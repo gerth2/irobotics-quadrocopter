@@ -181,6 +181,8 @@ private: System::Windows::Forms::ToolStripMenuItem^  kILLToolStripMenuItem;
 private: System::Windows::Forms::ToolStripMenuItem^  tellAJokeToolStripMenuItem;
 private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
 private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
+private: System::Windows::Forms::Button^  button12;
+private: System::Windows::Forms::ToolStripMenuItem^  clearTerminalToolStripMenuItem;
 
 private: 
 
@@ -308,6 +310,7 @@ private:
 			this->TiltTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->TiltLabel = (gcnew System::Windows::Forms::Label());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->button12 = (gcnew System::Windows::Forms::Button());
 			this->label50 = (gcnew System::Windows::Forms::Label());
 			this->panel10 = (gcnew System::Windows::Forms::Panel());
 			this->button10 = (gcnew System::Windows::Forms::Button());
@@ -331,6 +334,7 @@ private:
 			this->controlToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->runPIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->runManualToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->clearTerminalToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->kILLToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tellAJokeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -1393,6 +1397,7 @@ private:
 			// 
 			// tabPage1
 			// 
+			this->tabPage1->Controls->Add(this->button12);
 			this->tabPage1->Controls->Add(this->label50);
 			this->tabPage1->Controls->Add(this->panel10);
 			this->tabPage1->Controls->Add(this->label49);
@@ -1405,6 +1410,16 @@ private:
 			this->tabPage1->TabIndex = 5;
 			this->tabPage1->Text = L"Debugging Tests";
 			this->tabPage1->UseVisualStyleBackColor = true;
+			// 
+			// button12
+			// 
+			this->button12->Location = System::Drawing::Point(387, 363);
+			this->button12->Name = L"button12";
+			this->button12->Size = System::Drawing::Size(93, 23);
+			this->button12->TabIndex = 9;
+			this->button12->Text = L"Clear Terminal";
+			this->button12->UseVisualStyleBackColor = true;
+			this->button12->Click += gcnew System::EventHandler(this, &Form1::button12_Click);
 			// 
 			// label50
 			// 
@@ -1590,8 +1605,8 @@ private:
 			// 
 			// controlToolStripMenuItem
 			// 
-			this->controlToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->runPIDToolStripMenuItem, 
-				this->runManualToolStripMenuItem, this->kILLToolStripMenuItem, this->tellAJokeToolStripMenuItem});
+			this->controlToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {this->runPIDToolStripMenuItem, 
+				this->runManualToolStripMenuItem, this->clearTerminalToolStripMenuItem, this->kILLToolStripMenuItem, this->tellAJokeToolStripMenuItem});
 			this->controlToolStripMenuItem->Name = L"controlToolStripMenuItem";
 			this->controlToolStripMenuItem->Size = System::Drawing::Size(59, 20);
 			this->controlToolStripMenuItem->Text = L"Control";
@@ -1599,27 +1614,33 @@ private:
 			// runPIDToolStripMenuItem
 			// 
 			this->runPIDToolStripMenuItem->Name = L"runPIDToolStripMenuItem";
-			this->runPIDToolStripMenuItem->Size = System::Drawing::Size(138, 22);
+			this->runPIDToolStripMenuItem->Size = System::Drawing::Size(151, 22);
 			this->runPIDToolStripMenuItem->Text = L"Run PID";
 			// 
 			// runManualToolStripMenuItem
 			// 
 			this->runManualToolStripMenuItem->Name = L"runManualToolStripMenuItem";
-			this->runManualToolStripMenuItem->Size = System::Drawing::Size(138, 22);
+			this->runManualToolStripMenuItem->Size = System::Drawing::Size(151, 22);
 			this->runManualToolStripMenuItem->Text = L"Run Manual";
 			this->runManualToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::runManualToolStripMenuItem_Click);
+			// 
+			// clearTerminalToolStripMenuItem
+			// 
+			this->clearTerminalToolStripMenuItem->Name = L"clearTerminalToolStripMenuItem";
+			this->clearTerminalToolStripMenuItem->Size = System::Drawing::Size(151, 22);
+			this->clearTerminalToolStripMenuItem->Text = L"Clear Terminal";
 			// 
 			// kILLToolStripMenuItem
 			// 
 			this->kILLToolStripMenuItem->Name = L"kILLToolStripMenuItem";
-			this->kILLToolStripMenuItem->Size = System::Drawing::Size(138, 22);
+			this->kILLToolStripMenuItem->Size = System::Drawing::Size(151, 22);
 			this->kILLToolStripMenuItem->Text = L"KILL";
 			this->kILLToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::kILLToolStripMenuItem_Click);
 			// 
 			// tellAJokeToolStripMenuItem
 			// 
 			this->tellAJokeToolStripMenuItem->Name = L"tellAJokeToolStripMenuItem";
-			this->tellAJokeToolStripMenuItem->Size = System::Drawing::Size(138, 22);
+			this->tellAJokeToolStripMenuItem->Size = System::Drawing::Size(151, 22);
 			this->tellAJokeToolStripMenuItem->Text = L"Tell A Joke";
 			this->tellAJokeToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::tellAJokeToolStripMenuItem_Click);
 			// 
@@ -1647,7 +1668,9 @@ private:
 			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->TabControl);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
+			this->MaximizeBox = false;
 			this->Name = L"Form1";
 			this->Text = L"Quadrocopter Control Panel";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Form1::Form1_FormClosing);
@@ -1754,6 +1777,9 @@ private: System::Void runManualToolStripMenuItem_Click(System::Object^  sender, 
 		 }
 private: System::Void kILLToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 int m = Kill();
+		 }
+private: System::Void button12_Click(System::Object^  sender, System::EventArgs^  e) {
+			 printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		 }
 };
 }

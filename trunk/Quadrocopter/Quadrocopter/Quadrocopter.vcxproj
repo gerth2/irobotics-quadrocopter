@@ -147,7 +147,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\Pictures\robot\quadcopter icon.png" />
     <None Include="app.ico" />
+    <None Include="icon1.ico" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
