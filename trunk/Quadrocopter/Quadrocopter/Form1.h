@@ -199,6 +199,7 @@ private:
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->TabControl = (gcnew System::Windows::Forms::TabControl());
 			this->Settings = (gcnew System::Windows::Forms::TabPage());
 			this->button3 = (gcnew System::Windows::Forms::Button());
@@ -385,14 +386,15 @@ private:
 			// button3
 			// 
 			this->button3->BackColor = System::Drawing::Color::Red;
+			this->button3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"button3.BackgroundImage")));
+			this->button3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->button3->Font = (gcnew System::Drawing::Font(L"Dutch801 XBd BT", 12, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->button3->ForeColor = System::Drawing::Color::Yellow;
-			this->button3->Location = System::Drawing::Point(6, 309);
+			this->button3->Location = System::Drawing::Point(6, 175);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(84, 77);
+			this->button3->Size = System::Drawing::Size(167, 211);
 			this->button3->TabIndex = 2;
-			this->button3->Text = L"KILL!";
 			this->button3->UseVisualStyleBackColor = false;
 			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
 			// 
@@ -1516,12 +1518,14 @@ private:
 			// button4
 			// 
 			this->button4->BackColor = System::Drawing::Color::Red;
+			this->button4->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"button4.BackgroundImage")));
+			this->button4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->button4->Font = (gcnew System::Drawing::Font(L"Dutch801 XBd BT", 12, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->button4->ForeColor = System::Drawing::Color::Yellow;
-			this->button4->Location = System::Drawing::Point(6, 309);
+			this->button4->Location = System::Drawing::Point(6, 221);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(84, 77);
+			this->button4->Size = System::Drawing::Size(212, 165);
 			this->button4->TabIndex = 3;
 			this->button4->Text = L"KILL!";
 			this->button4->UseVisualStyleBackColor = false;
@@ -1595,27 +1599,27 @@ private:
 			// runPIDToolStripMenuItem
 			// 
 			this->runPIDToolStripMenuItem->Name = L"runPIDToolStripMenuItem";
-			this->runPIDToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->runPIDToolStripMenuItem->Size = System::Drawing::Size(138, 22);
 			this->runPIDToolStripMenuItem->Text = L"Run PID";
 			// 
 			// runManualToolStripMenuItem
 			// 
 			this->runManualToolStripMenuItem->Name = L"runManualToolStripMenuItem";
-			this->runManualToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->runManualToolStripMenuItem->Size = System::Drawing::Size(138, 22);
 			this->runManualToolStripMenuItem->Text = L"Run Manual";
 			this->runManualToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::runManualToolStripMenuItem_Click);
 			// 
 			// kILLToolStripMenuItem
 			// 
 			this->kILLToolStripMenuItem->Name = L"kILLToolStripMenuItem";
-			this->kILLToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->kILLToolStripMenuItem->Size = System::Drawing::Size(138, 22);
 			this->kILLToolStripMenuItem->Text = L"KILL";
 			this->kILLToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::kILLToolStripMenuItem_Click);
 			// 
 			// tellAJokeToolStripMenuItem
 			// 
 			this->tellAJokeToolStripMenuItem->Name = L"tellAJokeToolStripMenuItem";
-			this->tellAJokeToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->tellAJokeToolStripMenuItem->Size = System::Drawing::Size(138, 22);
 			this->tellAJokeToolStripMenuItem->Text = L"Tell A Joke";
 			this->tellAJokeToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::tellAJokeToolStripMenuItem_Click);
 			// 
@@ -1691,7 +1695,7 @@ private:
 			 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 			//add code to execute the PID-corrected control loop here.
-			 int counter=0
+			 int counter=0;
 			 while (counter<1)
 			 {
 
