@@ -1,0 +1,109 @@
+﻿Build started 6/9/2011 9:30:24 PM.
+     1>Project "C:\Users\Michael\documents\visual studio 2010\Projects\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "x64\Release\Quadrocopter.unsuccessfulbuild".
+       GenerateTargetFrameworkMonikerAttribute:
+       Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+       ClCompile:
+         D:\Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /O2 /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"x64\Release\Quadrocopter.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt stdafx.cpp /clr:nostdlib 
+         stdafx.cpp
+         D:\Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /O2 /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Release\Quadrocopter.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt AssemblyInfo.cpp Functions.cpp mainFunc.cpp ManFlight.cpp Quadrocopter.cpp rs232.cpp TestFunctions.cpp /clr:nostdlib 
+         AssemblyInfo.cpp
+         Functions.cpp
+     1>Functions.cpp(10): warning C4244: '=' : conversion from 'float' to 'clock_t', possible loss of data
+     1>Functions.cpp(86): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(88): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(90): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(92): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(110): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(113): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(116): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(151): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(144): warning C4101: 'i' : unreferenced local variable
+     1>Functions.cpp(256): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(372): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
+     1>Functions.cpp(399): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(425): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\time.inl(86) : see declaration of 'ctime'
+     1>Functions.cpp(428): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\time.inl(112) : see declaration of 'localtime'
+     1>Functions.cpp(434): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\stdio.h(234) : see declaration of 'fopen'
+     1>Functions.cpp(495): warning C4305: 'argument' : truncation from 'double' to 'float'
+         mainFunc.cpp
+     1>mainFunc.cpp(12): warning C4101: 'i' : unreferenced local variable
+     1>mainFunc.cpp(11): warning C4101: 'joystickin' : unreferenced local variable
+     1>mainFunc.cpp(10): warning C4101: 'copter' : unreferenced local variable
+         ManFlight.cpp
+     1>ManFlight.cpp(45): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
+     1>ManFlight.cpp(110): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>ManFlight.cpp(117): warning C4305: 'argument' : truncation from 'double' to 'float'
+         Quadrocopter.cpp
+     1>c:\users\michael\documents\visual studio 2010\projects\quadrocopter\quadrocopter\Form1.h(1700): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\stdio.h(249) : see declaration of 'freopen'
+         rs232.cpp
+     1>rs232.cpp(235): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(237): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(239): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(241): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(243): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(245): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(247): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(249): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(251): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(253): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(255): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(257): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+     1>rs232.cpp(259): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\string.h(105) : see declaration of 'strcpy'
+         TestFunctions.cpp
+     1>TestFunctions.cpp(8): warning C4101: 'joystickin' : unreferenced local variable
+     1>TestFunctions.cpp(44): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
+     1>TestFunctions.cpp(36): warning C4101: 'joystickin' : unreferenced local variable
+     1>TestFunctions.cpp(57): warning C4101: 'joystickin' : unreferenced local variable
+     1>TestFunctions.cpp(75): warning C4101: 'copter' : unreferenced local variable
+         Generating Code...
+     1>c:\users\michael\documents\visual studio 2010\projects\quadrocopter\quadrocopter\manflight.cpp(105): warning C4700: uninitialized local variable 'exitflag' used
+         All outputs are up-to-date.
+       CoreResGen:
+         "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\NETFX 4.0 Tools\resgen.exe" /useSourcePath /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /compile Form1.resX,x64\Release\Quadrocopter.Form1.resources
+         Processing resource file "Form1.resX" into "x64\Release\Quadrocopter.Form1.resources".
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"x64\Release\app.res" app.rc 
+       Link:
+         D:\Visual Studio 10.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Michael\documents\visual studio 2010\Projects\Quadrocopter\x64\Release\Quadrocopter.exe" /INCREMENTAL:NO /NOLOGO /ASSEMBLYRESOURCE:x64\Release\Quadrocopter.Form1.resources /MANIFEST /ManifestFile:"x64\Release\Quadrocopter.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Michael\documents\visual studio 2010\Projects\Quadrocopter\x64\Release\Quadrocopter.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X64 x64\Release\app.res
+         x64\Release\AssemblyInfo.obj
+         x64\Release\Functions.obj
+         x64\Release\mainFunc.obj
+         x64\Release\ManFlight.obj
+         x64\Release\Quadrocopter.obj
+         x64\Release\rs232.obj
+         x64\Release\stdafx.obj
+         x64\Release\TestFunctions.obj
+         "x64\Release\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         Quadrocopter.vcxproj -> C:\Users\Michael\documents\visual studio 2010\Projects\Quadrocopter\x64\Release\Quadrocopter.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Michael\documents\visual studio 2010\Projects\Quadrocopter\x64\Release\Quadrocopter.exe;#1" /manifest x64\Release\Quadrocopter.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "x64\Release\Quadrocopter.unsuccessfulbuild".
+         Touching "x64\Release\Quadrocopter.lastbuildstate".
+     1>Done Building Project "C:\Users\Michael\documents\visual studio 2010\Projects\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:05.52

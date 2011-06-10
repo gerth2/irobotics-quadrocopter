@@ -1,0 +1,94 @@
+﻿Build started 6/5/2011 1:55:32 PM.
+     1>Project "C:\Users\Chris Gerth\Documents\Visual Studio 2010\Projects\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "x64\Debug\Quadrocopter.unsuccessfulbuild".
+       GenerateTargetFrameworkMonikerAttribute:
+       Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+       ClCompile:
+         All outputs are up-to-date.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /Od /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Debug\Quadrocopter.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt Functions.cpp mainFunc.cpp ManFlight.cpp Quadrocopter.cpp /clr:nostdlib 
+         Functions.cpp
+     1>Functions.cpp(9): warning C4244: '=' : conversion from 'float' to 'clock_t', possible loss of data
+     1>Functions.cpp(84): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(86): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(88): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(90): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(108): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(111): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(114): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(147): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(152): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(155): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(158): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(162): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(165): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(168): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(172): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(175): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(178): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(206): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(211): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(214): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(217): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(220): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(224): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(228): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(232): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(236): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(197) : see declaration of 'strtok'
+     1>Functions.cpp(282): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
+     1>Functions.cpp(309): warning C4305: 'argument' : truncation from 'double' to 'float'
+         mainFunc.cpp
+     1>mainFunc.cpp(65): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
+     1>mainFunc.cpp(11): warning C4101: 'status' : unreferenced local variable
+         ManFlight.cpp
+     1>ManFlight.cpp(43): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
+     1>ManFlight.cpp(108): warning C4305: 'argument' : truncation from 'double' to 'float'
+         Quadrocopter.cpp
+         Generating Code...
+     1>c:\users\chris gerth\documents\visual studio 2010\projects\quadrocopter\quadrocopter\manflight.cpp(103): warning C4700: uninitialized local variable 'exitflag' used
+         All outputs are up-to-date.
+       CoreResGen:
+         All outputs are up-to-date.
+       ResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Chris Gerth\Documents\Visual Studio 2010\Projects\Quadrocopter\x64\Debug\Quadrocopter.exe" /INCREMENTAL /NOLOGO /ASSEMBLYRESOURCE:x64\Debug\Quadrocopter.Form1.resources /MANIFEST /ManifestFile:"x64\Debug\Quadrocopter.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Chris Gerth\Documents\Visual Studio 2010\Projects\Quadrocopter\x64\Debug\Quadrocopter.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X64 x64\Debug\app.res
+         x64\Debug\AssemblyInfo.obj
+         x64\Debug\Functions.obj
+         x64\Debug\mainFunc.obj
+         x64\Debug\ManFlight.obj
+         x64\Debug\Quadrocopter.obj
+         x64\Debug\rs232.obj
+         x64\Debug\stdafx.obj
+         "x64\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         Quadrocopter.vcxproj -> C:\Users\Chris Gerth\Documents\Visual Studio 2010\Projects\Quadrocopter\x64\Debug\Quadrocopter.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Chris Gerth\Documents\Visual Studio 2010\Projects\Quadrocopter\x64\Debug\Quadrocopter.exe;#1" /manifest x64\Debug\Quadrocopter.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "x64\Debug\Quadrocopter.unsuccessfulbuild".
+         Touching "x64\Debug\Quadrocopter.lastbuildstate".
+     1>Done Building Project "C:\Users\Chris Gerth\Documents\Visual Studio 2010\Projects\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:08.77
