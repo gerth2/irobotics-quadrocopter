@@ -2,7 +2,7 @@
 #include "Header.h"
 
 
-int PWM_Time_Test(void)
+int PWM_Time_Test(datalog * log)
 {
 	quadcopter copter;
     joystick joystickin;
@@ -22,13 +22,15 @@ int PWM_Time_Test(void)
         copter.north_motor = 30;
         Set_Pwm(&copter);
         printf("write cycle # %d\n",i);
+		if(log != NULL)
+			LogData(log, &copter, &joystickin);
     }
 
     printf("done!\n");
 	return 0;
 }
 
-int PWM_Write_Test(void)
+int PWM_Write_Test(datalog * log)
 {
 	 /*analog write test*/
 	int north, south, east, west;
@@ -47,11 +49,13 @@ int PWM_Write_Test(void)
         copter.east_motor = east;
         copter.west_motor = west;
         Set_Pwm(&copter);
+		if(log != NULL)
+			LogData(log, &copter, &joystickin);
     }
 	return 0;
 }
 
-int Sensor_Read_Test(void)
+int Sensor_Read_Test(datalog * log)
 {
 	quadcopter copter;
     joystick joystickin;
@@ -66,11 +70,13 @@ int Sensor_Read_Test(void)
         printf("values read in:\n\n");
         printf("gyrox = %d\ngyroy = %d\ngyroz = %d\naccelx = %d\naccely = %d\naccelz = %d\naltitude = %d\nheading = %d\ntemperature = %d\n", copter.ang_vel_x, copter.ang_vel_y, copter.ang_vel_z, copter.accel_x, copter.accel_y, copter.accel_z, copter.height, copter.heading, copter.temperature);
         printf("\n======================\n\n");
+		if(log != NULL)
+			LogData(log, &copter, &joystickin);
     }
 	return 0;
 }
 
-int Joystick_Read_Test(void)
+int Joystick_Read_Test(datalog * log)
 {
 	quadcopter copter;
     joystick joystickin;
@@ -85,6 +91,8 @@ int Joystick_Read_Test(void)
         printf("values read in:\n\n");
         printf("x axis = %d\ny axis = %d\nz axis = %d\nh axis = %d\nLeft Toggle = %d\nRight Toggle = %d\nLeft Slide = %d\nRight Slide = %d\n", joystickin.x, joystickin.y, joystickin.rotation, joystickin.altitude, joystickin.activate_height, joystickin.button1, joystickin.button2, joystickin.button3);
         printf("\n======================\n\n");
+		if(log != NULL)
+			LogData(log, &copter, &joystickin);
     }
 	return 0;
 }

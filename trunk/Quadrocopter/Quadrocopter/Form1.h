@@ -183,6 +183,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
 private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
 private: System::Windows::Forms::Button^  button12;
 private: System::Windows::Forms::ToolStripMenuItem^  clearTerminalToolStripMenuItem;
+private: System::Windows::Forms::CheckBox^  checkBox1;
 
 private: 
 
@@ -310,6 +311,7 @@ private:
 			this->TiltTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->TiltLabel = (gcnew System::Windows::Forms::Label());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->button12 = (gcnew System::Windows::Forms::Button());
 			this->label50 = (gcnew System::Windows::Forms::Label());
 			this->panel10 = (gcnew System::Windows::Forms::Panel());
@@ -1411,6 +1413,17 @@ private:
 			this->tabPage1->Text = L"Debugging Tests";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Location = System::Drawing::Point(12, 455);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(70, 17);
+			this->checkBox1->TabIndex = 10;
+			this->checkBox1->Text = L"Log Data";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
+			// 
 			// button12
 			// 
 			this->button12->Location = System::Drawing::Point(387, 363);
@@ -1664,6 +1677,7 @@ private:
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(518, 497);
+			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->TabControl);
@@ -1714,6 +1728,8 @@ private:
 
 		}
 #pragma endregion
+
+	static int logdata = 0;
 	private: System::Void textBox2_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 			 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1733,7 +1749,18 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 		 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 			 int m = Initalize_Hardware();
-			 m = ManFlight();
+			 datalog log;
+			 datalog * logptr;
+			 if(logdata)
+			 {
+				 StartDataLogging(&log);
+				 logptr = &log;
+			 }
+			 else
+				 logptr = NULL;
+			 m = ManFlight(logptr); /*main control loop*/
+			 if(logdata)
+				 EndDataLogging(logptr);
 			 m = Teardown_Hardware();
 		 }
 private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1743,19 +1770,64 @@ private: System::Void button10_Click(System::Object^  sender, System::EventArgs^
 			 int m = Teardown_Hardware();
 		 }
 private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int m = PWM_Time_Test();
+			 datalog log;
+			 datalog * logptr;
+			 if(logdata)
+			 {
+				 StartDataLogging(&log);
+				 logptr = &log;
+			 }
+			 else
+				 logptr = NULL;
+			 int m = PWM_Time_Test(&log);
+			 if(logdata)
+				 EndDataLogging(logptr);
 		 }
 private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
 			 int m = ESC_Program();
 		 }
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int m = PWM_Write_Test();
+			 datalog log;
+			 datalog * logptr;
+			 if(logdata)
+			 {
+				 StartDataLogging(&log);
+				 logptr = &log;
+			 }
+			 else
+				 logptr = NULL;
+			 int m = PWM_Write_Test(logptr);
+			 if(logdata)
+				 EndDataLogging(logptr);
+
 		 }
 private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int m = Sensor_Read_Test();
+			 datalog log;
+			 datalog * logptr;
+			 if(logdata)
+			 {
+				 StartDataLogging(&log);
+				 logptr = &log;
+			 }
+			 else
+				 logptr = NULL;
+			 int m = Sensor_Read_Test(logptr);
+			 if(logdata)
+				 EndDataLogging(logptr);
 		 }
 private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int m = Joystick_Read_Test();
+			 datalog log;
+			 datalog * logptr;
+			 if(logdata)
+			 {
+				 StartDataLogging(&log);
+				 logptr = &log;
+			 }
+			 else
+				 logptr = NULL;
+			 int m = Joystick_Read_Test(logptr);
+			 if(logdata)
+				 EndDataLogging(logptr);
 		 }
 private: System::Void Form1_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e) {
 			 int m = Teardown_Hardware();
@@ -1772,7 +1844,19 @@ private: System::Void quitToolStripMenuItem_Click(System::Object^  sender, Syste
 		 }
 private: System::Void runManualToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 int m = Initalize_Hardware();
-			 m = ManFlight();
+			 datalog log;
+			 datalog * logptr;
+			 if(logdata)
+			 {
+				 StartDataLogging(&log);
+				 logptr = &log;
+			 }
+			 else
+				 logptr = NULL;
+			 m = ManFlight(logptr);
+			 m = Teardown_Hardware();
+			 if(logdata)
+				 EndDataLogging(logptr);
 			 m = Teardown_Hardware();
 		 }
 private: System::Void kILLToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1780,6 +1864,10 @@ private: System::Void kILLToolStripMenuItem_Click(System::Object^  sender, Syste
 		 }
 private: System::Void button12_Click(System::Object^  sender, System::EventArgs^  e) {
 			 printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		 }
+private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+			 logdata = !logdata;
+			 //printf("logdata = %d\n", logdata);
 		 }
 };
 }

@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "Header.h"
 
-int ManFlight()
+int ManFlight(datalog * log)
 {
     /*this function allows for direct user control of the motors*/
     /*it maps differentials to each of the joystick axes, */
@@ -122,9 +122,11 @@ int ManFlight()
                     j = Kill(); //continue to attempt to kill until successful
             }
             return -1; //report exit due to kill status
-
-
         }
+
+		/*log data*/
+		if(log != NULL)
+			LogData(log, &copter, &joystickin);
 
     }
 

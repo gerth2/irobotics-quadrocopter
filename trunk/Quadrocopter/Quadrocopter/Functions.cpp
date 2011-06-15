@@ -447,6 +447,8 @@ int LogData(datalog * log, quadcopter *copter, joystick * joystickin)
     FILE * file;
     file = log->outputfile;
     double time;
+	if(file == NULL) /*check for uninitalized fileptr*/
+		return -1;
     if(log->firstwrite)
     {
         log->clock_init = clock();
@@ -483,6 +485,8 @@ int LogData(datalog * log, quadcopter *copter, joystick * joystickin)
 
 int EndDataLogging(datalog * log)
 {
+	if(log->outputfile == NULL)
+		return -1; /*check for lack of an open filestream*/
     fclose(log->outputfile);
     return 0;
 }

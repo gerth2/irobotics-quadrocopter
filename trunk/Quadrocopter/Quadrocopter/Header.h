@@ -147,7 +147,7 @@ int ESC_Program(void);
 /*h axis controls all four PWM output values, pushing them either to 0 or 255*/
 /* returns zero on completion*/
 
-int ManFlight(void);
+int ManFlight(datalog * log);
 /* allows pilot to have direct control of the motor outputs*/
 
 int CorrectJoystick(joystick * joystickin);
@@ -172,9 +172,10 @@ int Kill(void);
 /*sends killcode to quadcopter, and listens on serial to confirm successful kill*/
 
 /*the following are test procedure function prototypes*/
-int PWM_Time_Test(void);
-int PWM_Write_Test(void);
-int Sensor_Read_Test(void);
-int Joystick_Read_Test(void);
+/*pass NULL if no data is to be logged, datalog pointer to log data*/
+int PWM_Time_Test(datalog * log);
+int PWM_Write_Test(datalog * log);
+int Sensor_Read_Test(datalog * log);
+int Joystick_Read_Test(datalog * log);
 
 }
