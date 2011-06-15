@@ -1,4 +1,4 @@
-﻿Build started 6/14/2011 8:45:48 PM.
+﻿Build started 6/15/2011 1:02:30 PM.
      1>Project "C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "x64\Release\Quadrocopter.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -6,30 +6,15 @@
        Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
        ClCompile:
          All outputs are up-to-date.
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /O2 /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Release\Quadrocopter.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt Quadrocopter.cpp /clr:nostdlib 
-         Quadrocopter.cpp
-     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\Form1.h(1748): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(249) : see declaration of 'freopen'
+         All outputs are up-to-date.
          All outputs are up-to-date.
        CoreResGen:
-         "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\NETFX 4.0 Tools\resgen.exe" /useSourcePath /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /compile Form1.resX,x64\Release\Quadrocopter.Form1.resources
-         Processing resource file "Form1.resX" into "x64\Release\Quadrocopter.Form1.resources".
+         All outputs are up-to-date.
        ResourceCompile:
          All outputs are up-to-date.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Release\Quadrocopter.exe" /INCREMENTAL:NO /NOLOGO /ASSEMBLYRESOURCE:x64\Release\Quadrocopter.Form1.resources /MANIFEST /ManifestFile:"x64\Release\Quadrocopter.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Release\Quadrocopter.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X64 x64\Release\app.res
-         x64\Release\AssemblyInfo.obj
-         x64\Release\Functions.obj
-         x64\Release\mainFunc.obj
-         x64\Release\ManFlight.obj
-         x64\Release\Quadrocopter.obj
-         x64\Release\rs232.obj
-         x64\Release\stdafx.obj
-         x64\Release\TestFunctions.obj
-         "x64\Release\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         All outputs are up-to-date.
          Quadrocopter.vcxproj -> C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Release\Quadrocopter.exe
-       Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Release\Quadrocopter.exe;#1" /manifest x64\Release\Quadrocopter.exe.intermediate.manifest
        FinalizeBuildStatus:
          Deleting file "x64\Release\Quadrocopter.unsuccessfulbuild".
          Touching "x64\Release\Quadrocopter.lastbuildstate".
@@ -37,4 +22,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.80
+Time Elapsed 00:00:00.22

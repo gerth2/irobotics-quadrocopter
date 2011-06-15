@@ -1863,7 +1863,7 @@ private: System::Void kILLToolStripMenuItem_Click(System::Object^  sender, Syste
 			 int m = Kill();
 		 }
 private: System::Void button12_Click(System::Object^  sender, System::EventArgs^  e) {
-			 printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+			 printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		 }
 private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 			 logdata = !logdata;
