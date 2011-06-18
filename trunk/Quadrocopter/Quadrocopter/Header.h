@@ -123,11 +123,11 @@ int Set_Acc_Range(float range, quadcopter * copter); //currently unimplimented
 
 int Read_Sensors( quadcopter * copter);
 /*reads in sensor values and writes the results to the structure pointed to*/
-/*returns 0 on success, negative error code on failure*/
+/*returns 0 on success, -1 if input read is unsucessful.*/
 
 int Read_Joystick(joystick * joystickin);
 /*populates joystick struct with newest input values*/
-/*returns 0 on success, negative error code on failure*/
+/*returns 0 on success, -1 if input read is unsuccessful.*/
 
 int Set_Pwm( quadcopter * copter);
 /*writes the pwm values in the quadcopter structure to the actual quadcopter*/
@@ -137,7 +137,7 @@ int Set_Pwm( quadcopter * copter);
 
 int Teardown_Hardware(void);
 /*deinitalize all hardware. call just before program exits*/
-/*returns 0 on success, negative error code on failure*/
+/*returns 0 on success - no error checking possible*/
 
 void wait(float s);
 /*creates a pause in the program execution*/
@@ -149,6 +149,7 @@ int ESC_Program(void);
 
 int ManFlight(datalog * log);
 /* allows pilot to have direct control of the motor outputs*/
+/* returns 0 on exit success, -1 on exit from Kill*/
 
 int CorrectJoystick(joystick * joystickin);
 /*adjusts all joystick ouputs to approprate range (0-255)*/
@@ -157,13 +158,15 @@ int StartDataLogging(datalog * log);
 /* initalizes logging of a comma-separated value set of data*/
 /*prints to a standard text file.*/
 /* the file is created and data logging begins when this function is called*/
-/* returns -1 on failure to create log file and open filestream -*/
+/* returns -1 on failure to create log file and open filestream, 0 on success */
 
 int LogData(datalog * log, quadcopter * copter, joystick * joystickin);
 /* saves current frame of data to file. should be called every loop through main execution*/
+/*returns 0 on success, -1 on bad filepointer reference*/
 
 int EndDataLogging(datalog * log);
 /*saves the file and stops data logging*/
+/*returns 0 on success, -1 on bad filepointer reference*/
 
 int SetMaxDeltaMotors(int maxdeltamotor);
 /*sends the argument to the quadcopter to adjust the maximum rate of motor speed change*/

@@ -498,7 +498,7 @@ int Kill(void)
     SendByte(CCOMPORT, 'K');
     wait(.2);
     PollComport(CCOMPORT, inbuffer, sizeof(unsigned char)*10);
-    if((int)inbuffer[0] == -2)
+    if((int)inbuffer[0] == 'x')
     {
         printf("Kill Successful - manual reset of copter required\n\n\n");
         return 0;
