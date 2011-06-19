@@ -311,7 +311,6 @@ private:
 			this->TiltTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->TiltLabel = (gcnew System::Windows::Forms::Label());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
-			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->button12 = (gcnew System::Windows::Forms::Button());
 			this->label50 = (gcnew System::Windows::Forms::Label());
 			this->panel10 = (gcnew System::Windows::Forms::Panel());
@@ -325,6 +324,7 @@ private:
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->toolStripProgressBar1 = (gcnew System::Windows::Forms::ToolStripProgressBar());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
@@ -1413,17 +1413,6 @@ private:
 			this->tabPage1->Text = L"Debugging Tests";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
-			// checkBox1
-			// 
-			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(12, 455);
-			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(70, 17);
-			this->checkBox1->TabIndex = 10;
-			this->checkBox1->Text = L"Log Data";
-			this->checkBox1->UseVisualStyleBackColor = true;
-			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
-			// 
 			// button12
 			// 
 			this->button12->Location = System::Drawing::Point(387, 363);
@@ -1557,6 +1546,18 @@ private:
 			this->button4->TabIndex = 3;
 			this->button4->Text = L"KILL!";
 			this->button4->UseVisualStyleBackColor = false;
+			this->button4->Click += gcnew System::EventHandler(this, &Form1::button4_Click);
+			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Location = System::Drawing::Point(12, 455);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(70, 17);
+			this->checkBox1->TabIndex = 10;
+			this->checkBox1->Text = L"Log Data";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// statusStrip1
 			// 
@@ -1732,6 +1733,7 @@ private:
 	static int logdata = 0;
 	private: System::Void textBox2_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 			 }
+/*code for Settings page controls*/
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 			//add code to execute the PID-corrected control loop here.
 			 int counter=0;
@@ -1741,14 +1743,14 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 		 }
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int m = Kill();
+			 int m = Kill(); //code for red kill button
 		 }
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
-			 	AllocConsole();
-				freopen("CONOUT$", "wb", stdout);
+			 	AllocConsole(); //opens a terminal window when the form is executed
+				freopen("CONOUT$", "wb", stdout); //redirects all printf statements to that window
 		 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int m = Initalize_Hardware();
+			 int m = Initalize_Hardware(); //manual flight execution
 			 datalog log;
 			 datalog * logptr;
 			 if(logdata)
@@ -1763,14 +1765,15 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				 EndDataLogging(logptr);
 			 m = Teardown_Hardware();
 		 }
+/*code for Debug page buttons*/
 private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int m = Initalize_Hardware();
+			 int m = Initalize_Hardware(); //initalize hardware button
 		 }
 private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int m = Teardown_Hardware();
+			 int m = Teardown_Hardware(); //teardown hardware button
 		 }
 private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
-			 datalog log;
+			 datalog log;//pwm time test button 
 			 datalog * logptr;
 			 if(logdata)
 			 {
@@ -1784,10 +1787,10 @@ private: System::Void button5_Click(System::Object^  sender, System::EventArgs^ 
 				 EndDataLogging(logptr);
 		 }
 private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int m = ESC_Program();
+			 int m = ESC_Program(); //esc program button
 		 }
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
-			 datalog log;
+			 datalog log; //PWM write test button
 			 datalog * logptr;
 			 if(logdata)
 			 {
@@ -1802,7 +1805,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 
 		 }
 private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
-			 datalog log;
+			 datalog log; //Sensor Read Test button
 			 datalog * logptr;
 			 if(logdata)
 			 {
@@ -1816,7 +1819,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 				 EndDataLogging(logptr);
 		 }
 private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
-			 datalog log;
+			 datalog log; //Joystick Read test button
 			 datalog * logptr;
 			 if(logdata)
 			 {
@@ -1830,16 +1833,19 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 				 EndDataLogging(logptr);
 		 }
 private: System::Void Form1_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e) {
-			 int m = Teardown_Hardware();
+			 int m = Teardown_Hardware(); //code to be executed as program is closed
 			 printf("NO NO!!!! DON'T KILL ME!!!! NOOOOO!!!!\n\n\n ....I'm dying.... gaaak... :(\n\n");
 		 }
 private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 //"about" selection under help menu
 			 MessageBox::Show("iRobotics Quadcopter Computer Interface V.1.00\nInterface Design and Programming by Chris Gerth and Michael Vilim\nThank you to all our sponsors who will eventually be mentioned here.");
 		 }
 private: System::Void tellAJokeToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 //"Tell a Joke" selection under control menu
 			 MessageBox::Show("So a Pirate walks into a bar (the drinking establishment type), and he's got this steering wheel down the front of his pants. The bartender says, 'Sir, that looks really uncomfortable!' and the pirate replies 'Yar! and it's driving me nuts!");
 		 }
 private: System::Void quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 //"exit selection" under file menu
 			 Close();
 		 }
 private: System::Void runManualToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1868,6 +1874,9 @@ private: System::Void button12_Click(System::Object^  sender, System::EventArgs^
 private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 			 logdata = !logdata;
 			 //printf("logdata = %d\n", logdata);
+		 }
+private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+			 int m = Kill();
 		 }
 };
 }

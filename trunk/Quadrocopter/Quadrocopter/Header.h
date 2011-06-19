@@ -66,6 +66,7 @@ typedef struct quadcopter_t
     int ang_vel_y;
     int ang_vel_z;
     int temperature;
+	int prevtemp; //used for comparison against current temperature values to check for a bad sensor read
 
     /*Accelerometer - currently unused*/
     float accelrange; /*contains a value of 1,1.5,2,3,4,8,or 16 (+/- g), depending on current setting for accelerometer range.*/
@@ -94,10 +95,9 @@ typedef struct joystick_t /*contains current value for all user inputs*/
     int rotation;
     int altitude;
     int activate_height; /*1 or 0, depending on whether the user wants to utilize or disable the ultrasonic height rangefinder*/
-    int button1; /*reserved input for future use*/
-    int button2;
-    int button3;
-    int button4;
+    int button1; // right toggle
+    int button2; // left slide switch
+    int button3; // right slide switch
 
 
 } joystick;
@@ -123,7 +123,9 @@ int Set_Acc_Range(float range, quadcopter * copter); //currently unimplimented
 
 int Read_Sensors( quadcopter * copter);
 /*reads in sensor values and writes the results to the structure pointed to*/
-/*returns 0 on success, -1 if input read is unsucessful.*/
+/*returns 0 on success */
+/*error codes - -1: Read considered bad due to abnormally short input string (error on parsing) */
+/*              -2: Read considered bad due to signifigant change in temperature reading */
 
 int Read_Joystick(joystick * joystickin);
 /*populates joystick struct with newest input values*/

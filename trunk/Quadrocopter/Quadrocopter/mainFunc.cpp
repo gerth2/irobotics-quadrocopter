@@ -6,6 +6,8 @@ int mainFunc()
 {
 
 /*function test code - temporary*/
+	/*as of 6-19-2011, all test code has been migrated to individual test functions, called from Form1*/
+	/*none of this file should be compiled*/
 
     quadcopter copter;
     joystick joystickin;
