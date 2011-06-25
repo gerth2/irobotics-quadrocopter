@@ -184,6 +184,12 @@ private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
 private: System::Windows::Forms::Button^  button12;
 private: System::Windows::Forms::ToolStripMenuItem^  clearTerminalToolStripMenuItem;
 private: System::Windows::Forms::CheckBox^  checkBox1;
+private: System::Windows::Forms::Button^  button13;
+private: System::Windows::Forms::Button^  button14;
+private: System::ComponentModel::BackgroundWorker^  backgroundWorker1;
+private: System::Windows::Forms::Button^  codetestbutton;
+
+
 
 private: 
 
@@ -205,6 +211,7 @@ private:
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->TabControl = (gcnew System::Windows::Forms::TabControl());
 			this->Settings = (gcnew System::Windows::Forms::TabPage());
+			this->button13 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -311,6 +318,7 @@ private:
 			this->TiltTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->TiltLabel = (gcnew System::Windows::Forms::Label());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->button14 = (gcnew System::Windows::Forms::Button());
 			this->button12 = (gcnew System::Windows::Forms::Button());
 			this->label50 = (gcnew System::Windows::Forms::Label());
 			this->panel10 = (gcnew System::Windows::Forms::Panel());
@@ -341,6 +349,8 @@ private:
 			this->tellAJokeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->codetestbutton = (gcnew System::Windows::Forms::Button());
 			this->TabControl->SuspendLayout();
 			this->Settings->SuspendLayout();
 			this->TiltPID->SuspendLayout();
@@ -378,6 +388,7 @@ private:
 			// 
 			// Settings
 			// 
+			this->Settings->Controls->Add(this->button13);
 			this->Settings->Controls->Add(this->button3);
 			this->Settings->Controls->Add(this->button2);
 			this->Settings->Controls->Add(this->button1);
@@ -389,6 +400,17 @@ private:
 			this->Settings->Text = L"Settings";
 			this->Settings->UseVisualStyleBackColor = true;
 			// 
+			// button13
+			// 
+			this->button13->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)), 
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->button13->Location = System::Drawing::Point(243, 363);
+			this->button13->Name = L"button13";
+			this->button13->Size = System::Drawing::Size(75, 23);
+			this->button13->TabIndex = 3;
+			this->button13->Text = L"Cancel";
+			this->button13->UseVisualStyleBackColor = false;
+			// 
 			// button3
 			// 
 			this->button3->BackColor = System::Drawing::Color::Red;
@@ -397,9 +419,9 @@ private:
 			this->button3->Font = (gcnew System::Drawing::Font(L"Dutch801 XBd BT", 12, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->button3->ForeColor = System::Drawing::Color::Yellow;
-			this->button3->Location = System::Drawing::Point(6, 175);
+			this->button3->Location = System::Drawing::Point(6, 263);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(167, 211);
+			this->button3->Size = System::Drawing::Size(98, 123);
 			this->button3->TabIndex = 2;
 			this->button3->UseVisualStyleBackColor = false;
 			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
@@ -1399,6 +1421,8 @@ private:
 			// 
 			// tabPage1
 			// 
+			this->tabPage1->Controls->Add(this->codetestbutton);
+			this->tabPage1->Controls->Add(this->button14);
 			this->tabPage1->Controls->Add(this->button12);
 			this->tabPage1->Controls->Add(this->label50);
 			this->tabPage1->Controls->Add(this->panel10);
@@ -1412,6 +1436,17 @@ private:
 			this->tabPage1->TabIndex = 5;
 			this->tabPage1->Text = L"Debugging Tests";
 			this->tabPage1->UseVisualStyleBackColor = true;
+			// 
+			// button14
+			// 
+			this->button14->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)), 
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->button14->Location = System::Drawing::Point(306, 363);
+			this->button14->Name = L"button14";
+			this->button14->Size = System::Drawing::Size(75, 23);
+			this->button14->TabIndex = 10;
+			this->button14->Text = L"Cancel";
+			this->button14->UseVisualStyleBackColor = false;
 			// 
 			// button12
 			// 
@@ -1540,9 +1575,9 @@ private:
 			this->button4->Font = (gcnew System::Drawing::Font(L"Dutch801 XBd BT", 12, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->button4->ForeColor = System::Drawing::Color::Yellow;
-			this->button4->Location = System::Drawing::Point(6, 221);
+			this->button4->Location = System::Drawing::Point(6, 284);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(212, 165);
+			this->button4->Size = System::Drawing::Size(128, 102);
 			this->button4->TabIndex = 3;
 			this->button4->Text = L"KILL!";
 			this->button4->UseVisualStyleBackColor = false;
@@ -1672,6 +1707,20 @@ private:
 			this->aboutToolStripMenuItem->Text = L"About";
 			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::aboutToolStripMenuItem_Click);
 			// 
+			// backgroundWorker1
+			// 
+			this->backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &Form1::backgroundWorker1_DoWork);
+			// 
+			// codetestbutton
+			// 
+			this->codetestbutton->Location = System::Drawing::Point(368, 91);
+			this->codetestbutton->Name = L"codetestbutton";
+			this->codetestbutton->Size = System::Drawing::Size(105, 23);
+			this->codetestbutton->TabIndex = 11;
+			this->codetestbutton->Text = L"Code Test Button";
+			this->codetestbutton->UseVisualStyleBackColor = true;
+			this->codetestbutton->Click += gcnew System::EventHandler(this, &Form1::codetestbutton_Click);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1731,6 +1780,7 @@ private:
 #pragma endregion
 
 	static int logdata = 0;
+
 	private: System::Void textBox2_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 			 }
 /*code for Settings page controls*/
@@ -1849,6 +1899,7 @@ private: System::Void quitToolStripMenuItem_Click(System::Object^  sender, Syste
 			 Close();
 		 }
 private: System::Void runManualToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 //"Run Manual" under control menu
 			 int m = Initalize_Hardware();
 			 datalog log;
 			 datalog * logptr;
@@ -1866,17 +1917,29 @@ private: System::Void runManualToolStripMenuItem_Click(System::Object^  sender, 
 			 m = Teardown_Hardware();
 		 }
 private: System::Void kILLToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 //"kill" under control menu
 			 int m = Kill();
 		 }
 private: System::Void button12_Click(System::Object^  sender, System::EventArgs^  e) {
+			 //"clear console" button
 			 printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		 }
 private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+			 //log data checkbox checked action
 			 logdata = !logdata;
 			 //printf("logdata = %d\n", logdata);
 		 }
 private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+			 //Kill button on debug page
 			 int m = Kill();
+		 }
+
+private: System::Void backgroundWorker1_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e) {
+			 
+			 printf("executing background code...\n");
+		 }
+private: System::Void codetestbutton_Click(System::Object^  sender, System::EventArgs^  e) {
+			 
 		 }
 };
 }

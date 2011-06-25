@@ -1,4 +1,4 @@
-
+#pragma once
 /* This file contains all the hardware io functions*/
 
 #include "stdafx.h"
@@ -31,7 +31,6 @@ int Initalize_Hardware(void)
     printf(    "===                    ---Sponsors---                          ===\n");
     printf(    "===                    --------------                          ===\n");
     printf(    "===                       UIUC IEEE                            ===\n");
-    printf(    "===                    Caterpillar Inc.                        ===\n");
     printf(    "==================================================================\n\n\n");
 
     printf("\ninitalizing hardware....\n");
@@ -142,11 +141,9 @@ int Set_Pwm(quadcopter * copter)
 
 int Read_Sensors(quadcopter *copter)
 {
-	int i; //local variable definitons
     unsigned char inbuffer[100]; /*recieves serial from arduino*/
     const char *valueinastring;
 	char * context; // helps strtok_s keep track of where it is in the string it is parsing
-	int diftemp; //calculates the difference in temperature between reads (error checking)
 
 	SendByte(CCOMPORT, 'r'); /*request sensor values*/
 	memset(inbuffer, '\0', sizeof(unsigned char)*100); //clear input buffer
