@@ -20,17 +20,17 @@ int PWM_Time_Test(datalog * log)
     for(i = 0; i < 250; i++)//loop for 500 total writes
     {
         copter.north_motor = 0;
-        while(Set_Pwm(&copter) != 0) //write low with error checking
+        while(Set_Pwm(&copter) < 0) //write low with error checking
 		{
 			printf("bad PWM write on low write %d, retrying...\n", i);
 		}
         copter.north_motor = 30;
-        while(Set_Pwm(&copter) != 0) //write high with error checking
+        while(Set_Pwm(&copter) < 0) //write high with error checking
 		{
 			printf("bad PWM write on high write %d, retrying...\n", i);
 		}
         printf("write cycle # %d\n",i);
-		if(log != NULL)
+		if(log != NULL) //write data to log if applicable
 			LogData(log, &copter, &joystickin);
     }
 
@@ -52,11 +52,16 @@ int PWM_Write_Test(datalog * log)
     {
         printf("enter pwm values north, south, east, west"); //request values from user
         scanf("%d %d %d %d", &north, &south, &east, &west);
+		if(north > 255 || south > 255 || east > 255 || west > 255 || north < 0 || south < 0 || east < 0 || west < 0)
+		{
+			printf("invalid input\n");
+			continue;
+		}
         copter.north_motor = north;
         copter.south_motor = south;
         copter.east_motor = east;
         copter.west_motor = west;
-        while(Set_Pwm(&copter) != 0) //perform error check, write values to copter
+        while(Set_Pwm(&copter) < 0 ) //perform error check, write values to copter
 		{
 			printf("bad PWM write on loop %d, retrying...\n", i);
 		}

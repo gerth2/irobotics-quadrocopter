@@ -44,7 +44,7 @@ int Initalize_Hardware(void)
 
     if(OpenComport(7, BAUDRATE))
     {
-        printf("-- to quadcopter\n");
+        printf("-- to quadcopter wired interface\n");
         errorcode--;
     }
     if(OpenComport(5,BAUDRATE))
@@ -56,6 +56,12 @@ int Initalize_Hardware(void)
     /*execute copter-side setup by sending setup command via serial*/
 	/*no error checking currently possible*/
     SendByte(CCOMPORT, 's');
+	wait(.5);
+    if(SetMaxDeltaMotors(MAXDELTAMOTORS))
+    {
+        printf("initalization not completed successfully \n");
+        return -1;
+    }
     printf("initalization complete!\n\n");
     return errorcode;
 }
@@ -120,13 +126,18 @@ int Set_Pwm(quadcopter * copter)
     {
         memset(errorbuf, '\0', sizeof(unsigned char)*10);
         PollComport(CCOMPORT, errorbuf, sizeof(unsigned char)*10); /*verify confirmation of sucessful write*/
-        if(errorbuf[0] == 100) /*case - confirmation character successfully recieved. PWM values have been written*/
+        if(errorbuf[0] == 'd') /*case - confirmation character successfully recieved. PWM values have been written*/
         {
             #ifdef DEBUGPRINTS //print out additional debugging info if requested
             printf("errorbuff = %d %d %d %d %d\n", errorbuf[0], errorbuf[1], errorbuf[2], errorbuf[3], errorbuf[4]);
             #endif
             return 0; //return success
         }
+		if(errorbuf[0] == 'e') //case - recieved write request was too large to be written, output changed by MAXDELTAMOTORS
+		{
+			printf("recieved PWM values request a change which violates MAXDELTAMOTORS\n");
+			return 1; //return approprate message
+		}
     }
 
     #ifdef DEBUGPRINTS /*print out additional debugging information, if requested*/
@@ -525,6 +536,33 @@ int EndDataLogging(datalog * log)
     return 0;
 }
 
+int SetMaxDeltaMotors(int maxdeltamotor)
+{
+    unsigned char inbuffer[5];
+	char * context = NULL;
+	const char * setvalptr;
+    int setval = 0;
+	memset(&inbuffer[0], '\0', sizeof(unsigned char)*5); //clear our input buffer
+
+    if(maxdeltamotor > 255 || maxdeltamotor < 0) //ensure proper range on input
+    {
+        printf("invalid input to SetMaxDeltaMotors - outside range of 0-255\n");
+        return -1;
+    }
+
+    SendByte(CCOMPORT, 'n'); //send maximum rate of motor change command
+    SendByte(CCOMPORT, (char)maxdeltamotor); //send value
+    wait(.1); //wait for response
+    PollComport(CCOMPORT, &inbuffer[0], sizeof(unsigned char)*5); //get response from copter
+	setval = atoi((const char *)inbuffer);
+    if(setval != maxdeltamotor )
+    {
+        printf("ERROR! - maxdeltamotor set to %d\n", setval);
+        return -1;
+    }
+    return 0;
+
+}
 int Kill(void)
 {
     unsigned char inbuffer[10]; //local variable definitions

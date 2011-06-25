@@ -1,19 +1,55 @@
-﻿Build started 6/24/2011 2:55:57 PM.
+﻿Build started 6/25/2011 2:05:42 PM.
      1>Project "C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "x64\Debug\Quadrocopter.unsuccessfulbuild".
+         Creating "x64\Debug\Quadrocopter.unsuccessfulbuild" because "AlwaysCreate" was specified.
        GenerateTargetFrameworkMonikerAttribute:
        Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
        ClCompile:
          All outputs are up-to-date.
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /Od /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Debug\Quadrocopter.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt Quadrocopter.cpp /clr:nostdlib 
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /Od /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Debug\Quadrocopter.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt Functions.cpp ManFlight.cpp Quadrocopter.cpp TestFunctions.cpp mainFunc.cpp /clr:nostdlib 
+         Functions.cpp
+     1>Functions.cpp(11): warning C4244: '=' : conversion from 'float' to 'clock_t', possible loss of data
+     1>Functions.cpp(95): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(97): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(99): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(101): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(115): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(118): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(121): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(161): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(282): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(399): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
+     1>Functions.cpp(433): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(465): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\time.inl(86) : see declaration of 'ctime'
+     1>Functions.cpp(469): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\time.inl(112) : see declaration of 'localtime'
+     1>Functions.cpp(475): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : see declaration of 'fopen'
+     1>Functions.cpp(555): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Functions.cpp(543): warning C4101: 'setvalptr' : unreferenced local variable
+     1>Functions.cpp(572): warning C4305: 'argument' : truncation from 'double' to 'float'
+         ManFlight.cpp
+     1>ManFlight.cpp(45): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
+     1>ManFlight.cpp(110): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>ManFlight.cpp(117): warning C4305: 'argument' : truncation from 'double' to 'float'
          Quadrocopter.cpp
      1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\Form1.h(1800): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(249) : see declaration of 'freopen'
+         TestFunctions.cpp
+     1>TestFunctions.cpp(54): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
+         mainFunc.cpp
+     1>mainFunc.cpp(14): warning C4101: 'i' : unreferenced local variable
+     1>mainFunc.cpp(13): warning C4101: 'joystickin' : unreferenced local variable
+     1>mainFunc.cpp(12): warning C4101: 'copter' : unreferenced local variable
+         Generating Code...
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\manflight.cpp(105): warning C4700: uninitialized local variable 'exitflag' used
          All outputs are up-to-date.
        CoreResGen:
-         "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\NETFX 4.0 Tools\resgen.exe" /useSourcePath /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /r:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /compile Form1.resX,x64\Debug\Quadrocopter.Form1.resources
-         Processing resource file "Form1.resX" into "x64\Debug\Quadrocopter.Form1.resources".
+         All outputs are up-to-date.
        ResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -37,4 +73,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.12
+Time Elapsed 00:00:10.30

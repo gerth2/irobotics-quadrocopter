@@ -16,7 +16,7 @@ extern "C"
 	#define JCOMPORT 5
 
 	/*delay definitions (in seconds)*/
-	#define SENSOR_READ_DELAY .093
+	#define SENSOR_READ_DELAY .087
 	#define JOYSTICK_READ_DELAY .008
 	#define PWM_WRITE_DELAY .0011
 
@@ -41,6 +41,9 @@ extern "C"
 	#define ZMIN 150
 	#define HMAX 811
 	#define HMIN 256
+
+	/*define limits on maximum rate of motor speed change*/
+	#define MAXDELTAMOTORS 40
 
 	/*Structure definitions*/
 
@@ -136,6 +139,8 @@ extern "C"
 	/*returns 0 on success, negative error code on failure*/
 	/*error codes - -1: error on transmission via serial - pwm value not guarnteed written to copter*/
 	/*              -2: input value to write is out of valid range*/
+	/*              +1: values recieved were too large to be written without exceeding MAXDELTAMOTORS*/
+	/*                    -MAXDELTAMOTORS was either added or subtracted from current values as approprate*/
 
 	int Teardown_Hardware(void);
 	/*deinitalize all hardware. call just before program exits*/
