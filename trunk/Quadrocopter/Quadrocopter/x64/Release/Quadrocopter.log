@@ -1,4 +1,4 @@
-﻿Build started 6/25/2011 2:15:52 PM.
+﻿Build started 7/1/2011 8:44:35 AM.
      1>Project "C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "x64\Release\Quadrocopter.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -22,4 +22,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.28
+Time Elapsed 00:00:00.25

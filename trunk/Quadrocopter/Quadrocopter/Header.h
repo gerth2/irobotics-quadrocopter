@@ -102,6 +102,12 @@ extern "C"
 
 
 	} joystick;
+
+	/*global variables (kinda - i'm really not sure where you declare global variables. here seemed a good as place as any)*/
+	static int logdata = 0; //flag to tell whether datalogging is requested or not
+	static int joystickcomport = 5; //comport to which joystick arduino is attached
+	static int wirelesscomport = 6; //comport to which computer-side Xbee radio is attached
+	static int wiredcomport = 7; //comport to which FDTI chip for wired testing is attached.
 	
 
 
@@ -140,7 +146,7 @@ extern "C"
 	/*error codes - -1: error on transmission via serial - pwm value not guarnteed written to copter*/
 	/*              -2: input value to write is out of valid range*/
 	/*              +1: values recieved were too large to be written without exceeding MAXDELTAMOTORS*/
-	/*                    -MAXDELTAMOTORS was either added or subtracted from current values as approprate*/
+	/*                    -value read in was ignored. resend approprate value.*/
 
 	int Teardown_Hardware(void);
 	/*deinitalize all hardware. call just before program exits*/

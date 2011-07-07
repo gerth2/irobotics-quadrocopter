@@ -188,6 +188,7 @@ private: System::Windows::Forms::Button^  button13;
 private: System::Windows::Forms::Button^  button14;
 private: System::ComponentModel::BackgroundWorker^  backgroundWorker1;
 private: System::Windows::Forms::Button^  codetestbutton;
+private: System::Windows::Forms::ToolStripMenuItem^  setupComportsToolStripMenuItem;
 
 
 
@@ -318,6 +319,7 @@ private:
 			this->TiltTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->TiltLabel = (gcnew System::Windows::Forms::Label());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->codetestbutton = (gcnew System::Windows::Forms::Button());
 			this->button14 = (gcnew System::Windows::Forms::Button());
 			this->button12 = (gcnew System::Windows::Forms::Button());
 			this->label50 = (gcnew System::Windows::Forms::Label());
@@ -350,7 +352,7 @@ private:
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
-			this->codetestbutton = (gcnew System::Windows::Forms::Button());
+			this->setupComportsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->TabControl->SuspendLayout();
 			this->Settings->SuspendLayout();
 			this->TiltPID->SuspendLayout();
@@ -1437,6 +1439,16 @@ private:
 			this->tabPage1->Text = L"Debugging Tests";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
+			// codetestbutton
+			// 
+			this->codetestbutton->Location = System::Drawing::Point(368, 91);
+			this->codetestbutton->Name = L"codetestbutton";
+			this->codetestbutton->Size = System::Drawing::Size(105, 23);
+			this->codetestbutton->TabIndex = 11;
+			this->codetestbutton->Text = L"Code Test Button";
+			this->codetestbutton->UseVisualStyleBackColor = true;
+			this->codetestbutton->Click += gcnew System::EventHandler(this, &Form1::codetestbutton_Click);
+			// 
 			// button14
 			// 
 			this->button14->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)), 
@@ -1621,8 +1633,8 @@ private:
 			// 
 			// fileToolStripMenuItem
 			// 
-			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->newPIDToolStripMenuItem, 
-				this->loadPIDToolStripMenuItem, this->savePIDToolStripMenuItem, this->quitToolStripMenuItem});
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {this->newPIDToolStripMenuItem, 
+				this->loadPIDToolStripMenuItem, this->savePIDToolStripMenuItem, this->setupComportsToolStripMenuItem, this->quitToolStripMenuItem});
 			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
 			this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
 			this->fileToolStripMenuItem->Text = L"File";
@@ -1630,25 +1642,25 @@ private:
 			// newPIDToolStripMenuItem
 			// 
 			this->newPIDToolStripMenuItem->Name = L"newPIDToolStripMenuItem";
-			this->newPIDToolStripMenuItem->Size = System::Drawing::Size(121, 22);
+			this->newPIDToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			this->newPIDToolStripMenuItem->Text = L"New PID";
 			// 
 			// loadPIDToolStripMenuItem
 			// 
 			this->loadPIDToolStripMenuItem->Name = L"loadPIDToolStripMenuItem";
-			this->loadPIDToolStripMenuItem->Size = System::Drawing::Size(121, 22);
+			this->loadPIDToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			this->loadPIDToolStripMenuItem->Text = L"Load PID";
 			// 
 			// savePIDToolStripMenuItem
 			// 
 			this->savePIDToolStripMenuItem->Name = L"savePIDToolStripMenuItem";
-			this->savePIDToolStripMenuItem->Size = System::Drawing::Size(121, 22);
+			this->savePIDToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			this->savePIDToolStripMenuItem->Text = L"Save PID";
 			// 
 			// quitToolStripMenuItem
 			// 
 			this->quitToolStripMenuItem->Name = L"quitToolStripMenuItem";
-			this->quitToolStripMenuItem->Size = System::Drawing::Size(121, 22);
+			this->quitToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			this->quitToolStripMenuItem->Text = L"Quit";
 			this->quitToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::quitToolStripMenuItem_Click);
 			// 
@@ -1711,21 +1723,19 @@ private:
 			// 
 			this->backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &Form1::backgroundWorker1_DoWork);
 			// 
-			// codetestbutton
+			// setupComportsToolStripMenuItem
 			// 
-			this->codetestbutton->Location = System::Drawing::Point(368, 91);
-			this->codetestbutton->Name = L"codetestbutton";
-			this->codetestbutton->Size = System::Drawing::Size(105, 23);
-			this->codetestbutton->TabIndex = 11;
-			this->codetestbutton->Text = L"Code Test Button";
-			this->codetestbutton->UseVisualStyleBackColor = true;
-			this->codetestbutton->Click += gcnew System::EventHandler(this, &Form1::codetestbutton_Click);
+			this->setupComportsToolStripMenuItem->Name = L"setupComportsToolStripMenuItem";
+			this->setupComportsToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			this->setupComportsToolStripMenuItem->Text = L"Setup Comports";
+			this->setupComportsToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::setupComportsToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
+			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(518, 497);
 			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->statusStrip1);
@@ -1779,9 +1789,9 @@ private:
 		}
 #pragma endregion
 
-	static int logdata = 0;
 
-	private: System::Void textBox2_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+
+private: System::Void textBox2_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 			 }
 /*code for Settings page controls*/
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1940,6 +1950,48 @@ private: System::Void backgroundWorker1_DoWork(System::Object^  sender, System::
 		 }
 private: System::Void codetestbutton_Click(System::Object^  sender, System::EventArgs^  e) {
 			 
+		 }
+private: System::Void setupComportsToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 /*local vars*/
+			 int input;
+			 
+			 /*code to execute when "setup comports" is selected under the file menu*/
+			 printf("\n-----------------------------\n");
+			 printf("Current Comports:\n");
+			 printf("	to joystick interface - %d\n", joystickcomport);
+			 printf("	to Xbee wireless      - %d\n", wirelesscomport);
+			 printf("	to FTDI interface     - %d\n", wiredcomport);
+			 /*get new values for comports*/
+			 printf("\nEnter new comport for Joystick interface: ");
+			 scanf("%d", &input);
+			 if(input < 0) //perform error check
+			 {
+				 printf("\ninvalid entry\n");
+				 return;
+			 }
+			 joystickcomport = input;
+			 printf("\nEnter new comport for Xbee wireless interface: ");
+			 scanf("%d", &input);
+			 if(input < 0) //perform error check
+			 {
+				 printf("\ninvalid entry\n");
+				 return;
+			 }
+			 wirelesscomport = input;
+			 printf("\nEnter new comport for FTDI wired interface: ");
+			 scanf("%d", &input);
+			 if(input < 0) //perform error check
+			 {
+				 printf("\ninvalid entry\n");
+				 return;
+			 }
+			 wiredcomport = input;
+			 printf("\nNew comports:\n");
+			 printf("	joystick - %d\n", joystickcomport);
+			 printf("	Xbee     - %d\n", wirelesscomport);
+			 printf("	FTDI     - %d\n", wiredcomport);
+			 printf("\n-----------------------------\n");
+			 return;
 		 }
 };
 }

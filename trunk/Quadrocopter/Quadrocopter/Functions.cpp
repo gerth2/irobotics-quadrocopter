@@ -7,10 +7,10 @@
 /*function to cause pauses in the program execution*/
 void wait(float s)
 {
-    clock_t endwait;
-    endwait = (float)clock()+s*1000;
+    clock_t endwait;//variable definition
+    endwait = (float)clock()+s*1000;// determine time to end at (current time + requested wait)
     while (clock() < endwait) //main wait loop
-    {
+    { //hold and do nada
     }
 
 }
@@ -35,19 +35,22 @@ int Initalize_Hardware(void)
 
     printf("\ninitalizing hardware....\n");
     /*open the three required comports, check for errors*/
+	/*these are virtual serial ports assigned by the windows OS to all */
+	/*USB devices which request a serial port. each device is awarded a unique comport.*/
+	/*you will need to change the comports as the software is ported between computers.*/
     int errorcode = 0;
-    if(OpenComport(6, BAUDRATE))
+    if(OpenComport(wirelesscomport, BAUDRATE))
     {
         printf("-- to computer-side Xbee radio\n");
         errorcode--;
     }
 
-    if(OpenComport(7, BAUDRATE))
+    if(OpenComport(wiredcomport, BAUDRATE))
     {
         printf("-- to quadcopter wired interface\n");
         errorcode--;
     }
-    if(OpenComport(5,BAUDRATE))
+    if(OpenComport(joystickcomport, BAUDRATE))
     {
         printf("-- to Joystick Input Arduino\n");
         errorcode--;
@@ -57,13 +60,13 @@ int Initalize_Hardware(void)
 	/*no error checking currently possible*/
     SendByte(CCOMPORT, 's');
 	wait(.5);
-    if(SetMaxDeltaMotors(MAXDELTAMOTORS))
+    if(SetMaxDeltaMotors(MAXDELTAMOTORS)) //set up default maxdeltamotors value, check for error
     {
         printf("initalization not completed successfully \n");
         return -1;
     }
-    printf("initalization complete!\n\n");
-    return errorcode;
+    printf("initalization complete!\n\n"); //return success
+    return errorcode; //return number of unopened comports. Under normal operation, this should be -1.
 }
 
 int Set_Pwm(quadcopter * copter)
@@ -538,7 +541,7 @@ int EndDataLogging(datalog * log)
 
 int SetMaxDeltaMotors(int maxdeltamotor)
 {
-    unsigned char inbuffer[5];
+    unsigned char inbuffer[5]; //local variable definitions
 	char * context = NULL;
 	const char * setvalptr;
     int setval = 0;
@@ -555,14 +558,15 @@ int SetMaxDeltaMotors(int maxdeltamotor)
     wait(.1); //wait for response
     PollComport(CCOMPORT, &inbuffer[0], sizeof(unsigned char)*5); //get response from copter
 	setval = atoi((const char *)inbuffer);
-    if(setval != maxdeltamotor )
+    if(setval != maxdeltamotor ) //detect if the set value is not the same as the requested one
     {
         printf("ERROR! - maxdeltamotor set to %d\n", setval);
-        return -1;
+        return -2;
     }
-    return 0;
+    return 0; //else, return success
 
 }
+
 int Kill(void)
 {
     unsigned char inbuffer[10]; //local variable definitions

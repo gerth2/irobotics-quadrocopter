@@ -12,7 +12,7 @@ int ManFlight(datalog * log)
     /*forces all motors to zero and returns to the caller*/
 
     /*first, make sure the toggle is set up correctly*/
-    joystick joystickin;
+    joystick joystickin; //local variable definitions
     quadcopter copter;
     int i, j;
     int exitflag;
@@ -21,55 +21,55 @@ int ManFlight(datalog * log)
 
 
     printf("\n\n\nProgram is now running in Manual Flight Control Mode!!!\n\n");
-    Read_Joystick(&joystickin);
-    if(joystickin.activate_height != 0)
+    Read_Joystick(&joystickin); //get initial reading
+    if(joystickin.activate_height != 0)//detect case where left toggle is not in proper position to start
     {
-        printf("please flip left toggle\n");
-        while(1)
+        printf("please flip left toggle\n"); //tell the idiot user what to do
+        while(1) //loop until he does it
         {
             Read_Joystick(&joystickin);
             if(joystickin.activate_height == 0)
             {
-                printf("thank you.\n\n");
+                printf("thank you.\n\n"); //and we're good...
                 break;
             }
         }
     }
 
-    printf("This mode allows for direct Pilot control of motor outputs.\n");
+    printf("This mode allows for direct Pilot control of motor outputs.\n"); //again, describe what's gonna happen.
     printf("Throw the left toggle to deactivate all motors and exit.\n");
     printf("Right Toggle executes Kill Code.\n");
     printf("X joystick controls roll, Y joystick controls pitch\n");
     printf("Z joystick controls yaw, H joystick controls altitude\n\n\n");
     printf("Enter anything to continue.");
-    scanf("%d", &i);
-    i = 0;
+    scanf("%d", &i); //hold until the user is ok to continue, and do nothing with that variable
+    i = 0;//see? i told you we'd do nothing with it.
 
     /*main control loop*/
     while(1)
     {
-        Read_Joystick(&joystickin);
-        CorrectJoystick(&joystickin);
+        Read_Joystick(&joystickin); //get joystick input
+        CorrectJoystick(&joystickin); //make it look nice
 
-        #ifdef DEBUGPRINTSFLIGHT
+        #ifdef DEBUGPRINTSFLIGHT //print out pretty looking debug info if the user wants it
         printf("corrected joystick values:\nx %d\ny %d\nz %d\nh %d\n", joystickin.x, joystickin.y, joystickin.rotation, joystickin.altitude);
         #endif
 
-        throttle = (double)(joystickin.altitude);
+        throttle = (double)(joystickin.altitude); //establish the base value for all the motors
         pitchdelta = (double)((127 - joystickin.y) *(0.5)); /*generate deltas - final decimal is a scalaing factor*/
         rolldelta = (double)((127 - joystickin.x) * (0.5)); /*change scalaing factor to change sensitivity*/
         yawdelta = (double)((127 - joystickin.rotation) * 0.9);
 
-        #ifdef DEBUGPRINTSFLIGHT
+        #ifdef DEBUGPRINTSFLIGHT //print out more debug info if it's wanted
         printf("deltas:\npitch %lf\nroll %lf\nyaw %lf\n", pitchdelta, rolldelta, yawdelta);
         #endif
 
-        northmotor = throttle + pitchdelta + yawdelta;
+        northmotor = throttle + pitchdelta + yawdelta; //this block o' code maps each delta to the motors, with negatives as approprate
         southmotor = throttle - pitchdelta + yawdelta;
         eastmotor  = throttle + rolldelta  - yawdelta;
         westmotor  = throttle - rolldelta  - yawdelta;
 
-        /*ensure proper output range*/
+        /*ensure proper output ranges, so the quadcopter doesn't complain*/
         if(northmotor > 255)
             northmotor = 255;
         if(northmotor < 0)
@@ -90,59 +90,64 @@ int ManFlight(datalog * log)
         if(westmotor < 0)
             westmotor = 0;
 
-        #ifdef DEBUGPRINTSFLIGHT
+        #ifdef DEBUGPRINTSFLIGHT //print out more useful info to the user (but only if he/she wants it)
         printf("motor outputs : \n");
         printf("north %lf\nsouth %lf\neast %lf\nwest %lf\n", northmotor, southmotor, eastmotor, westmotor);
         #endif
 
-        copter.north_motor = (int)northmotor;
+        copter.north_motor = (int)northmotor; //migrate all the values back to the quadcopter structure
         copter.south_motor = (int)southmotor;
         copter.east_motor = (int)eastmotor;
         copter.west_motor = (int)westmotor;
-        Set_Pwm(&copter);
+        Set_Pwm(&copter); //and write them to the quadcopter
 
-        /*check for exit status*/
+        /*check for exit status - the complexish nature of the code effectively acts as a debouncing mechanism*/
+		/*we had problems with excessive bounce in the switches earlier*/
         if(exitflag == 1)
             break;
-        exitflag = 0;
-        if(joystickin.activate_height == 1)
+        exitflag = 0;//reset the flag if the code gets to this point
+        if(joystickin.activate_height == 1) //if the computer thinks that the switch might have been thrown,
         {
-            wait(.01);
-            if(joystickin.activate_height == 1)
+            wait(.01); //wait for a real short time,
+            if(joystickin.activate_height == 1) //check again, and only set the flag if it's still thrown
                 exitflag = 1;
         }
-        /*check for kill status*/
+
+        /*check for kill status - exact same debouncing scheme*/
         if(joystickin.button1 == 1)
         {
-            wait(.03);
+            wait(.03); //wait a bit longer this time - we definitely don't want any premature kills
             if(joystickin.button1 == 1)
             {
                 j = Kill();
                 while(j)
-                    j = Kill(); //continue to attempt to kill until successful
+                    j = Kill(); //error checking - continue to attempt to kill until successful
             }
             return -1; //report exit due to kill status
         }
 
-		/*log data*/
+		/*log data, but again only if requested*/
 		if(log != NULL)
 			LogData(log, &copter, &joystickin);
 
     }
 
-    printf("exiting...\n");
-    copter.north_motor = 0;
+    printf("exiting...\n"); //alert user that exit status has been triggered
+    copter.north_motor = 0; //reset all motor values to zero before exiting
     copter.south_motor = 0;
     copter.east_motor = 0;
     copter.west_motor = 0;
-    Set_Pwm(&copter);
-    wait(1.5);
-    return 0;
+    Set_Pwm(&copter); //write zeroed values to copter
+    wait(1.5);//hold for a second and a half before returning control to the caller
+    return 0; //and return. yay, we're done!
+
 }
 
 int CorrectJoystick(joystick * joystickin)
 {
-    double xval, yval, zval, hval;
+    double xval, yval, zval, hval; //local var. definitions
+	/*macroed values defined in header.h, are from observed max/min values produced from full sweeps of the remote's joysticks*/
+	/*they are inconsistant because of physical differences in the potentiometers inside the controller*/
 
     /*extract values from structure*/
     xval = (double)joystickin->x;
@@ -152,7 +157,7 @@ int CorrectJoystick(joystick * joystickin)
 
     xval = xval - XMIN; // adjust offset
     xval = xval * (255)/(XMAX-XMIN); // rescale
-    if(xval > 255)
+    if(xval > 255) //ensure proper range (essentially creates a small deadzone at the extreme ranges of travel)
         xval = 255;
     if(xval < 0)
         xval = 0;
