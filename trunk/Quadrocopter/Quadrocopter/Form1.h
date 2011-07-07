@@ -189,6 +189,7 @@ private: System::Windows::Forms::Button^  button14;
 private: System::ComponentModel::BackgroundWorker^  backgroundWorker1;
 private: System::Windows::Forms::Button^  codetestbutton;
 private: System::Windows::Forms::ToolStripMenuItem^  setupComportsToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^  setMaxDeltaMotorsToolStripMenuItem;
 
 
 
@@ -342,6 +343,7 @@ private:
 			this->newPIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->loadPIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->savePIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->setupComportsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->quitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->controlToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->runPIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -352,7 +354,7 @@ private:
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
-			this->setupComportsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->setMaxDeltaMotorsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->TabControl->SuspendLayout();
 			this->Settings->SuspendLayout();
 			this->TiltPID->SuspendLayout();
@@ -1657,6 +1659,13 @@ private:
 			this->savePIDToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			this->savePIDToolStripMenuItem->Text = L"Save PID";
 			// 
+			// setupComportsToolStripMenuItem
+			// 
+			this->setupComportsToolStripMenuItem->Name = L"setupComportsToolStripMenuItem";
+			this->setupComportsToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			this->setupComportsToolStripMenuItem->Text = L"Setup Comports";
+			this->setupComportsToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::setupComportsToolStripMenuItem_Click);
+			// 
 			// quitToolStripMenuItem
 			// 
 			this->quitToolStripMenuItem->Name = L"quitToolStripMenuItem";
@@ -1666,8 +1675,9 @@ private:
 			// 
 			// controlToolStripMenuItem
 			// 
-			this->controlToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {this->runPIDToolStripMenuItem, 
-				this->runManualToolStripMenuItem, this->clearTerminalToolStripMenuItem, this->kILLToolStripMenuItem, this->tellAJokeToolStripMenuItem});
+			this->controlToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {this->runPIDToolStripMenuItem, 
+				this->runManualToolStripMenuItem, this->setMaxDeltaMotorsToolStripMenuItem, this->clearTerminalToolStripMenuItem, this->kILLToolStripMenuItem, 
+				this->tellAJokeToolStripMenuItem});
 			this->controlToolStripMenuItem->Name = L"controlToolStripMenuItem";
 			this->controlToolStripMenuItem->Size = System::Drawing::Size(59, 20);
 			this->controlToolStripMenuItem->Text = L"Control";
@@ -1675,33 +1685,33 @@ private:
 			// runPIDToolStripMenuItem
 			// 
 			this->runPIDToolStripMenuItem->Name = L"runPIDToolStripMenuItem";
-			this->runPIDToolStripMenuItem->Size = System::Drawing::Size(151, 22);
+			this->runPIDToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->runPIDToolStripMenuItem->Text = L"Run PID";
 			// 
 			// runManualToolStripMenuItem
 			// 
 			this->runManualToolStripMenuItem->Name = L"runManualToolStripMenuItem";
-			this->runManualToolStripMenuItem->Size = System::Drawing::Size(151, 22);
+			this->runManualToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->runManualToolStripMenuItem->Text = L"Run Manual";
 			this->runManualToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::runManualToolStripMenuItem_Click);
 			// 
 			// clearTerminalToolStripMenuItem
 			// 
 			this->clearTerminalToolStripMenuItem->Name = L"clearTerminalToolStripMenuItem";
-			this->clearTerminalToolStripMenuItem->Size = System::Drawing::Size(151, 22);
+			this->clearTerminalToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->clearTerminalToolStripMenuItem->Text = L"Clear Terminal";
 			// 
 			// kILLToolStripMenuItem
 			// 
 			this->kILLToolStripMenuItem->Name = L"kILLToolStripMenuItem";
-			this->kILLToolStripMenuItem->Size = System::Drawing::Size(151, 22);
+			this->kILLToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->kILLToolStripMenuItem->Text = L"KILL";
 			this->kILLToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::kILLToolStripMenuItem_Click);
 			// 
 			// tellAJokeToolStripMenuItem
 			// 
 			this->tellAJokeToolStripMenuItem->Name = L"tellAJokeToolStripMenuItem";
-			this->tellAJokeToolStripMenuItem->Size = System::Drawing::Size(151, 22);
+			this->tellAJokeToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->tellAJokeToolStripMenuItem->Text = L"Tell A Joke";
 			this->tellAJokeToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::tellAJokeToolStripMenuItem_Click);
 			// 
@@ -1723,12 +1733,12 @@ private:
 			// 
 			this->backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &Form1::backgroundWorker1_DoWork);
 			// 
-			// setupComportsToolStripMenuItem
+			// setMaxDeltaMotorsToolStripMenuItem
 			// 
-			this->setupComportsToolStripMenuItem->Name = L"setupComportsToolStripMenuItem";
-			this->setupComportsToolStripMenuItem->Size = System::Drawing::Size(160, 22);
-			this->setupComportsToolStripMenuItem->Text = L"Setup Comports";
-			this->setupComportsToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::setupComportsToolStripMenuItem_Click);
+			this->setMaxDeltaMotorsToolStripMenuItem->Name = L"setMaxDeltaMotorsToolStripMenuItem";
+			this->setMaxDeltaMotorsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->setMaxDeltaMotorsToolStripMenuItem->Text = L"Set MaxDeltaMotors";
+			this->setMaxDeltaMotorsToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::setMaxDeltaMotorsToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -1842,7 +1852,7 @@ private: System::Void button5_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 			 else
 				 logptr = NULL;
-			 int m = PWM_Time_Test(&log);
+			 int m = PWM_Time_Test(logptr);
 			 if(logdata)
 				 EndDataLogging(logptr);
 		 }
@@ -1992,6 +2002,12 @@ private: System::Void setupComportsToolStripMenuItem_Click(System::Object^  send
 			 printf("	FTDI     - %d\n", wiredcomport);
 			 printf("\n-----------------------------\n");
 			 return;
+		 }
+private: System::Void setMaxDeltaMotorsToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 int inputval;
+			 printf("\n\n Enter new value for MAXDELTAMOTORS: ");
+			 scanf("%d", &inputval);
+			 SetMaxDeltaMotors(inputval);
 		 }
 };
 }
