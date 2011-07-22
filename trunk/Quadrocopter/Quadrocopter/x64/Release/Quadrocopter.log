@@ -1,0 +1,25 @@
+﻿Build started 7/1/2011 8:44:35 AM.
+     1>Project "C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "x64\Release\Quadrocopter.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       GenerateTargetFrameworkMonikerAttribute:
+       Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+       ClCompile:
+         All outputs are up-to-date.
+         All outputs are up-to-date.
+         All outputs are up-to-date.
+       CoreResGen:
+         All outputs are up-to-date.
+       ResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+         Quadrocopter.vcxproj -> C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Release\Quadrocopter.exe
+       FinalizeBuildStatus:
+         Deleting file "x64\Release\Quadrocopter.unsuccessfulbuild".
+         Touching "x64\Release\Quadrocopter.lastbuildstate".
+     1>Done Building Project "C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.25
