@@ -1818,12 +1818,23 @@ private: System::Void textBox2_TextChanged(System::Object^  sender, System::Even
 			 }
 /*code for Settings page controls*/
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-			//add code to execute the PID-corrected control loop here.
-			 int counter=0;
-			 while (counter<1)
-			 {
+			//PID-corrected control loop here
 
+			 int m;
+			 m = Initalize_Hardware(); //manual flight execution
+			 datalog log;
+			 datalog * logptr;
+			 if(logdata)
+			 {
+				 StartDataLogging(&log);
+				 logptr = &log;
 			 }
+			 else
+				 logptr = NULL;
+			 m = PIDFlight(logptr);
+			 if(logdata)
+				 EndDataLogging(logptr);
+			 m = Teardown_Hardware();
 		 }
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 			 int m = Kill(); //code for red kill button
