@@ -333,11 +333,11 @@ int PIDFlight(datalog * log)
         printf("+Y %lf\-Y %lf\+X %lf\-X %lf\n", PYMotor, NYMotor, PXMotor, NXMotor);
         #endif
 
-        copter.north_motor = (int)PYMotor;
-        copter.south_motor = (int)NYMotor;
-        copter.east_motor = (int)PXMotor;
-        copter.west_motor = (int)NXMotor;
-        Set_Pwm(&copter);
+        copter1.north_motor = (int)PYMotor;
+        copter1.south_motor = (int)NYMotor;
+        copter1.east_motor = (int)PXMotor;
+        copter1.west_motor = (int)NXMotor;
+        Set_Pwm(&copter1);
 		//--------------------------------------//
 		//-------------END REGION---------------//
 		//--------------------------------------//
@@ -374,11 +374,11 @@ int PIDFlight(datalog * log)
     }
 
     printf("exiting...\n");
-    copter.north_motor = 0;
-    copter.south_motor = 0;
-    copter.east_motor = 0;
-    copter.west_motor = 0;
-    Set_Pwm(&copter);
+    copter1.north_motor = 0;
+    copter1.south_motor = 0;
+    copter1.east_motor = 0;
+    copter1.west_motor = 0;
+    Set_Pwm(&copter1);
     wait(1.5);
     return 0;
 }
