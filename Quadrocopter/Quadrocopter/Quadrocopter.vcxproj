@@ -157,6 +157,7 @@
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="mainFunc.cpp" />
     <ClCompile Include="ManFlight.cpp" />
+    <ClCompile Include="PIDFlight.cpp" />
     <ClCompile Include="Quadrocopter.cpp" />
     <ClCompile Include="rs232.cpp" />
     <ClCompile Include="stdafx.cpp">
