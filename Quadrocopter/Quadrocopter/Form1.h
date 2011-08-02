@@ -1593,6 +1593,7 @@ private:
 			this->button4->Font = (gcnew System::Drawing::Font(L"Dutch801 XBd BT", 12, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->button4->ForeColor = System::Drawing::Color::Yellow;
+			/*this comment is named Bill. His only purpose is to ammuse you. Dance, Bill! Dance for our ammusement!!!*/
 			this->button4->Location = System::Drawing::Point(6, 284);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(128, 102);

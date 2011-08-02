@@ -161,6 +161,8 @@ extern "C"
 	/*h axis controls all four PWM output values, pushing them either to 0 or 255*/
 	/* returns zero on completion*/
 
+	/*this comment is named Joe. He serves no purpose. Say 'Hi' to Joe! It helps his self-esteem*/
+
 	int ManFlight(datalog * log);
 	/* allows pilot to have direct control of the motor outputs*/
 	/* returns 0 on exit success, -1 on exit from Kill*/
