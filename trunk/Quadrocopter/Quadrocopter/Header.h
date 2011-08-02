@@ -167,6 +167,10 @@ extern "C"
 	/* allows pilot to have direct control of the motor outputs*/
 	/* returns 0 on exit success, -1 on exit from Kill*/
 
+	int PIDFlight(datalog * log);
+	/* allows pilot to have indirect control of the motor outputs*/
+	/* returns 0 on exit success, -1 on exit from Kill*/
+
 	int CorrectJoystick(joystick * joystickin);
 	/*adjusts all joystick ouputs to approprate range (0-255)*/
 
