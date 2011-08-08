@@ -22,7 +22,7 @@ int PIDFlight(datalog * log)
     double pitchdelta, rolldelta, yawdelta, altitudeabsolute;
 
 
-    printf("\n\n\nProgram is now running in Manual Flight Control Mode!!!\n\n");
+    printf("\n\n\nProgram is now running in PID-Assisted Flight Mode\n\n");
     Read_Joystick(&joystickin); //get initial reading
     if(joystickin.activate_height != 0)//detect case where left toggle is not in proper position to start
     {
@@ -38,7 +38,7 @@ int PIDFlight(datalog * log)
         }
     }
 
-    printf("This mode allows for direct Pilot control of motor outputs.\n");
+    printf("This mode adjusts motor values based on sensor readings and joystick input.\n");
     printf("Throw the right toggle to deactivate all motors and exit.\n");
     printf("Right Toggle executes Kill Code.\n");
     printf("X joystick controls roll, Y joystick controls pitch\n");
@@ -98,8 +98,8 @@ int PIDFlight(datalog * log)
 	//----------------------------------//
 	//-----DECLARE CURRENT STATE VARS---//
 	//----------------------------------//
-	double currentXZtilt;
-	double currentYZtilt;
+	double currentXZtilt=0;
+	double currentYZtilt=0;
 	
 	double current_clock = clock();
 	double previous_clock;
@@ -115,9 +115,10 @@ int PIDFlight(datalog * log)
 	//-----DECLARE CONSTANTS------------//
 	//----------------------------------//
 	double const gyroscopeConversion=.00875; //gyroscope measurement has .00875 degrees per unit
-	double const accelerometerConversion=9.81; //9.81 m/sec^2
+	double const accelerometerConversion=9.81/4000; //9.81 m/sec^2
 	double const compassConversion=10.0;
 	double const motorScale=5;
+	double const toRadianConversion=.0174444;
 	//--------------------------------------//
 	//-------------END REGION---------------//
 	//--------------------------------------//
@@ -135,25 +136,25 @@ int PIDFlight(datalog * log)
 	//--------------------------------------//
 	//----DEFINE REACTIVITY COEFFICIENTS----//
 	//--------------------------------------//
-	int rollReactivityCubicCoefficient=0;
-	int rollReactivityQuadraticCoefficient=0;
-	int rollReactivityProportionalCoefficient=1;
-	int rollReactivityConstantCoefficient=0;
+	double rollReactivityCubicCoefficient=0;
+	double rollReactivityQuadraticCoefficient=0;
+	double rollReactivityProportionalCoefficient=1;
+	double rollReactivityConstantCoefficient=0;
 
-	int pitchReactivityCubicCoefficient=0;
-	int pitchReactivityQuadraticCoefficient=1;
-	int pitchReactivityProportionalCoefficient=0;
-	int pitchReactivityConstantCoefficient=0;
+	double pitchReactivityCubicCoefficient=0;
+	double pitchReactivityQuadraticCoefficient=0;
+	double pitchReactivityProportionalCoefficient=1;
+	double pitchReactivityConstantCoefficient=0;
 
-	int yawReactivityCubicCoefficient=0;
-	int yawReactivityQuadraticCoefficient=1;
-	int yawReactivityProportionalCoefficient=0;
-	int yawReactivityConstantCoefficient=0;
+	double yawReactivityCubicCoefficient=0;
+	double yawReactivityQuadraticCoefficient=0;
+	double yawReactivityProportionalCoefficient=1;
+	double yawReactivityConstantCoefficient=0;
 
-	int altReactivityCubicCoefficient=0;
-	int altReactivityQuadraticCoefficient=1;
-	int altReactivityProportionalCoefficient=0;
-	int altReactivityConstantCoefficient=0;
+	double altReactivityCubicCoefficient=0;
+	double altReactivityQuadraticCoefficient=0;
+	double altReactivityProportionalCoefficient=1;
+	double altReactivityConstantCoefficient=0;
 	//--------------------------------------//
 	//-------------END REGION---------------//
 	//--------------------------------------//
@@ -190,9 +191,9 @@ int PIDFlight(datalog * log)
 		//-----------TILT PID CALCULATIONS------//
 		//--------------------------------------//
 
-		double avg_ang_vel_y=(copter1.ang_vel_y+copter2.ang_vel_y+copter3.ang_vel_y)/3.0;
-		double avg_ang_vel_x=(copter1.ang_vel_x+copter2.ang_vel_x+copter3.ang_vel_x)/3.0;
-		double avg_ang_vel_z=(copter1.ang_vel_z+copter2.ang_vel_z+copter3.ang_vel_z)/3.0;
+		double avg_ang_vel_y=(copter1.ang_vel_y+copter2.ang_vel_y+copter3.ang_vel_y)/3.0+171;
+		double avg_ang_vel_x=(copter1.ang_vel_x+copter2.ang_vel_x+copter3.ang_vel_x)/3.0+36;
+		double avg_ang_vel_z=(copter1.ang_vel_z+copter2.ang_vel_z+copter3.ang_vel_z)/3.0-36;
 		//if high tilt, use gyroscope integration
 		if (currentXZtilt>10 || currentXZtilt<-10)
 		{
@@ -201,25 +202,27 @@ int PIDFlight(datalog * log)
 		}
 		else
 		{
+			currentXZtilt+=avg_ang_vel_y*time_diff*gyroscopeConversion; //gyroscope measures in 
 			//use accelerometer to recalibrate
 		}
 		if (currentYZtilt>10 || currentYZtilt<-10)
 		{
 			//YZ tilt
-			currentYZtilt+=copter1.ang_vel_x*time_diff*gyroscopeConversion;
+			currentYZtilt+=avg_ang_vel_x*time_diff*gyroscopeConversion;
 		}
 		else
 		{
 			//use accelerometer to recalibrate
+			currentYZtilt+=avg_ang_vel_x*time_diff*gyroscopeConversion;
 		}
 
 		XZTiltP=currentXZtilt-(rolldelta/128.0)*maxXZAngle;
 		XZTiltI=XZTiltI+XZTiltP;
-		XZTiltD=avg_ang_vel_y;
+		XZTiltD=avg_ang_vel_y*gyroscopeConversion;
 
 		YZTiltP=currentYZtilt-(rolldelta/128.0)*maxYZAngle;
 		YZTiltI=YZTiltI+YZTiltP;;
-		YZTiltD=avg_ang_vel_x;
+		YZTiltD=avg_ang_vel_x*gyroscopeConversion;
 		//--------------------------------------//
 		//-------------END REGION---------------//
 		//--------------------------------------//
@@ -228,9 +231,9 @@ int PIDFlight(datalog * log)
 		//------------YAW PID CALCULATIONS------//
 		//--------------------------------------//
 		double currentHeading=(copter1.heading/compassConversion+copter2.heading/compassConversion+copter3.heading/compassConversion)/3.0-180.0; //adjust so it has a -180 to +180 degree range
-		YawP=currentHeading-(yawdelta/128.0)*180.0;
+		YawP=currentHeading+(yawdelta/128.0)*180.0;
 		YawI=YawI+YawP;
-		YawD=avg_ang_vel_z;
+		YawD=avg_ang_vel_z*gyroscopeConversion;
 		//--------------------------------------//
 		//-------------END REGION---------------//
 		//--------------------------------------//
@@ -245,11 +248,11 @@ int PIDFlight(datalog * log)
 
 		//double currentAltitudeAcceleration=
 		//find first component
-		double firstAccelComponent=(cos(currentXZtilt)*avg_accel_total);
-		double totalAltitudeAccel=(cos(currentYZtilt)*firstAccelComponent);
+		double firstAccelComponent=(cos(currentXZtilt*toRadianConversion)*avg_accel_total);
+		double totalAltitudeAccel=(cos(currentYZtilt*toRadianConversion)*firstAccelComponent)-4000;
 		currentAltitudeVelocity=currentAltitudeVelocity+(totalAltitudeAccel*time_diff*accelerometerConversion);
 		currentAltitude=currentAltitude+currentAltitudeVelocity*time_diff;
-		double currentSensorAltitude=((copter1.height+copter2.height+copter3.height)/3.0)/10.0; //average and convert from cm to m
+		double currentSensorAltitude=((copter1.height+copter2.height+copter3.height)/3.0)/100.0; //average and convert from cm to m
 
 		//if the tilt is small enough, use the height sensor measurement
 		if ((currentXZtilt < 10 && currentXZtilt > -10) && (currentYZtilt < 10 && currentYZtilt > -10))
@@ -258,6 +261,7 @@ int PIDFlight(datalog * log)
 		}
 		else
 		{
+			currentAltitude=currentSensorAltitude;
 			//nothing, as the current altitude has already been set to the double integrated acceleration
 		}
 
@@ -297,17 +301,23 @@ int PIDFlight(datalog * log)
 		//NY = -Y
 		//PX = +X
 		//NX = -X
-		double unscaledPYMotor = -AltError-YZTiltError-YawError;
-		double unscaledNYMotor = -AltError+YZTiltError-YawError;
-		double unscaledPXMotor = -AltError-XZTiltError+YawError;
-		double unscaledNXMotor = -AltError+XZTiltError+YawError;
+		double unscaledPYMotorChange = -AltError-YZTiltError-YawError;
+		double unscaledNYMotorChange = -AltError+YZTiltError-YawError;
+		double unscaledPXMotorChange = -AltError+XZTiltError+YawError;
+		double unscaledNXMotorChange = -AltError-XZTiltError+YawError;
 
-		PYMotor = unscaledPYMotor/motorScale;
-        NYMotor = unscaledNYMotor/motorScale;
-        PXMotor  = unscaledPXMotor/motorScale;
-        NXMotor  = unscaledNXMotor/motorScale;
+		//PYMotor = PYMotor + min(unscaledPYMotorChange/motorScale,40);
+        //NYMotor = NYMotor + min(unscaledNYMotorChange/motorScale,40);
+        //PXMotor = PXMotor + min(unscaledPXMotorChange/motorScale,40);
+        //NXMotor = NXMotor + min(unscaledNXMotorChange/motorScale,40);
+
+		PYMotor = unscaledPYMotorChange/motorScale;
+        NYMotor = unscaledNYMotorChange/motorScale;
+        PXMotor = unscaledPXMotorChange/motorScale;
+        NXMotor = unscaledNXMotorChange/motorScale;
 
         /*ensure proper output range*/
+		/*
         if(PYMotor > 255)
             PYMotor = 255;
         if(PYMotor < 0)
@@ -327,6 +337,7 @@ int PIDFlight(datalog * log)
             NXMotor = 255;
         if(NXMotor < 0)
             NXMotor = 0;
+		*/
 
         #ifdef DEBUGPRINTSFLIGHT
         printf("motor outputs : \n");
@@ -337,7 +348,7 @@ int PIDFlight(datalog * log)
         copter1.south_motor = (int)NYMotor;
         copter1.east_motor = (int)PXMotor;
         copter1.west_motor = (int)NXMotor;
-        Set_Pwm(&copter1);
+        //Set_Pwm(&copter1);
 		//--------------------------------------//
 		//-------------END REGION---------------//
 		//--------------------------------------//
@@ -373,7 +384,7 @@ int PIDFlight(datalog * log)
 
     }
 
-    printf("exiting...\n");
+    printf("Exiting to main menu...\n");
     copter1.north_motor = 0;
     copter1.south_motor = 0;
     copter1.east_motor = 0;
