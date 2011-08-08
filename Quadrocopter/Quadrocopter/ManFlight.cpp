@@ -50,6 +50,7 @@ int ManFlight(datalog * log)
     {
         Read_Joystick(&joystickin); //get joystick input
         CorrectJoystick(&joystickin); //make it look nice
+		Read_Sensors(&copter);
 
         #ifdef DEBUGPRINTSFLIGHT //print out pretty looking debug info if the user wants it
         printf("corrected joystick values:\nx %d\ny %d\nz %d\nh %d\n", joystickin.x, joystickin.y, joystickin.rotation, joystickin.altitude);

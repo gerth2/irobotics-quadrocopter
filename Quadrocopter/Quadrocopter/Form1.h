@@ -1927,7 +1927,7 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 				 EndDataLogging(logptr);
 		 }
 private: System::Void Form1_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e) {
-			 int m = Teardown_Hardware(); //code to be executed as program is closed
+			 //code to be executed as program is closed
 			 printf("NO NO!!!! DON'T KILL ME!!!! NOOOOO!!!!\n\n\n ....I'm dying.... gaaak... :(\n\n");
 		 }
 private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
