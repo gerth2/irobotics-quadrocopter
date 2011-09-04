@@ -276,29 +276,14 @@ void loop()
     digitalWrite(13, LOW);
   }
 
-  /*execute command to set up a new deltamotors value*/
-  if(in == 'n')
-  { 
-    digitalWrite(13, HIGH);
-    do //do nothing while nothing is on the serial line
-    {
-      in = Serial.read();
-    }
-    while (in == -1);
-    maxdeltamotors = in;
-    Serial.print(maxdeltamotors, DEC);
-    #ifdef AUTOKILL
-    zerotime = millis(); /*reset autokill stuff*/
-    autokill_flag = 0;
-    #endif 
-    digitalWrite(13, LOW);
-  }
-
   /*execute Kill Code*/
   if(in == 'K')
   {
     while(1)
     { 
+      /*continually write zero motor speed values, and blink the status light*/
+      /*note - there is no escape from this loop - a manual reset is required*/
+      
       digitalWrite(13, HIGH);
       WritePWM(50, 50, 50, 50);
       Serial.write('x');
