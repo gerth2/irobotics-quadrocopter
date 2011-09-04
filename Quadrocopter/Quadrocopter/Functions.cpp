@@ -22,7 +22,7 @@ int Initalize_Hardware(void)
 
     /*print out some official-looking stuff for coolness factor*/
     printf("\n\n==================================================================\n");
-    printf(    "===            IEEE MIDTERMINATORS QUADCOPTER - v1.0           ===\n");
+    printf(    "===            IEEE MIDTERMINATORS QUADCOPTER - v1.1           ===\n");
     printf(    "===                                                            ===\n");
     printf(    "===    Hardware Design and Interface Software - Chris Gerth    ===\n");
     printf(    "===        Software and PID Algorithm - Michael Vilim          ===\n");
@@ -31,6 +31,7 @@ int Initalize_Hardware(void)
     printf(    "===                    ---Sponsors---                          ===\n");
     printf(    "===                    --------------                          ===\n");
     printf(    "===                       UIUC IEEE                            ===\n");
+	printf(    "===                       Qualcomm                             ===\n");
     printf(    "==================================================================\n\n\n");
 
     printf("\ninitalizing hardware....\n");
@@ -60,11 +61,11 @@ int Initalize_Hardware(void)
 	/*no error checking currently possible*/
     SendByte(coptercomport, 's');
 	wait(.5);
-    if(SetMaxDeltaMotors(MAXDELTAMOTORS)) //set up default maxdeltamotors value, check for error
+ /*   if(SetMaxDeltaMotors(MAXDELTAMOTORS)) //set up default maxdeltamotors value, check for error
     {
         printf("initalization not completed successfully \n");
         return -1;
-    }
+    }*/
     printf("initalization complete!\n\n"); //return success
     return errorcode; //return number of unopened comports. Under normal operation, this should be -1.
 }
@@ -72,7 +73,7 @@ int Initalize_Hardware(void)
 int Set_Pwm(quadcopter * copter)
 {
     int north, south, east, west; //local variable definitons
-    int i;
+    int i, checksum;
     unsigned char errorbuf[10];
     unsigned char outbuff[4];
     memset(errorbuf, '\0', sizeof(unsigned char)*10); //clear out buffers
@@ -104,12 +105,15 @@ int Set_Pwm(quadcopter * copter)
     west = (float)west * (float)((float)(UPPERLIMIT-LOWERLIMIT)/(float)255);
     west = (int)west + LOWERLIMIT;
 
+	checksum = (north + south + east + west) % 10;
+
     #ifdef DEBUGPRINTS /*print out additional debugging information, if requested*/
     printf("values written:\n");
     printf("north = %d\n", north);
     printf("south = %d\n", south);
     printf("east  = %d\n", east);
     printf("west  = %d\n", west);
+	printf("checksum = %d\n", checksum);
     #endif
 
     /*send bytes and perform error checking*/
@@ -124,6 +128,9 @@ int Set_Pwm(quadcopter * copter)
     wait(PWM_WRITE_DELAY);
     if(SendByte(coptercomport, (char)west))
         printf("error in tranmission of PWM value\n");
+	wait(PWM_WRITE_DELAY);
+	if(SendByte(coptercomport, (char)checksum))
+		printf("error in transmisison of checksum\n");
 
     for(i = 0; i <100000; i++) /*wait some arbitrairly large time for success signal before continuing*/
     {
