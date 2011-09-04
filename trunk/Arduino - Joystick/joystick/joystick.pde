@@ -1,3 +1,5 @@
+//iRobotics Quadcopter 2011-2012 Joystick-side code v. 1.1
+
 //Code to run the arduino which interfaces the joystick with the computer
 //order of axis transmission: x, y, z, h, l.tog, r.tog, l. slide, r. slide
 int xaxis = 0;
