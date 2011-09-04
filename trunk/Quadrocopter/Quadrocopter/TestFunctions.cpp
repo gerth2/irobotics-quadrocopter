@@ -88,6 +88,7 @@ int Sensor_Read_Test(datalog * log)
 			printf("bad sensor read on loop %d, retrying....\n", i);
 		}
         printf("\n\n======================\n"); //print out results
+		printf("loop %d\n", i);
         printf("values read in:\n\n");
         printf("gyrox = %d\ngyroy = %d\ngyroz = %d\naccelx = %d\naccely = %d\naccelz = %d\naltitude = %d\nheading = %d\ntemperature = %d\n", copter.ang_vel_x, copter.ang_vel_y, copter.ang_vel_z, copter.accel_x, copter.accel_y, copter.accel_z, copter.height, copter.heading, copter.temperature);
         printf("\n======================\n\n");
@@ -114,8 +115,36 @@ int Joystick_Read_Test(datalog * log)
 			printf("bad joystick read on loop %d, retrying...\n", i);
 		}
         printf("\n\n======================\n"); //print out results
+		printf("loop %d\n", i);
         printf("values read in:\n\n");
         printf("x axis = %d\ny axis = %d\nz axis = %d\nh axis = %d\nLeft Toggle = %d\nRight Toggle = %d\nLeft Slide = %d\nRight Slide = %d\n", joystickin.x, joystickin.y, joystickin.rotation, joystickin.altitude, joystickin.activate_height, joystickin.button1, joystickin.button2, joystickin.button3);
+        printf("\n======================\n\n");
+		if(log != NULL) //log data if requested
+			LogData(log, &copter, &joystickin);
+
+    }
+	return 0;
+}
+
+
+int Gyro_Read_Test(datalog * log)
+{
+	quadcopter copter; /*local var. definitions*/
+    joystick joystickin;
+	int i;
+	 /*sensor read test*/
+    printf("\nGyro Read test - will read only the gyroscope 1000 times\n");
+    wait(3); /*printf info and pause*/
+    for(i = 0; i<1000; i++) /*loop through sensor reads*/
+    {
+        while(Read_Gyro(&copter) != 0 ) //loop while waiting for good results
+		{
+			printf("bad sensor read on loop %d, retrying....\n", i);
+		}
+        printf("\n\n======================\n"); //print out results
+		printf("loop %d\n", i);
+        printf("values read in:\n\n");
+        printf("gyrox = %d\ngyroy = %d\ngyroz = %d\n", copter.ang_vel_x, copter.ang_vel_y, copter.ang_vel_z);
         printf("\n======================\n\n");
 		if(log != NULL) //log data if requested
 			LogData(log, &copter, &joystickin);
