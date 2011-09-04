@@ -145,7 +145,7 @@ int Set_Pwm(quadcopter * copter)
         }
 		if(errorbuf[0] == 'e') //case - recieved write request was too large to be written, output changed by MAXDELTAMOTORS
 		{
-			printf("recieved PWM values request a change which violates MAXDELTAMOTORS\n");
+			printf("Checksum Error detected, motor values not written.\n");
 			return 1; //return approprate message
 		}
     }
@@ -165,6 +165,8 @@ int Read_Sensors(quadcopter *copter)
     unsigned char inbuffer[100]; /*recieves serial from arduino*/
     const char *valueinastring;
 	char * context; // helps strtok_s keep track of where it is in the string it is parsing
+	int checksum=0;
+	int localchecksum = 1;
 
 	SendByte(coptercomport, 'r'); /*request sensor values*/
 	memset(inbuffer, '\0', sizeof(unsigned char)*100); //clear input buffer
@@ -177,8 +179,7 @@ int Read_Sensors(quadcopter *copter)
 	/*the funciton strtok_s searches for the : and parses the string accordingly*/
 	/*the function atoi changes the parsed ascii values to decimal integers*/
 
-	/*Note: as of 6-19, Copter has been programed to always transmit the value "5" for the temperature*/
-	/* this is used in error checking. Read_Sensors will return an error value if this condition is not met*/
+	/*Note: as of 9/3/2011, a checksum system is used for error detection*/
 
 	/*read gyrox data*/
 	valueinastring = strtok_s((char *)inbuffer, ":", &context);
@@ -254,19 +255,90 @@ int Read_Sensors(quadcopter *copter)
 	}
 	copter->heading = atoi(valueinastring);
     
-	/*read temperature data*/
+	/*read checksum data*/
 	valueinastring = strtok_s(NULL, ":", &context);
 	if(valueinastring == NULL)
 	{
 		printf("error - input string is abnormally small\n");
 		return -1;
 	}
-	copter->temperature = atoi(valueinastring);
+	checksum = atoi(valueinastring);
 
-	if(copter->temperature != 5)
-		return -2; /*return error code on unexpected value from temperature data field*/
+	//calculate the value that the checksum ought to be
+	localchecksum = (copter->ang_vel_x + copter->ang_vel_y + copter->ang_vel_z + copter->accel_x + copter->accel_y + copter->accel_z + copter->height + copter->heading) % 10;
+
+	if(checksum != localchecksum)
+		return -2; /*return error code on checksum disagreement*/
 	else
 		return 0; //return success
+}
+
+int Read_Gyro(quadcopter *copter)
+{
+    unsigned char inbuffer[100]; /*recieves serial from arduino*/
+    const char *valueinastring;
+	char * context; // helps strtok_s keep track of where it is in the string it is parsing
+	int checksum=0;
+	int localchecksum = 1;
+
+	SendByte(coptercomport, 'o'); /*request sensor values for gyro only*/
+	memset(inbuffer, '\0', sizeof(unsigned char)*100); //clear input buffer
+	wait(GYRO_READ_DELAY); /*wait for data to be read and sent*/
+
+	PollComport(coptercomport, inbuffer, sizeof(unsigned char)*100); /*read in serial data*/
+
+	/*data is recieved in the following format - (data):(data):(data):(data):...*/
+	/*where each (data) is an ascii string represinting the inputted value*/
+	/*the funciton strtok_s searches for the : and parses the string accordingly*/
+	/*the function atoi changes the parsed ascii values to decimal integers*/
+
+	/*Note: as of 9/3/2011, a checksum system is used for error detection*/
+
+	/*read gyrox data*/
+	valueinastring = strtok_s((char *)inbuffer, ":", &context);
+	if(valueinastring == NULL) // check for a lack of a : (usually an indicator of a bad input string)
+	{
+		printf("error - input string is abnormally small\n");
+		return -1;
+	}
+	copter->ang_vel_x = atoi(valueinastring); //write integer value to the structure
+    
+	/*read gyroy data*/
+	valueinastring = strtok_s(NULL, ":", &context);
+	if(valueinastring == NULL)
+	{
+		printf("error - input string is abnormally small\n");
+		return -1;
+	}
+	copter->ang_vel_y = atoi(valueinastring);
+    
+	/*read gyroz data*/
+	valueinastring = strtok_s(NULL, ":", &context);
+	if(valueinastring == NULL)
+	{
+		printf("error - input string is abnormally small\n");
+		return -1;
+	}
+	copter->ang_vel_z = atoi(valueinastring);
+
+	/*read checksum data*/
+	valueinastring = strtok_s(NULL, ":", &context);
+	if(valueinastring == NULL)
+	{
+		printf("error - input string is abnormally small\n");
+		return -1;
+	}
+	checksum = atoi(valueinastring);
+
+	localchecksum = (copter->ang_vel_z + copter->ang_vel_y + copter->ang_vel_x) % 10;
+
+	if(checksum != localchecksum)
+	{
+		printf("Error - checksums disagree\n");
+		return -2;
+	}
+	else
+		return 0;
 }
 
 
@@ -546,6 +618,11 @@ int EndDataLogging(datalog * log)
     return 0;
 }
 
+
+/* The following function was used in the place of the new checksum system. 
+
+It is no longer valid and is unused.
+
 int SetMaxDeltaMotors(int maxdeltamotor)
 {
     unsigned char inbuffer[5]; //local variable definitions
@@ -573,6 +650,8 @@ int SetMaxDeltaMotors(int maxdeltamotor)
     return 0; //else, return success
 
 }
+
+*/
 
 int Kill(void)
 {

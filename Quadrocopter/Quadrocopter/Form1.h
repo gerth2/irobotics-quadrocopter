@@ -193,6 +193,7 @@ private: System::Windows::Forms::Button^  codetestbutton;
 private: System::Windows::Forms::ToolStripMenuItem^  setupComportsToolStripMenuItem;
 private: System::Windows::Forms::ToolStripMenuItem^  selectInterfaceToolStripMenuItem;
 private: System::Windows::Forms::ToolStripStatusLabel^  toolStripStatusLabel1;
+private: System::Windows::Forms::Button^  Gyro_Test;
 
 
 
@@ -359,6 +360,7 @@ private:
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->Gyro_Test = (gcnew System::Windows::Forms::Button());
 			this->TabControl->SuspendLayout();
 			this->Settings->SuspendLayout();
 			this->TiltPID->SuspendLayout();
@@ -1525,6 +1527,7 @@ private:
 			// 
 			// panel9
 			// 
+			this->panel9->Controls->Add(this->Gyro_Test);
 			this->panel9->Controls->Add(this->button11);
 			this->panel9->Controls->Add(this->button8);
 			this->panel9->Controls->Add(this->button7);
@@ -1532,7 +1535,7 @@ private:
 			this->panel9->Controls->Add(this->button5);
 			this->panel9->Location = System::Drawing::Point(6, 30);
 			this->panel9->Name = L"panel9";
-			this->panel9->Size = System::Drawing::Size(158, 100);
+			this->panel9->Size = System::Drawing::Size(158, 117);
 			this->panel9->TabIndex = 5;
 			// 
 			// button11
@@ -1593,7 +1596,6 @@ private:
 			this->button4->Font = (gcnew System::Drawing::Font(L"Dutch801 XBd BT", 12, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->button4->ForeColor = System::Drawing::Color::Yellow;
-			/*this comment is named Bill. His only purpose is to ammuse you. Dance, Bill! Dance for our ammusement!!!*/
 			this->button4->Location = System::Drawing::Point(6, 284);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(128, 102);
@@ -1752,6 +1754,16 @@ private:
 			// backgroundWorker1
 			// 
 			this->backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &Form1::backgroundWorker1_DoWork);
+			// 
+			// Gyro_Test
+			// 
+			this->Gyro_Test->Location = System::Drawing::Point(4, 91);
+			this->Gyro_Test->Name = L"Gyro_Test";
+			this->Gyro_Test->Size = System::Drawing::Size(75, 23);
+			this->Gyro_Test->TabIndex = 9;
+			this->Gyro_Test->Text = L"Gyro";
+			this->Gyro_Test->UseVisualStyleBackColor = true;
+			this->Gyro_Test->Click += gcnew System::EventHandler(this, &Form1::Gyro_Test_Click);
 			// 
 			// Form1
 			// 
@@ -2051,6 +2063,21 @@ private: System::Void selectInterfaceToolStripMenuItem_Click(System::Object^  se
 			 printf("new copter comport - %d\n", coptercomport);
 
 
+
+		 }
+private: System::Void Gyro_Test_Click(System::Object^  sender, System::EventArgs^  e) {
+			 datalog log; //Joystick Read test button
+			 datalog * logptr;
+			 if(logdata)
+			 {
+				 StartDataLogging(&log);
+				 logptr = &log;
+			 }
+			 else
+				 logptr = NULL;
+			 int m = Gyro_Read_Test(logptr);
+			 if(logdata)
+				 EndDataLogging(logptr);
 
 		 }
 };

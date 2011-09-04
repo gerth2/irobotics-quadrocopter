@@ -18,7 +18,8 @@ extern "C"
 
 	/*delay definitions (in seconds)*/
 	#define SENSOR_READ_DELAY .087
-	#define JOYSTICK_READ_DELAY .008
+	#define GYRO_READ_DELAY .087
+	#define JOYSTICK_READ_DELAY .010
 	#define PWM_WRITE_DELAY .0011
 
 	/*Test debugging definitions*/
@@ -188,8 +189,13 @@ extern "C"
 	/*saves the file and stops data logging*/
 	/*returns 0 on success, -1 on bad filepointer reference*/
 
-	int SetMaxDeltaMotors(int maxdeltamotor);
+	/*int SetMaxDeltaMotors(int maxdeltamotor);*/
 	/*sends the argument to the quadcopter to adjust the maximum rate of motor speed change*/
+	/*DECOMISISONED AS OF 9/3/2011 */
+
+	int Read_Gyro(quadcopter * copter);
+	/*reads the sensor values of ONLY the gyro*/
+	/*it's just designed to run faster when you don't need all the data*/
 
 	int Kill(void);
 	/*sends killcode to quadcopter, and listens on serial to confirm successful kill*/
@@ -200,5 +206,6 @@ extern "C"
 	int PWM_Write_Test(datalog * log);
 	int Sensor_Read_Test(datalog * log);
 	int Joystick_Read_Test(datalog * log);
+	int Gyro_Read_Test(datalog * log);
 
 }
