@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "Header.h"
 
-int ManFlight(datalog * log)
+void _cdecl ManFlight(void * inlog)
 {
     /*this function allows for direct user control of the motors*/
     /*it maps differentials to each of the joystick axes, */
@@ -14,10 +14,13 @@ int ManFlight(datalog * log)
     /*first, make sure the toggle is set up correctly*/
     joystick joystickin; //local variable definitions
     quadcopter copter;
+	datalog * log;
     int i, j;
     int exitflag;
     double northmotor, southmotor, eastmotor, westmotor;
     double pitchdelta, rolldelta, yawdelta, throttle;
+
+	log = (datalog *)inlog; //typecast the input variable so it can be used
 
 
     printf("\n\n\nProgram is now running in Manual Flight Control Mode!!!\n\n");
@@ -124,7 +127,7 @@ int ManFlight(datalog * log)
                 while(j)
                     j = Kill(); //error checking - continue to attempt to kill until successful
             }
-            return -1; //report exit due to kill status
+            return; //report exit due to kill status
         }
 
 		/*log data, but again only if requested*/
@@ -139,8 +142,11 @@ int ManFlight(datalog * log)
     copter.east_motor = 0;
     copter.west_motor = 0;
     Set_Pwm(&copter); //write zeroed values to copter
+
+	if(log != NULL)
+		EndDataLogging(log);
+
     wait(1.5);//hold for a second and a half before returning control to the caller
-    return 0; //and return. yay, we're done!
 
 }
 

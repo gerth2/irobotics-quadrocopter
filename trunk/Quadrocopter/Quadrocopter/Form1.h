@@ -194,6 +194,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  setupComportsToolStripMenuI
 private: System::Windows::Forms::ToolStripMenuItem^  selectInterfaceToolStripMenuItem;
 private: System::Windows::Forms::ToolStripStatusLabel^  toolStripStatusLabel1;
 private: System::Windows::Forms::Button^  Gyro_Test;
+private: System::Windows::Forms::NumericUpDown^  input_box;
 
 
 
@@ -324,6 +325,7 @@ private:
 			this->TiltTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->TiltLabel = (gcnew System::Windows::Forms::Label());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->input_box = (gcnew System::Windows::Forms::NumericUpDown());
 			this->codetestbutton = (gcnew System::Windows::Forms::Button());
 			this->button14 = (gcnew System::Windows::Forms::Button());
 			this->button12 = (gcnew System::Windows::Forms::Button());
@@ -333,6 +335,7 @@ private:
 			this->button9 = (gcnew System::Windows::Forms::Button());
 			this->label49 = (gcnew System::Windows::Forms::Label());
 			this->panel9 = (gcnew System::Windows::Forms::Panel());
+			this->Gyro_Test = (gcnew System::Windows::Forms::Button());
 			this->button11 = (gcnew System::Windows::Forms::Button());
 			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->button7 = (gcnew System::Windows::Forms::Button());
@@ -360,7 +363,6 @@ private:
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
-			this->Gyro_Test = (gcnew System::Windows::Forms::Button());
 			this->TabControl->SuspendLayout();
 			this->Settings->SuspendLayout();
 			this->TiltPID->SuspendLayout();
@@ -376,6 +378,7 @@ private:
 			this->panel2->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->input_box))->BeginInit();
 			this->panel10->SuspendLayout();
 			this->panel9->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
@@ -1431,6 +1434,7 @@ private:
 			// 
 			// tabPage1
 			// 
+			this->tabPage1->Controls->Add(this->input_box);
 			this->tabPage1->Controls->Add(this->codetestbutton);
 			this->tabPage1->Controls->Add(this->button14);
 			this->tabPage1->Controls->Add(this->button12);
@@ -1447,13 +1451,20 @@ private:
 			this->tabPage1->Text = L"Debugging Tests";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
+			// input_box
+			// 
+			this->input_box->Location = System::Drawing::Point(360, 120);
+			this->input_box->Name = L"input_box";
+			this->input_box->Size = System::Drawing::Size(120, 20);
+			this->input_box->TabIndex = 12;
+			// 
 			// codetestbutton
 			// 
 			this->codetestbutton->Location = System::Drawing::Point(368, 91);
 			this->codetestbutton->Name = L"codetestbutton";
 			this->codetestbutton->Size = System::Drawing::Size(105, 23);
 			this->codetestbutton->TabIndex = 11;
-			this->codetestbutton->Text = L"Code Test Button";
+			this->codetestbutton->Text = L"Start new thread";
 			this->codetestbutton->UseVisualStyleBackColor = true;
 			this->codetestbutton->Click += gcnew System::EventHandler(this, &Form1::codetestbutton_Click);
 			// 
@@ -1537,6 +1548,16 @@ private:
 			this->panel9->Name = L"panel9";
 			this->panel9->Size = System::Drawing::Size(158, 117);
 			this->panel9->TabIndex = 5;
+			// 
+			// Gyro_Test
+			// 
+			this->Gyro_Test->Location = System::Drawing::Point(4, 91);
+			this->Gyro_Test->Name = L"Gyro_Test";
+			this->Gyro_Test->Size = System::Drawing::Size(75, 23);
+			this->Gyro_Test->TabIndex = 9;
+			this->Gyro_Test->Text = L"Gyro";
+			this->Gyro_Test->UseVisualStyleBackColor = true;
+			this->Gyro_Test->Click += gcnew System::EventHandler(this, &Form1::Gyro_Test_Click);
 			// 
 			// button11
 			// 
@@ -1755,16 +1776,6 @@ private:
 			// 
 			this->backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &Form1::backgroundWorker1_DoWork);
 			// 
-			// Gyro_Test
-			// 
-			this->Gyro_Test->Location = System::Drawing::Point(4, 91);
-			this->Gyro_Test->Name = L"Gyro_Test";
-			this->Gyro_Test->Size = System::Drawing::Size(75, 23);
-			this->Gyro_Test->TabIndex = 9;
-			this->Gyro_Test->Text = L"Gyro";
-			this->Gyro_Test->UseVisualStyleBackColor = true;
-			this->Gyro_Test->Click += gcnew System::EventHandler(this, &Form1::Gyro_Test_Click);
-			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1812,6 +1823,7 @@ private:
 			this->panel1->PerformLayout();
 			this->tabPage1->ResumeLayout(false);
 			this->tabPage1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->input_box))->EndInit();
 			this->panel10->ResumeLayout(false);
 			this->panel9->ResumeLayout(false);
 			this->statusStrip1->ResumeLayout(false);
@@ -1856,7 +1868,9 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 				freopen("CONOUT$", "wb", stdout); //redirects all printf statements to that window
 		 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int m = Initalize_Hardware(); //manual flight execution
+
+			 int m = Teardown_Hardware();
+			 m = Initalize_Hardware(); //manual flight execution
 			 datalog log;
 			 datalog * logptr;
 			 if(logdata)
@@ -1866,10 +1880,11 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 			 else
 				 logptr = NULL;
-			 m = ManFlight(logptr); /*main control loop*/
-			 if(logdata)
-				 EndDataLogging(logptr);
-			 m = Teardown_Hardware();
+			 
+
+			printf("begining new thread for manual flight");
+			 _beginthread( &ManFlight, 0, (void*)logptr);
+
 		 }
 /*code for Debug page buttons*/
 private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1956,7 +1971,8 @@ private: System::Void quitToolStripMenuItem_Click(System::Object^  sender, Syste
 		 }
 private: System::Void runManualToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //"Run Manual" under control menu
-			 int m = Initalize_Hardware();
+			 int m = Teardown_Hardware();
+			 m = Initalize_Hardware(); //manual flight execution
 			 datalog log;
 			 datalog * logptr;
 			 if(logdata)
@@ -1966,11 +1982,10 @@ private: System::Void runManualToolStripMenuItem_Click(System::Object^  sender, 
 			 }
 			 else
 				 logptr = NULL;
-			 m = ManFlight(logptr);
-			 m = Teardown_Hardware();
-			 if(logdata)
-				 EndDataLogging(logptr);
-			 m = Teardown_Hardware();
+
+			printf("begining new thread for manual flight");
+			 _beginthread( &ManFlight, 0, (void*)logptr);
+
 		 }
 private: System::Void kILLToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //"kill" under control menu
@@ -1995,9 +2010,14 @@ private: System::Void backgroundWorker1_DoWork(System::Object^  sender, System::
 			 printf("executing background code...\n");
 		 }
 private: System::Void codetestbutton_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int input;
-			 scanf("%d", &input);
-			 toolStripProgressBar1->Value = input;
+			 int value;
+			value = (int)input_box->Value;
+			 
+			 printf("about to start new thread\n");
+			 _beginthread( &TestThread, 0, (void*)value);
+			 printf("new thread should be running now\n");
+
+
 			 
 		 }
 private: System::Void setupComportsToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
