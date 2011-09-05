@@ -9,6 +9,8 @@ extern "C"
 	#include <windows.h>
 	#include <string.h>
 	#include <dos.h>
+	#include <process.h>
+
 
 
 	/*comport definitions*/
@@ -164,7 +166,7 @@ extern "C"
 
 	/*this comment is named Joe. He serves no purpose. Say 'Hi' to Joe! It helps his self-esteem*/
 
-	int ManFlight(datalog * log);
+	void ManFlight(void * inlog);
 	/* allows pilot to have direct control of the motor outputs*/
 	/* returns 0 on exit success, -1 on exit from Kill*/
 
@@ -199,6 +201,8 @@ extern "C"
 
 	int Kill(void);
 	/*sends killcode to quadcopter, and listens on serial to confirm successful kill*/
+
+	void _cdecl TestThread(void * input);
 
 	/*the following are test procedure function prototypes*/
 	/*pass NULL if no data is to be logged, datalog pointer to log data*/

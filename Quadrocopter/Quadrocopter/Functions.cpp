@@ -675,5 +675,23 @@ int Kill(void)
 
 }
 
+void _cdecl TestThread(void * input)
+{
+	int i;
+	int value;
+	printf("other thread is running\n");
+	printf("value passed will be displayed in 10 seconds\n");
 
+	value = (int)input;
+
+	wait(10);
+
+	printf("passed value was %d\n", value);
+
+	for(i = 0; i++; i < 100)
+	{
+		printf("i = %d\n", i);
+	}
+	printf("thread exiting now\n");
+}
 
