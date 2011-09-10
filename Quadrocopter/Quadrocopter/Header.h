@@ -19,13 +19,13 @@ extern "C"
 	#define JCOMPORT 5
 
 	/*delay definitions (in seconds)*/
-	#define SENSOR_READ_DELAY .087
+	#define SENSOR_READ_DELAY .090
 	#define GYRO_READ_DELAY .087
 	#define JOYSTICK_READ_DELAY .010
-	#define PWM_WRITE_DELAY .0011
+	#define PWM_WRITE_DELAY .0020
 
 	/*Test debugging definitions*/
-	//#define DEBUGPRINTS
+	#define DEBUGPRINTS
 	#define DEBUGPRINTSFLIGHT
 
 	/*define output limits for Write_Pwm*/
@@ -149,8 +149,7 @@ extern "C"
 	/*returns 0 on success, negative error code on failure*/
 	/*error codes - -1: error on transmission via serial - pwm value not guarnteed written to copter*/
 	/*              -2: input value to write is out of valid range*/
-	/*              +1: values recieved were too large to be written without exceeding MAXDELTAMOTORS*/
-	/*                    -value read in was ignored. resend approprate value.*/
+	/*              -3: Checksum mismatch - error somewhere in transmission*/
 
 	int Teardown_Hardware(void);
 	/*deinitalize all hardware. call just before program exits*/
@@ -203,6 +202,7 @@ extern "C"
 	/*sends killcode to quadcopter, and listens on serial to confirm successful kill*/
 
 	void _cdecl TestThread(void * input);
+	void _cdecl Sensor_Test_Thread(void * input);
 
 	/*the following are test procedure function prototypes*/
 	/*pass NULL if no data is to be logged, datalog pointer to log data*/

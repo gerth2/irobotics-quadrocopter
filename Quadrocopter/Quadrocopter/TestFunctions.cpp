@@ -9,7 +9,7 @@ int PWM_Time_Test(datalog * log)
     joystick joystickin;
 	int i;
 	
-	printf("will perform 500 writes to pwm values (0, 30 ,0 , 30, ...)\n");
+	printf("will perform 500 writes to pwm values (0, 255 ,0 , 255, ...)\n");
     wait(3);
     copter.north_motor = 0; //initalize values
     copter.east_motor = 0;
@@ -20,11 +20,18 @@ int PWM_Time_Test(datalog * log)
     for(i = 0; i < 250; i++)//loop for 500 total writes
     {
         copter.north_motor = 0;
+		copter.south_motor = 0;
+		copter.east_motor = 0;
+		copter.west_motor = 0;
         while(Set_Pwm(&copter) < 0) //write low with error checking
 		{
 			printf("bad PWM write on low write %d, retrying...\n", i);
 		}
-        copter.north_motor = 30;
+        copter.north_motor = 255;
+		copter.south_motor = 255;
+		copter.east_motor = 255;
+		copter.west_motor = 255;
+
         while(Set_Pwm(&copter) < 0) //write high with error checking
 		{
 			printf("bad PWM write on high write %d, retrying...\n", i);
@@ -75,10 +82,20 @@ int PWM_Write_Test(datalog * log)
 
 int Sensor_Read_Test(datalog * log)
 {
+	_beginthread( &Sensor_Test_Thread, 0, (void*)log);
+	return 0;
+
+}
+
+void _cdecl Sensor_Test_Thread(void * input)
+{
 	quadcopter copter; /*local var. definitions*/
     joystick joystickin;
 	int i;
+	datalog * log;
 	 /*sensor read test*/
+
+	log = (datalog *) input;
     printf("\nSensor Read test - will read 1000 times\n");
     wait(3); /*printf info and pause*/
     for(i = 0; i<1000; i++) /*loop through sensor reads*/
@@ -96,7 +113,8 @@ int Sensor_Read_Test(datalog * log)
 			LogData(log, &copter, &joystickin);
 
     }
-	return 0;
+	return;
+
 }
 
 int Joystick_Read_Test(datalog * log)

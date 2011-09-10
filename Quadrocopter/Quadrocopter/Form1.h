@@ -195,6 +195,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  selectInterfaceToolStripMen
 private: System::Windows::Forms::ToolStripStatusLabel^  toolStripStatusLabel1;
 private: System::Windows::Forms::Button^  Gyro_Test;
 private: System::Windows::Forms::NumericUpDown^  input_box;
+private: System::Windows::Forms::NumericUpDown^  eastmotortest;
+private: System::Windows::Forms::NumericUpDown^  southmotortest;
+
+
+private: System::Windows::Forms::NumericUpDown^  westmotortest;
+
+private: System::Windows::Forms::NumericUpDown^  northmotortest;
+
 
 
 
@@ -363,6 +371,10 @@ private:
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->northmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->westmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->southmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->eastmotortest = (gcnew System::Windows::Forms::NumericUpDown());
 			this->TabControl->SuspendLayout();
 			this->Settings->SuspendLayout();
 			this->TiltPID->SuspendLayout();
@@ -383,6 +395,10 @@ private:
 			this->panel9->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->northmotortest))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->westmotortest))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->southmotortest))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->eastmotortest))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// TabControl
@@ -1434,6 +1450,11 @@ private:
 			// 
 			// tabPage1
 			// 
+			this->tabPage1->Controls->Add(this->eastmotortest);
+			this->tabPage1->Controls->Add(this->southmotortest);
+			this->tabPage1->Controls->Add(this->westmotortest);
+			this->tabPage1->Controls->Add(this->northmotortest);
+			this->tabPage1->Controls->Add(this->button6);
 			this->tabPage1->Controls->Add(this->input_box);
 			this->tabPage1->Controls->Add(this->codetestbutton);
 			this->tabPage1->Controls->Add(this->button14);
@@ -1542,16 +1563,15 @@ private:
 			this->panel9->Controls->Add(this->button11);
 			this->panel9->Controls->Add(this->button8);
 			this->panel9->Controls->Add(this->button7);
-			this->panel9->Controls->Add(this->button6);
 			this->panel9->Controls->Add(this->button5);
 			this->panel9->Location = System::Drawing::Point(6, 30);
 			this->panel9->Name = L"panel9";
-			this->panel9->Size = System::Drawing::Size(158, 117);
+			this->panel9->Size = System::Drawing::Size(158, 94);
 			this->panel9->TabIndex = 5;
 			// 
 			// Gyro_Test
 			// 
-			this->Gyro_Test->Location = System::Drawing::Point(4, 91);
+			this->Gyro_Test->Location = System::Drawing::Point(80, 3);
 			this->Gyro_Test->Name = L"Gyro_Test";
 			this->Gyro_Test->Size = System::Drawing::Size(75, 23);
 			this->Gyro_Test->TabIndex = 9;
@@ -1591,7 +1611,7 @@ private:
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(82, 2);
+			this->button6->Location = System::Drawing::Point(44, 231);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(75, 23);
 			this->button6->TabIndex = 5;
@@ -1776,6 +1796,38 @@ private:
 			// 
 			this->backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &Form1::backgroundWorker1_DoWork);
 			// 
+			// northmotortest
+			// 
+			this->northmotortest->Location = System::Drawing::Point(61, 153);
+			this->northmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
+			this->northmotortest->Name = L"northmotortest";
+			this->northmotortest->Size = System::Drawing::Size(44, 20);
+			this->northmotortest->TabIndex = 14;
+			// 
+			// westmotortest
+			// 
+			this->westmotortest->Location = System::Drawing::Point(22, 179);
+			this->westmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
+			this->westmotortest->Name = L"westmotortest";
+			this->westmotortest->Size = System::Drawing::Size(44, 20);
+			this->westmotortest->TabIndex = 15;
+			// 
+			// southmotortest
+			// 
+			this->southmotortest->Location = System::Drawing::Point(61, 205);
+			this->southmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
+			this->southmotortest->Name = L"southmotortest";
+			this->southmotortest->Size = System::Drawing::Size(44, 20);
+			this->southmotortest->TabIndex = 16;
+			// 
+			// eastmotortest
+			// 
+			this->eastmotortest->Location = System::Drawing::Point(90, 179);
+			this->eastmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
+			this->eastmotortest->Name = L"eastmotortest";
+			this->eastmotortest->Size = System::Drawing::Size(44, 20);
+			this->eastmotortest->TabIndex = 17;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1830,6 +1882,10 @@ private:
 			this->statusStrip1->PerformLayout();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->northmotortest))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->westmotortest))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->southmotortest))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->eastmotortest))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -1911,18 +1967,19 @@ private: System::Void button11_Click(System::Object^  sender, System::EventArgs^
 			 int m = ESC_Program(); //esc program button
 		 }
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
-			 datalog log; //PWM write test button
-			 datalog * logptr;
-			 if(logdata)
-			 {
-				 StartDataLogging(&log);
-				 logptr = &log;
-			 }
-			 else
-				 logptr = NULL;
-			 int m = PWM_Write_Test(logptr);
-			 if(logdata)
-				 EndDataLogging(logptr);
+			quadcopter copter;
+
+			copter.north_motor = (int)northmotortest->Value;
+			copter.east_motor = (int)eastmotortest->Value;
+			copter.west_motor = (int)westmotortest->Value;
+			copter.south_motor = (int)southmotortest->Value;
+
+			if(Set_Pwm(&copter))
+				printf("error on write\n");
+			else
+				printf("Values written - N: %d  S: %d  E: %d  W: %d\n", copter.north_motor, copter.south_motor, copter.east_motor, copter.west_motor);
+			
+
 
 		 }
 private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {

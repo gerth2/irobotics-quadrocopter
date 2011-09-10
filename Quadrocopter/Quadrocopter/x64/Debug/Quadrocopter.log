@@ -1,4 +1,4 @@
-﻿Build started 9/5/2011 2:47:16 PM.
+﻿Build started 9/10/2011 3:57:29 PM.
      1>Project "C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "x64\Debug\Quadrocopter.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -6,38 +6,15 @@
        Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
        ClCompile:
          All outputs are up-to-date.
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Debug\Quadrocopter.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt Quadrocopter.cpp /clr:nostdlib 
-         Quadrocopter.cpp
-     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\Form1.h(1868): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(249) : see declaration of 'freopen'
-     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\Form1.h(2035): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
-     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\Form1.h(2043): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
-     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\Form1.h(2051): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
-     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\Form1.h(2076): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
+         All outputs are up-to-date.
          All outputs are up-to-date.
        CoreResGen:
          All outputs are up-to-date.
        ResourceCompile:
          All outputs are up-to-date.
        Link:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Debug\Quadrocopter.exe" /INCREMENTAL /NOLOGO /ASSEMBLYRESOURCE:x64\Debug\Quadrocopter.Form1.resources /MANIFEST /ManifestFile:"x64\Debug\Quadrocopter.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Debug\Quadrocopter.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X64 x64\Debug\app.res
-         x64\Debug\AssemblyInfo.obj
-         x64\Debug\Functions.obj
-         x64\Debug\mainFunc.obj
-         x64\Debug\ManFlight.obj
-         x64\Debug\PIDFlight.obj
-         x64\Debug\Quadrocopter.obj
-         x64\Debug\rs232.obj
-         x64\Debug\stdafx.obj
-         x64\Debug\TestFunctions.obj
-         "x64\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         All outputs are up-to-date.
          Quadrocopter.vcxproj -> C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Debug\Quadrocopter.exe
-       Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Debug\Quadrocopter.exe;#1" /manifest x64\Debug\Quadrocopter.exe.intermediate.manifest
        FinalizeBuildStatus:
          Deleting file "x64\Debug\Quadrocopter.unsuccessfulbuild".
          Touching "x64\Debug\Quadrocopter.lastbuildstate".
@@ -45,4 +22,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.99
+Time Elapsed 00:00:00.66
