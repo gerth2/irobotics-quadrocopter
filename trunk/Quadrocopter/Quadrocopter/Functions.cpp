@@ -132,7 +132,7 @@ int Set_Pwm(quadcopter * copter)
 	if(SendByte(coptercomport, (char)checksum))
 		printf("error in transmisison of checksum\n");
 
-    for(i = 0; i <100000; i++) /*wait some arbitrairly large time for success signal before continuing*/
+    for(i = 0; i <100000000; i++) /*wait some arbitrairly large time for success signal before continuing*/
     {
         memset(errorbuf, '\0', sizeof(unsigned char)*10);
         PollComport(coptercomport, errorbuf, sizeof(unsigned char)*10); /*verify confirmation of sucessful write*/
@@ -146,7 +146,7 @@ int Set_Pwm(quadcopter * copter)
 		if(errorbuf[0] == 'e') //case - recieved write request was too large to be written, output changed by MAXDELTAMOTORS
 		{
 			printf("Checksum Error detected, motor values not written.\n");
-			return 1; //return approprate message
+			return -3; //return approprate message
 		}
     }
 

@@ -191,6 +191,8 @@ void loop()
    {
      digitalWrite(13, HIGH); /*turn on activity light*/
      
+     checksum = 0;
+     
      gyrox = ReadGyroX(); /*read in gyro values*/
      gyroy = ReadGyroY();
      gyroz = ReadGyroZ();
@@ -202,6 +204,8 @@ void loop()
      Serial.print(gyroy, DEC);
      Serial.write(':');
      Serial.print(gyroz, DEC);
+     Serial.write(':');
+     Serial.print(checksum, DEC);
      Serial.write(':');
      
      digitalWrite(13, LOW); /*turn off activity light*/
