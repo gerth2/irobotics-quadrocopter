@@ -1,5 +1,8 @@
 /***********************************************/
 /***********************************************/
+// iRobotics Quadcopter 2011-2012 Arduino Code v1.1
+//
+//
 // Main control Code - this segment is the main
 // entry point for the program. It handles
 // Serial I/O and calls approprate functions
@@ -16,6 +19,7 @@
 // 'w' - write pwm values to motors (returns 'd' on success and 'e' on error)
 // 'n' - write new maxdeltamotors value (returns the value the variable is set to)
 // 'K' - Killcode - all motors shut down, no more serial transmissions will be listened to. manual reset required.
+// 'm' - Read Magnometer values. Returns them as x, y, z in standard ascii
 // 'a' - write new value to range of accelerometer (unimplimented)
 // 'g' - write new value to range of gyroscope (unimplimented)
 /***********************************************/
@@ -191,8 +195,6 @@ void loop()
    {
      digitalWrite(13, HIGH); /*turn on activity light*/
      
-     checksum = 0;
-     
      gyrox = ReadGyroX(); /*read in gyro values*/
      gyroy = ReadGyroY();
      gyroz = ReadGyroZ();
@@ -204,8 +206,6 @@ void loop()
      Serial.print(gyroy, DEC);
      Serial.write(':');
      Serial.print(gyroz, DEC);
-     Serial.write(':');
-     Serial.print(checksum, DEC);
      Serial.write(':');
      
      digitalWrite(13, LOW); /*turn off activity light*/
@@ -280,14 +280,29 @@ void loop()
     digitalWrite(13, LOW);
   }
 
+  /*execute command to set up a new deltamotors value*/
+  if(in == 'n')
+  { 
+    digitalWrite(13, HIGH);
+    do //do nothing while nothing is on the serial line
+    {
+      in = Serial.read();
+    }
+    while (in == -1);
+    maxdeltamotors = in;
+    Serial.print(maxdeltamotors, DEC);
+    #ifdef AUTOKILL
+    zerotime = millis(); /*reset autokill stuff*/
+    autokill_flag = 0;
+    #endif 
+    digitalWrite(13, LOW);
+  }
+
   /*execute Kill Code*/
   if(in == 'K')
   {
     while(1)
     { 
-      /*continually write zero motor speed values, and blink the status light*/
-      /*note - there is no escape from this loop - a manual reset is required*/
-      
       digitalWrite(13, HIGH);
       WritePWM(50, 50, 50, 50);
       Serial.write('x');
@@ -297,6 +312,15 @@ void loop()
       Serial.write('x');
       delay(500);
     }
+  }
+  
+    if(in == 'm')
+  {
+    
+    /*execute test code*/
+    digitalWrite(13, HIGH);
+    ReadMagno();
+    digitalWrite(13, LOW);
   }
 
 

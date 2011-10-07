@@ -6,6 +6,7 @@ int ReadGyroY(void);
 int ReadGyroZ(void);
 int ReadGyroTemp(void);
 int ReadHeight(void);
+int ReadMagno(void);
 void ReadAccel(int outputarray[]);
 void WritePWM(int north, int south, int east, int west);
 
@@ -40,6 +41,9 @@ int sensor1 = 0;
 #define YAXISOFFSET (-150)
 #define ZAXISOFFSET (420)
 
+
+//Define Magnometer address
+#define magnoaddress 0x1E //0011110b, I2C 7bit address of HMC5883
 
 
 

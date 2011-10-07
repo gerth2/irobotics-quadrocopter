@@ -113,8 +113,7 @@ void _cdecl Sensor_Test_Thread(void * input)
 			LogData(log, &copter, &joystickin);
 
     }
-	return;
-
+	_endthread();
 }
 
 int Joystick_Read_Test(datalog * log)
@@ -163,6 +162,32 @@ int Gyro_Read_Test(datalog * log)
 		printf("loop %d\n", i);
         printf("values read in:\n\n");
         printf("gyrox = %d\ngyroy = %d\ngyroz = %d\n", copter.ang_vel_x, copter.ang_vel_y, copter.ang_vel_z);
+        printf("\n======================\n\n");
+		if(log != NULL) //log data if requested
+			LogData(log, &copter, &joystickin);
+
+    }
+	return 0;
+}
+
+int Magno_Read_Test(datalog * log)
+{
+	quadcopter copter; /*local var. definitions*/
+    joystick joystickin;
+	int i;
+	 /*sensor read test*/
+    printf("\nMagno Read test - will read only the magnometer 1000 times\n");
+    wait(3); /*printf info and pause*/
+    for(i = 0; i<1000; i++) /*loop through sensor reads*/
+    {
+        while(Read_Magno(&copter) != 0 ) //loop while waiting for good results
+		{
+			printf("bad sensor read on loop %d, retrying....\n", i);
+		}
+        printf("\n\n======================\n"); //print out results
+		printf("loop %d\n", i);
+        printf("values read in:\n\n");
+        printf("magnox = %d\nmagnoy = %d\nmganoz = %d\n", copter.magno_x, copter.magno_y, copter.magno_z);
         printf("\n======================\n\n");
 		if(log != NULL) //log data if requested
 			LogData(log, &copter, &joystickin);

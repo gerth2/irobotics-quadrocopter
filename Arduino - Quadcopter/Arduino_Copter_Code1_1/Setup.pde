@@ -16,6 +16,16 @@ int HardwareSetup(void)
   Wire.endTransmission();
   
   ///////////////////////////////////////////////////
+  /*Magno Setup*/
+  
+  Wire.beginTransmission(magnoaddress); //open communication with HMC5883
+  Wire.send(0x02); //select mode register
+  Wire.send(0x00); //continuous measurement mode
+  Wire.endTransmission();
+  
+  
+  ///////////////////////////////////////////////////
+  
   /*accel. setup*/
   //this code was copied from an open-source project for building a seismograph (hence the references to earthquakes)
   

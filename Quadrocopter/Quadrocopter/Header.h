@@ -19,10 +19,11 @@ extern "C"
 	#define JCOMPORT 5
 
 	/*delay definitions (in seconds)*/
-	#define SENSOR_READ_DELAY .090
+	#define SENSOR_READ_DELAY .089
 	#define GYRO_READ_DELAY .087
 	#define JOYSTICK_READ_DELAY .010
 	#define PWM_WRITE_DELAY .0020
+	#define MAGNO_READ_DELAY .045
 
 	/*Test debugging definitions*/
 	#define DEBUGPRINTS
@@ -73,12 +74,17 @@ extern "C"
 		int temperature;
 		int prevtemp; //used for comparison against current temperature values to check for a bad sensor read
 
-		/*Accelerometer - currently unused*/
+		/*Accelerometer*/
 		float accelrange; /*contains a value of 1,1.5,2,3,4,8,or 16 (+/- g), depending on current setting for accelerometer range.*/
 						  /*DO NOT alter this value, it is set up by the Set_Acc_Range function. only read from it.*/
 		int accel_x; /*expressed in 2's compliment values*/
 		int accel_y;
 		int accel_z;
+
+		/*Magnometer*/
+		int magno_x;
+		int magno_y;
+		int magno_z;
 
 		/*compass*/
 		int heading; /*measured in tenths of degrees, value between 0 and 3599*/
@@ -198,6 +204,9 @@ extern "C"
 	/*reads the sensor values of ONLY the gyro*/
 	/*it's just designed to run faster when you don't need all the data*/
 
+	int Read_Magno(quadcopter *copter);
+	/*This function reads only the magnometer values*/
+
 	int Kill(void);
 	/*sends killcode to quadcopter, and listens on serial to confirm successful kill*/
 
@@ -211,5 +220,5 @@ extern "C"
 	int Sensor_Read_Test(datalog * log);
 	int Joystick_Read_Test(datalog * log);
 	int Gyro_Read_Test(datalog * log);
-
+	int Magno_Read_Test(datalog * log);
 }
