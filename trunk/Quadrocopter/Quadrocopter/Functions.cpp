@@ -695,3 +695,71 @@ void _cdecl TestThread(void * input)
 	printf("thread exiting now\n");
 }
 
+int Read_Magno(quadcopter *copter)
+{
+    unsigned char inbuffer[100]; /*recieves serial from arduino*/
+    const char *valueinastring;
+	char * context; // helps strtok_s keep track of where it is in the string it is parsing
+	int checksum=0;
+	int localchecksum = 1;
+
+	SendByte(coptercomport, 'm'); /*request sensor values for gyro only*/
+	memset(inbuffer, '\0', sizeof(unsigned char)*100); //clear input buffer
+	wait(MAGNO_READ_DELAY); /*wait for data to be read and sent*/
+
+	PollComport(coptercomport, inbuffer, sizeof(unsigned char)*100); /*read in serial data*/
+
+	/*data is recieved in the following format - (data):(data):(data):(data):...*/
+	/*where each (data) is an ascii string represinting the inputted value*/
+	/*the funciton strtok_s searches for the : and parses the string accordingly*/
+	/*the function atoi changes the parsed ascii values to decimal integers*/
+
+	/*Note: as of 9/3/2011, a checksum system is used for error detection*/
+
+	/*read magnox data*/
+	valueinastring = strtok_s((char *)inbuffer, ":", &context);
+	if(valueinastring == NULL) // check for a lack of a : (usually an indicator of a bad input string)
+	{
+		printf("error - input string is abnormally small\n");
+		return -1;
+	}
+	copter->magno_x = atoi(valueinastring); //write integer value to the structure
+    
+	/*read magnoy data*/
+	valueinastring = strtok_s(NULL, ":", &context);
+	if(valueinastring == NULL)
+	{
+		printf("error - input string is abnormally small\n");
+		return -1;
+	}
+	copter->magno_y = atoi(valueinastring);
+    
+	/*read magnoz data*/
+	valueinastring = strtok_s(NULL, ":", &context);
+	if(valueinastring == NULL)
+	{
+		printf("error - input string is abnormally small\n");
+		return -1;
+	}
+	copter->magno_z = atoi(valueinastring);
+
+	/*read checksum data*/
+	valueinastring = strtok_s(NULL, ":", &context);
+	if(valueinastring == NULL)
+	{
+		printf("error - input string is abnormally small\n");
+		return -1;
+	}
+	checksum = atoi(valueinastring);
+
+	localchecksum = (copter->magno_z + copter->magno_y + copter->magno_x) % 10;
+
+	if(checksum != localchecksum)
+	{
+		printf("Error - checksums disagree\n");
+		return -2;
+	}
+	else
+		return 0;
+}
+

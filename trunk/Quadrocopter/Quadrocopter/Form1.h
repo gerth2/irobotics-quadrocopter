@@ -202,6 +202,7 @@ private: System::Windows::Forms::NumericUpDown^  southmotortest;
 private: System::Windows::Forms::NumericUpDown^  westmotortest;
 
 private: System::Windows::Forms::NumericUpDown^  northmotortest;
+private: System::Windows::Forms::Button^  MagnoTestButton;
 
 
 
@@ -333,6 +334,11 @@ private:
 			this->TiltTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->TiltLabel = (gcnew System::Windows::Forms::Label());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->eastmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->southmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->westmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->northmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->input_box = (gcnew System::Windows::Forms::NumericUpDown());
 			this->codetestbutton = (gcnew System::Windows::Forms::Button());
 			this->button14 = (gcnew System::Windows::Forms::Button());
@@ -347,7 +353,6 @@ private:
 			this->button11 = (gcnew System::Windows::Forms::Button());
 			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
@@ -371,10 +376,7 @@ private:
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
-			this->northmotortest = (gcnew System::Windows::Forms::NumericUpDown());
-			this->westmotortest = (gcnew System::Windows::Forms::NumericUpDown());
-			this->southmotortest = (gcnew System::Windows::Forms::NumericUpDown());
-			this->eastmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->MagnoTestButton = (gcnew System::Windows::Forms::Button());
 			this->TabControl->SuspendLayout();
 			this->Settings->SuspendLayout();
 			this->TiltPID->SuspendLayout();
@@ -390,15 +392,15 @@ private:
 			this->panel2->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->eastmotortest))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->southmotortest))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->westmotortest))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->northmotortest))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->input_box))->BeginInit();
 			this->panel10->SuspendLayout();
 			this->panel9->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->northmotortest))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->westmotortest))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->southmotortest))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->eastmotortest))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// TabControl
@@ -1472,6 +1474,48 @@ private:
 			this->tabPage1->Text = L"Debugging Tests";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
+			// eastmotortest
+			// 
+			this->eastmotortest->Location = System::Drawing::Point(90, 179);
+			this->eastmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
+			this->eastmotortest->Name = L"eastmotortest";
+			this->eastmotortest->Size = System::Drawing::Size(44, 20);
+			this->eastmotortest->TabIndex = 17;
+			// 
+			// southmotortest
+			// 
+			this->southmotortest->Location = System::Drawing::Point(61, 205);
+			this->southmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
+			this->southmotortest->Name = L"southmotortest";
+			this->southmotortest->Size = System::Drawing::Size(44, 20);
+			this->southmotortest->TabIndex = 16;
+			// 
+			// westmotortest
+			// 
+			this->westmotortest->Location = System::Drawing::Point(22, 179);
+			this->westmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
+			this->westmotortest->Name = L"westmotortest";
+			this->westmotortest->Size = System::Drawing::Size(44, 20);
+			this->westmotortest->TabIndex = 15;
+			// 
+			// northmotortest
+			// 
+			this->northmotortest->Location = System::Drawing::Point(61, 153);
+			this->northmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
+			this->northmotortest->Name = L"northmotortest";
+			this->northmotortest->Size = System::Drawing::Size(44, 20);
+			this->northmotortest->TabIndex = 14;
+			// 
+			// button6
+			// 
+			this->button6->Location = System::Drawing::Point(44, 231);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(75, 23);
+			this->button6->TabIndex = 5;
+			this->button6->Text = L"PWM Write";
+			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Click += gcnew System::EventHandler(this, &Form1::button6_Click);
+			// 
 			// input_box
 			// 
 			this->input_box->Location = System::Drawing::Point(360, 120);
@@ -1559,6 +1603,7 @@ private:
 			// 
 			// panel9
 			// 
+			this->panel9->Controls->Add(this->MagnoTestButton);
 			this->panel9->Controls->Add(this->Gyro_Test);
 			this->panel9->Controls->Add(this->button11);
 			this->panel9->Controls->Add(this->button8);
@@ -1566,7 +1611,7 @@ private:
 			this->panel9->Controls->Add(this->button5);
 			this->panel9->Location = System::Drawing::Point(6, 30);
 			this->panel9->Name = L"panel9";
-			this->panel9->Size = System::Drawing::Size(158, 94);
+			this->panel9->Size = System::Drawing::Size(158, 117);
 			this->panel9->TabIndex = 5;
 			// 
 			// Gyro_Test
@@ -1608,16 +1653,6 @@ private:
 			this->button7->Text = L"Sensor";
 			this->button7->UseVisualStyleBackColor = true;
 			this->button7->Click += gcnew System::EventHandler(this, &Form1::button7_Click);
-			// 
-			// button6
-			// 
-			this->button6->Location = System::Drawing::Point(44, 231);
-			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(75, 23);
-			this->button6->TabIndex = 5;
-			this->button6->Text = L"PWM Write";
-			this->button6->UseVisualStyleBackColor = true;
-			this->button6->Click += gcnew System::EventHandler(this, &Form1::button6_Click);
 			// 
 			// button5
 			// 
@@ -1796,37 +1831,15 @@ private:
 			// 
 			this->backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &Form1::backgroundWorker1_DoWork);
 			// 
-			// northmotortest
+			// MagnoTestButton
 			// 
-			this->northmotortest->Location = System::Drawing::Point(61, 153);
-			this->northmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
-			this->northmotortest->Name = L"northmotortest";
-			this->northmotortest->Size = System::Drawing::Size(44, 20);
-			this->northmotortest->TabIndex = 14;
-			// 
-			// westmotortest
-			// 
-			this->westmotortest->Location = System::Drawing::Point(22, 179);
-			this->westmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
-			this->westmotortest->Name = L"westmotortest";
-			this->westmotortest->Size = System::Drawing::Size(44, 20);
-			this->westmotortest->TabIndex = 15;
-			// 
-			// southmotortest
-			// 
-			this->southmotortest->Location = System::Drawing::Point(61, 205);
-			this->southmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
-			this->southmotortest->Name = L"southmotortest";
-			this->southmotortest->Size = System::Drawing::Size(44, 20);
-			this->southmotortest->TabIndex = 16;
-			// 
-			// eastmotortest
-			// 
-			this->eastmotortest->Location = System::Drawing::Point(90, 179);
-			this->eastmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
-			this->eastmotortest->Name = L"eastmotortest";
-			this->eastmotortest->Size = System::Drawing::Size(44, 20);
-			this->eastmotortest->TabIndex = 17;
+			this->MagnoTestButton->Location = System::Drawing::Point(3, 87);
+			this->MagnoTestButton->Name = L"MagnoTestButton";
+			this->MagnoTestButton->Size = System::Drawing::Size(75, 23);
+			this->MagnoTestButton->TabIndex = 18;
+			this->MagnoTestButton->Text = L"Magno";
+			this->MagnoTestButton->UseVisualStyleBackColor = true;
+			this->MagnoTestButton->Click += gcnew System::EventHandler(this, &Form1::MagnoTestButton_Click);
 			// 
 			// Form1
 			// 
@@ -1875,6 +1888,10 @@ private:
 			this->panel1->PerformLayout();
 			this->tabPage1->ResumeLayout(false);
 			this->tabPage1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->eastmotortest))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->southmotortest))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->westmotortest))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->northmotortest))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->input_box))->EndInit();
 			this->panel10->ResumeLayout(false);
 			this->panel9->ResumeLayout(false);
@@ -1882,10 +1899,6 @@ private:
 			this->statusStrip1->PerformLayout();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->northmotortest))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->westmotortest))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->southmotortest))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->eastmotortest))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -2156,6 +2169,20 @@ private: System::Void Gyro_Test_Click(System::Object^  sender, System::EventArgs
 			 if(logdata)
 				 EndDataLogging(logptr);
 
+		 }
+private: System::Void MagnoTestButton_Click(System::Object^  sender, System::EventArgs^  e) {
+			 			 datalog log; //Joystick Read test button
+			 datalog * logptr;
+			 if(logdata)
+			 {
+				 StartDataLogging(&log);
+				 logptr = &log;
+			 }
+			 else
+				 logptr = NULL;
+			 int m = Magno_Read_Test(logptr);
+			 if(logdata)
+				 EndDataLogging(logptr);
 		 }
 };
 }
