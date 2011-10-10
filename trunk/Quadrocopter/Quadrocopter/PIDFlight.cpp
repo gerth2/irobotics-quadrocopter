@@ -159,6 +159,19 @@ int PIDFlight(datalog * log)
 	//-------------END REGION---------------//
 	//--------------------------------------//
 
+	//define base magnetic orientation
+	Read_Magno(quadcopter &copter1);
+	Read_Magno(quadcopter &copter2);
+	Read_Magno(quadcopter &copter3);
+
+	double avgBaseMagnoX=(copter1.magno_x+copter2.magno_x+copter3.magno_x)/3
+	double avgBaseMagnoY=(copter1.magno_y+copter2.magno_y+copter3.magno_y)/3
+	double avgBaseMagnoZ=(copter1.magno_z+copter2.magno_z+copter3.magno_z)/3
+
+	double baseXZTilt=atan(avgBaseMagnoZ/avgBaseMagnoX);
+	double baseYZTilt=atan(avgBaseMagnoZ/avgBaseMagnoY);
+	double baseYaw=atan(avgBaseMagnoY/avgBaseMagnoX);
+
     /*main control loop*/
     while(1)
     {
@@ -167,8 +180,11 @@ int PIDFlight(datalog * log)
 
 		//take three sensor readings to smooth the operation
 		Read_Sensors(&copter1);
+		Read_Magno(quadcopter &copter1);
 		Read_Sensors(&copter2);
+		Read_Magno(quadcopter &copter2);
 		Read_Sensors(&copter3);
+		Read_Magno(quadcopter &copter3);
 
         #ifdef DEBUGPRINTSFLIGHT
         printf("corrected joystick values:\nx %d\ny %d\nz %d\nh %d\n", joystickin.x, joystickin.y, joystickin.rotation, joystickin.altitude);
@@ -194,7 +210,9 @@ int PIDFlight(datalog * log)
 		double avg_ang_vel_y=(copter1.ang_vel_y+copter2.ang_vel_y+copter3.ang_vel_y)/3.0+171;
 		double avg_ang_vel_x=(copter1.ang_vel_x+copter2.ang_vel_x+copter3.ang_vel_x)/3.0+36;
 		double avg_ang_vel_z=(copter1.ang_vel_z+copter2.ang_vel_z+copter3.ang_vel_z)/3.0-36;
-		//if high tilt, use gyroscope integration
+		//gyroscope integration of tilt
+
+		/*
 		if (currentXZtilt>10 || currentXZtilt<-10)
 		{
 			//XZ tilt
@@ -215,6 +233,16 @@ int PIDFlight(datalog * log)
 			//use accelerometer to recalibrate
 			currentYZtilt+=avg_ang_vel_x*time_diff*gyroscopeConversion;
 		}
+		*/
+
+		//calculate tilt based on magnetometer
+		double avgCurrentMagnoX=(copter1.magno_x+copter2.magno_x+copter3.magno_x)/3
+		double avgCurrentMagnoY=(copter1.magno_y+copter2.magno_y+copter3.magno_y)/3
+		double avgCurrentMagnoZ=(copter1.magno_z+copter2.magno_z+copter3.magno_z)/3
+
+		currentXZTilt=atan(avgCurrentMagnoZ/avgCurrentMagnoX)-baseXZTilt;
+		currentYZTilt=atan(avgCurrentMagnoZ/avgCurrentMagnoY)-baseYZTilt;
+		currentHeading=atan(avgCurrentMagnoY/avgCurrentMagnoX)-baseYaw;
 
 		XZTiltP=currentXZtilt-(rolldelta/128.0)*maxXZAngle;
 		XZTiltI=XZTiltI+XZTiltP;
@@ -254,15 +282,28 @@ int PIDFlight(datalog * log)
 		currentAltitude=currentAltitude+currentAltitudeVelocity*time_diff;
 		double currentSensorAltitude=((copter1.height+copter2.height+copter3.height)/3.0)/100.0; //average and convert from cm to m
 
+		//used to correct velocity drift due to integration
+		double lastSensorAltitude;
+		bool altitudeSensorValid;
+
 		//if the tilt is small enough, use the height sensor measurement
 		if ((currentXZtilt < 10 && currentXZtilt > -10) && (currentYZtilt < 10 && currentYZtilt > -10))
 		{
 			currentAltitude=currentSensorAltitude;
+			//feature to correct the current altitude velocity as it will drift with the integration of acceleration
+			if (altitudeSensorValid)
+			{
+				currentAltitudeVelocity=(currentSensorAltitude-lastSensorAltitude)/time_diff;
+			}
+			lastSensorAltitude=currentSensorAltitude;
+			altitudeSensorValid=true;
 		}
 		else
 		{
-			currentAltitude=currentSensorAltitude;
 			//nothing, as the current altitude has already been set to the double integrated acceleration
+
+			//invalidate the last altitude sensor reading
+			altitudeSensorValid=false;
 		}
 
 		AltP=currentAltitude-(altitudeabsolute/256.0)*maxAltitude;
