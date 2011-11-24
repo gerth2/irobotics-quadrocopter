@@ -5,6 +5,12 @@
 
 int PIDFlight(datalog * log)
 {
+	_beginthread( &PIDFlight_thread, 0, (void*)log);
+	return 0;
+}
+
+void _cdecl PIDFlight_thread(void * input)
+{
 
     /*this function allows for indirect user control of the motors*/
 
@@ -20,7 +26,10 @@ int PIDFlight(datalog * log)
     int exitflag;
     double PYMotor, NYMotor, PXMotor, NXMotor;
     double pitchdelta, rolldelta, yawdelta, altitudeabsolute;
+	datalog * log;
 
+	log = (datalog*) input;
+	log->PIDThreadRunning = 1;
 
     printf("\n\n\nProgram is now running in PID-Assisted Flight Mode\n\n");
     Read_Joystick(&joystickin); //get initial reading
@@ -30,6 +39,16 @@ int PIDFlight(datalog * log)
         while(1) //loop until he does it
         {
             Read_Joystick(&joystickin);
+			if( (int)log->KillPIDThread == 1 || (int)log->KillAllThreads == 1)//check to see if thread exit flag is high
+			{
+				printf("Thread exiting due to exterior exit signal\n");
+				log->KillPIDThread = 0;
+				log->PIDThreadRunning = 0;
+				if(log->enabledatalogging)
+					EndDataLogging(log);
+				Teardown_Hardware();
+				_endthread();
+			}
             if(joystickin.activate_height == 0)
             {
                 printf("thank you.\n\n"); //and we're good...
@@ -43,9 +62,20 @@ int PIDFlight(datalog * log)
     printf("Right Toggle executes Kill Code.\n");
     printf("X joystick controls roll, Y joystick controls pitch\n");
     printf("Z joystick controls yaw, H joystick controls altitude\n\n\n");
-    printf("Enter anything to continue.");
-    scanf("%d", &i);
+
+    wait(3);
     i = 0;
+
+	if( (int)log->KillPIDThread == 1 || (int)log->KillAllThreads == 1)//check to see if thread exit flag is high
+	{
+		printf("Thread exiting due to exterior exit signal\n");
+		log->KillPIDThread = 0;
+		log->PIDThreadRunning = 0;
+		if(log->enabledatalogging)
+			 EndDataLogging(log);
+		 Teardown_Hardware();
+		_endthread();
+	}
 
 	//---------------------------//
 	//-----DECLARE PID ERRORS----//
@@ -160,13 +190,13 @@ int PIDFlight(datalog * log)
 	//--------------------------------------//
 
 	//define base magnetic orientation
-	Read_Magno(quadcopter &copter1);
-	Read_Magno(quadcopter &copter2);
-	Read_Magno(quadcopter &copter3);
+	Read_Magno(&copter1);
+	Read_Magno(&copter2);
+	Read_Magno(&copter3);
 
-	double avgBaseMagnoX=(copter1.magno_x+copter2.magno_x+copter3.magno_x)/3
-	double avgBaseMagnoY=(copter1.magno_y+copter2.magno_y+copter3.magno_y)/3
-	double avgBaseMagnoZ=(copter1.magno_z+copter2.magno_z+copter3.magno_z)/3
+	double avgBaseMagnoX=(copter1.magno_x+copter2.magno_x+copter3.magno_x)/3;
+	double avgBaseMagnoY=(copter1.magno_y+copter2.magno_y+copter3.magno_y)/3;
+	double avgBaseMagnoZ=(copter1.magno_z+copter2.magno_z+copter3.magno_z)/3;
 
 	double baseXZTilt=atan(avgBaseMagnoZ/avgBaseMagnoX);
 	double baseYZTilt=atan(avgBaseMagnoZ/avgBaseMagnoY);
@@ -175,16 +205,28 @@ int PIDFlight(datalog * log)
     /*main control loop*/
     while(1)
     {
+
+	if( (int)log->KillPIDThread == 1 || log->KillAllThreads == 1)//check to see if thread exit flag is high
+	{
+		printf("Thread exiting due to exterior exit signal\n");
+		log->KillPIDThread = 0;
+		log->PIDThreadRunning = 0;
+		if(log->enabledatalogging)
+			 EndDataLogging(log);
+		 Teardown_Hardware();
+		_endthread();
+	}
+
         Read_Joystick(&joystickin);
         CorrectJoystick(&joystickin);
 
 		//take three sensor readings to smooth the operation
 		Read_Sensors(&copter1);
-		Read_Magno(quadcopter &copter1);
+		Read_Magno(&copter1);
 		Read_Sensors(&copter2);
-		Read_Magno(quadcopter &copter2);
+		Read_Magno(&copter2);
 		Read_Sensors(&copter3);
-		Read_Magno(quadcopter &copter3);
+		Read_Magno(&copter3);
 
         #ifdef DEBUGPRINTSFLIGHT
         printf("corrected joystick values:\nx %d\ny %d\nz %d\nh %d\n", joystickin.x, joystickin.y, joystickin.rotation, joystickin.altitude);
@@ -236,13 +278,13 @@ int PIDFlight(datalog * log)
 		*/
 
 		//calculate tilt based on magnetometer
-		double avgCurrentMagnoX=(copter1.magno_x+copter2.magno_x+copter3.magno_x)/3
-		double avgCurrentMagnoY=(copter1.magno_y+copter2.magno_y+copter3.magno_y)/3
-		double avgCurrentMagnoZ=(copter1.magno_z+copter2.magno_z+copter3.magno_z)/3
+		double avgCurrentMagnoX=(copter1.magno_x+copter2.magno_x+copter3.magno_x)/3;
+		double avgCurrentMagnoY=(copter1.magno_y+copter2.magno_y+copter3.magno_y)/3;
+		double avgCurrentMagnoZ=(copter1.magno_z+copter2.magno_z+copter3.magno_z)/3;
 
-		currentXZTilt=atan(avgCurrentMagnoZ/avgCurrentMagnoX)-baseXZTilt;
-		currentYZTilt=atan(avgCurrentMagnoZ/avgCurrentMagnoY)-baseYZTilt;
-		currentHeading=atan(avgCurrentMagnoY/avgCurrentMagnoX)-baseYaw;
+		double currentXZTilt=atan(avgCurrentMagnoZ/avgCurrentMagnoX)-baseXZTilt;
+		double currentYZTilt=atan(avgCurrentMagnoZ/avgCurrentMagnoY)-baseYZTilt;
+		double currentHeading=atan(avgCurrentMagnoY/avgCurrentMagnoX)-baseYaw;
 
 		XZTiltP=currentXZtilt-(rolldelta/128.0)*maxXZAngle;
 		XZTiltI=XZTiltI+XZTiltP;
@@ -258,7 +300,7 @@ int PIDFlight(datalog * log)
 		//--------------------------------------//
 		//------------YAW PID CALCULATIONS------//
 		//--------------------------------------//
-		double currentHeading=(copter1.heading/compassConversion+copter2.heading/compassConversion+copter3.heading/compassConversion)/3.0-180.0; //adjust so it has a -180 to +180 degree range
+		currentHeading=(copter1.heading/compassConversion+copter2.heading/compassConversion+copter3.heading/compassConversion)/3.0-180.0; //adjust so it has a -180 to +180 degree range
 		YawP=currentHeading+(yawdelta/128.0)*180.0;
 		YawI=YawI+YawP;
 		YawD=avg_ang_vel_z*gyroscopeConversion;
@@ -416,11 +458,15 @@ int PIDFlight(datalog * log)
                 while(j)
                     j = Kill(); //error checking - continue to attempt to kill until successful
             }
-            return -1; //report exit due to kill status
+        if(log->enabledatalogging)
+			 EndDataLogging(log);
+		 Teardown_Hardware();
+		_endthread();
+			
         }
 
 		/*log data*/
-		if(log != NULL)
+		if(log->enabledatalogging != 0)
 			LogData(log, &copter1, &joystickin);
 
     }
@@ -432,5 +478,8 @@ int PIDFlight(datalog * log)
     copter1.west_motor = 0;
     Set_Pwm(&copter1);
     wait(1.5);
-    return 0;
+	if(log->enabledatalogging)
+		 EndDataLogging(log);
+	Teardown_Hardware();
+    //return 0;
 }

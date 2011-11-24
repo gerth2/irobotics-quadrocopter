@@ -40,17 +40,18 @@ int Initalize_Hardware(void)
 	/*USB devices which request a serial port. each device is awarded a unique comport.*/
 	/*you will need to change the comports as the software is ported between computers.*/
     int errorcode = 0;
-    if(OpenComport(wirelesscomport, BAUDRATE))
+    if(OpenComport(coptercomport, BAUDRATE))
     {
         printf("-- to computer-side Xbee radio\n");
         errorcode--;
     }
 
-    if(OpenComport(wiredcomport, BAUDRATE))
+  /*  if(OpenComport(wiredcomport, BAUDRATE))
     {
         printf("-- to quadcopter wired interface\n");
         errorcode--;
     }
+	*/
     if(OpenComport(joystickcomport, BAUDRATE))
     {
         printf("-- to Joystick Input Arduino\n");
@@ -68,6 +69,8 @@ int Initalize_Hardware(void)
     }*/
     printf("initalization complete!\n\n"); //return success
     return errorcode; //return number of unopened comports. Under normal operation, this should be -1.
+
+
 }
 
 int Set_Pwm(quadcopter * copter)
@@ -442,9 +445,8 @@ int Teardown_Hardware(void)
 {
     printf("\ntearing down hardware...");
     /*close serial links*/
-    CloseComport(5);
-    CloseComport(6);
-    CloseComport(7);
+    CloseComport(coptercomport);
+    CloseComport(joystickcomport);
     printf("done!\n\n");
     return 0;
 }
@@ -656,7 +658,6 @@ int SetMaxDeltaMotors(int maxdeltamotor)
 int Kill(void)
 {
     unsigned char inbuffer[10]; //local variable definitions
-
     SendByte(coptercomport, 'K'); //send command to kill the quadcopter
 	memset(inbuffer, '\0', sizeof(unsigned char)*10); //clear input buffer
     wait(.2); //pause while command is executed

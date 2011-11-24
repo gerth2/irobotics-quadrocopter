@@ -154,19 +154,20 @@ private: System::Windows::Forms::Button^  button1;
 private: System::Windows::Forms::Button^  button3;
 private: System::Windows::Forms::Button^  button2;
 private: System::Windows::Forms::TabPage^  tabPage1;
-private: System::Windows::Forms::Label^  label50;
-private: System::Windows::Forms::Panel^  panel10;
+
+
 private: System::Windows::Forms::Button^  button10;
 private: System::Windows::Forms::Button^  button9;
-private: System::Windows::Forms::Label^  label49;
-private: System::Windows::Forms::Panel^  panel9;
+
+
 private: System::Windows::Forms::Button^  button8;
 private: System::Windows::Forms::Button^  button7;
 private: System::Windows::Forms::Button^  button6;
 private: System::Windows::Forms::Button^  button5;
 private: System::Windows::Forms::Button^  button4;
 private: System::Windows::Forms::Button^  button11;
-private: System::Windows::Forms::StatusStrip^  statusStrip1;
+private: System::Windows::Forms::StatusStrip^  StatusStrip;
+
 public: System::Windows::Forms::ToolStripProgressBar^  toolStripProgressBar1;
 private: 
 
@@ -190,9 +191,10 @@ private: System::Windows::Forms::Button^  button13;
 private: System::Windows::Forms::Button^  button14;
 private: System::ComponentModel::BackgroundWorker^  backgroundWorker1;
 private: System::Windows::Forms::Button^  codetestbutton;
-private: System::Windows::Forms::ToolStripMenuItem^  setupComportsToolStripMenuItem;
-private: System::Windows::Forms::ToolStripMenuItem^  selectInterfaceToolStripMenuItem;
-private: System::Windows::Forms::ToolStripStatusLabel^  toolStripStatusLabel1;
+
+
+private: System::Windows::Forms::ToolStripStatusLabel^  Status;
+
 private: System::Windows::Forms::Button^  Gyro_Test;
 private: System::Windows::Forms::NumericUpDown^  input_box;
 private: System::Windows::Forms::NumericUpDown^  eastmotortest;
@@ -203,6 +205,20 @@ private: System::Windows::Forms::NumericUpDown^  westmotortest;
 
 private: System::Windows::Forms::NumericUpDown^  northmotortest;
 private: System::Windows::Forms::Button^  MagnoTestButton;
+private: System::Windows::Forms::ToolStripMenuItem^  versionToolStripMenuItem;
+private: System::Windows::Forms::NumericUpDown^  JoystickComportSelect;
+private: System::Windows::Forms::NumericUpDown^  CopterComportSelect;
+private: System::Windows::Forms::GroupBox^  groupBox1;
+private: System::Windows::Forms::GroupBox^  groupBox2;
+private: System::Windows::Forms::Label^  label52;
+private: System::Windows::Forms::Label^  label51;
+private: System::Windows::Forms::GroupBox^  groupBox3;
+private: System::Windows::Forms::GroupBox^  groupBox5;
+private: System::Windows::Forms::GroupBox^  groupBox4;
+
+
+
+private: System::ComponentModel::IContainer^  components;
 
 
 
@@ -215,7 +231,7 @@ private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -227,10 +243,16 @@ private:
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->TabControl = (gcnew System::Windows::Forms::TabControl());
 			this->Settings = (gcnew System::Windows::Forms::TabPage());
-			this->button13 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button13 = (gcnew System::Windows::Forms::Button());
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->label52 = (gcnew System::Windows::Forms::Label());
+			this->label51 = (gcnew System::Windows::Forms::Label());
+			this->CopterComportSelect = (gcnew System::Windows::Forms::NumericUpDown());
+			this->JoystickComportSelect = (gcnew System::Windows::Forms::NumericUpDown());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->TiltPID = (gcnew System::Windows::Forms::TabPage());
 			this->label25 = (gcnew System::Windows::Forms::Label());
 			this->label14 = (gcnew System::Windows::Forms::Label());
@@ -334,38 +356,36 @@ private:
 			this->TiltTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->TiltLabel = (gcnew System::Windows::Forms::Label());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
-			this->eastmotortest = (gcnew System::Windows::Forms::NumericUpDown());
-			this->southmotortest = (gcnew System::Windows::Forms::NumericUpDown());
-			this->westmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->groupBox5 = (gcnew System::Windows::Forms::GroupBox());
 			this->northmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->eastmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->westmotortest = (gcnew System::Windows::Forms::NumericUpDown());
 			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->southmotortest = (gcnew System::Windows::Forms::NumericUpDown());
+			this->groupBox4 = (gcnew System::Windows::Forms::GroupBox());
+			this->MagnoTestButton = (gcnew System::Windows::Forms::Button());
+			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->button11 = (gcnew System::Windows::Forms::Button());
+			this->Gyro_Test = (gcnew System::Windows::Forms::Button());
+			this->button8 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->button10 = (gcnew System::Windows::Forms::Button());
+			this->button9 = (gcnew System::Windows::Forms::Button());
 			this->input_box = (gcnew System::Windows::Forms::NumericUpDown());
 			this->codetestbutton = (gcnew System::Windows::Forms::Button());
 			this->button14 = (gcnew System::Windows::Forms::Button());
 			this->button12 = (gcnew System::Windows::Forms::Button());
-			this->label50 = (gcnew System::Windows::Forms::Label());
-			this->panel10 = (gcnew System::Windows::Forms::Panel());
-			this->button10 = (gcnew System::Windows::Forms::Button());
-			this->button9 = (gcnew System::Windows::Forms::Button());
-			this->label49 = (gcnew System::Windows::Forms::Label());
-			this->panel9 = (gcnew System::Windows::Forms::Panel());
-			this->Gyro_Test = (gcnew System::Windows::Forms::Button());
-			this->button11 = (gcnew System::Windows::Forms::Button());
-			this->button8 = (gcnew System::Windows::Forms::Button());
-			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
-			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
+			this->StatusStrip = (gcnew System::Windows::Forms::StatusStrip());
 			this->toolStripProgressBar1 = (gcnew System::Windows::Forms::ToolStripProgressBar());
-			this->toolStripStatusLabel1 = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->Status = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->newPIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->loadPIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->savePIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->setupComportsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->selectInterfaceToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->quitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->controlToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->runPIDToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -375,10 +395,14 @@ private:
 			this->tellAJokeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->versionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
-			this->MagnoTestButton = (gcnew System::Windows::Forms::Button());
 			this->TabControl->SuspendLayout();
 			this->Settings->SuspendLayout();
+			this->groupBox2->SuspendLayout();
+			this->groupBox1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->CopterComportSelect))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->JoystickComportSelect))->BeginInit();
 			this->TiltPID->SuspendLayout();
 			this->panel4->SuspendLayout();
 			this->panel3->SuspendLayout();
@@ -392,14 +416,15 @@ private:
 			this->panel2->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->eastmotortest))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->southmotortest))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->westmotortest))->BeginInit();
+			this->groupBox5->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->northmotortest))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->eastmotortest))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->westmotortest))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->southmotortest))->BeginInit();
+			this->groupBox4->SuspendLayout();
+			this->groupBox3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->input_box))->BeginInit();
-			this->panel10->SuspendLayout();
-			this->panel9->SuspendLayout();
-			this->statusStrip1->SuspendLayout();
+			this->StatusStrip->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -419,10 +444,9 @@ private:
 			// 
 			// Settings
 			// 
-			this->Settings->Controls->Add(this->button13);
+			this->Settings->Controls->Add(this->groupBox2);
+			this->Settings->Controls->Add(this->groupBox1);
 			this->Settings->Controls->Add(this->button3);
-			this->Settings->Controls->Add(this->button2);
-			this->Settings->Controls->Add(this->button1);
 			this->Settings->Location = System::Drawing::Point(4, 22);
 			this->Settings->Name = L"Settings";
 			this->Settings->Padding = System::Windows::Forms::Padding(3);
@@ -431,16 +455,101 @@ private:
 			this->Settings->Text = L"Settings";
 			this->Settings->UseVisualStyleBackColor = true;
 			// 
+			// groupBox2
+			// 
+			this->groupBox2->Controls->Add(this->button1);
+			this->groupBox2->Controls->Add(this->button2);
+			this->groupBox2->Controls->Add(this->button13);
+			this->groupBox2->Location = System::Drawing::Point(151, 6);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(105, 111);
+			this->groupBox2->TabIndex = 8;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"Programs";
+			// 
+			// button1
+			// 
+			this->button1->BackColor = System::Drawing::Color::Lime;
+			this->button1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->button1->Location = System::Drawing::Point(15, 19);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 0;
+			this->button1->Text = L"Run PID Control";
+			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->BackColor = System::Drawing::Color::Yellow;
+			this->button2->Location = System::Drawing::Point(15, 51);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->TabIndex = 1;
+			this->button2->Text = L"Run Manual";
+			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
+			// 
 			// button13
 			// 
 			this->button13->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(128)));
-			this->button13->Location = System::Drawing::Point(243, 363);
+			this->button13->Location = System::Drawing::Point(15, 80);
 			this->button13->Name = L"button13";
 			this->button13->Size = System::Drawing::Size(75, 23);
 			this->button13->TabIndex = 3;
 			this->button13->Text = L"Cancel";
 			this->button13->UseVisualStyleBackColor = false;
+			this->button13->Click += gcnew System::EventHandler(this, &Form1::button13_Click);
+			// 
+			// groupBox1
+			// 
+			this->groupBox1->Controls->Add(this->label52);
+			this->groupBox1->Controls->Add(this->label51);
+			this->groupBox1->Controls->Add(this->CopterComportSelect);
+			this->groupBox1->Controls->Add(this->JoystickComportSelect);
+			this->groupBox1->Location = System::Drawing::Point(6, 6);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(139, 76);
+			this->groupBox1->TabIndex = 7;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"Comport Select";
+			// 
+			// label52
+			// 
+			this->label52->AutoSize = true;
+			this->label52->Location = System::Drawing::Point(19, 52);
+			this->label52->Name = L"label52";
+			this->label52->Size = System::Drawing::Size(45, 13);
+			this->label52->TabIndex = 7;
+			this->label52->Text = L"Joystick";
+			// 
+			// label51
+			// 
+			this->label51->AutoSize = true;
+			this->label51->Location = System::Drawing::Point(19, 21);
+			this->label51->Name = L"label51";
+			this->label51->Size = System::Drawing::Size(63, 13);
+			this->label51->TabIndex = 6;
+			this->label51->Text = L"Quadcopter";
+			// 
+			// CopterComportSelect
+			// 
+			this->CopterComportSelect->Location = System::Drawing::Point(88, 14);
+			this->CopterComportSelect->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->CopterComportSelect->Name = L"CopterComportSelect";
+			this->CopterComportSelect->Size = System::Drawing::Size(39, 20);
+			this->CopterComportSelect->TabIndex = 4;
+			this->CopterComportSelect->ValueChanged += gcnew System::EventHandler(this, &Form1::CopterComportSelect_ValueChanged);
+			// 
+			// JoystickComportSelect
+			// 
+			this->JoystickComportSelect->Location = System::Drawing::Point(88, 45);
+			this->JoystickComportSelect->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->JoystickComportSelect->Name = L"JoystickComportSelect";
+			this->JoystickComportSelect->Size = System::Drawing::Size(39, 20);
+			this->JoystickComportSelect->TabIndex = 5;
+			this->JoystickComportSelect->ValueChanged += gcnew System::EventHandler(this, &Form1::JoystickComportSelect_ValueChanged);
 			// 
 			// button3
 			// 
@@ -456,29 +565,6 @@ private:
 			this->button3->TabIndex = 2;
 			this->button3->UseVisualStyleBackColor = false;
 			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
-			// 
-			// button2
-			// 
-			this->button2->BackColor = System::Drawing::Color::Yellow;
-			this->button2->Location = System::Drawing::Point(324, 363);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
-			this->button2->TabIndex = 1;
-			this->button2->Text = L"Run Manual";
-			this->button2->UseVisualStyleBackColor = false;
-			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
-			// 
-			// button1
-			// 
-			this->button1->BackColor = System::Drawing::Color::Lime;
-			this->button1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->button1->Location = System::Drawing::Point(405, 363);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 0;
-			this->button1->Text = L"Run PID Control";
-			this->button1->UseVisualStyleBackColor = false;
-			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
 			// 
 			// TiltPID
 			// 
@@ -1452,19 +1538,13 @@ private:
 			// 
 			// tabPage1
 			// 
-			this->tabPage1->Controls->Add(this->eastmotortest);
-			this->tabPage1->Controls->Add(this->southmotortest);
-			this->tabPage1->Controls->Add(this->westmotortest);
-			this->tabPage1->Controls->Add(this->northmotortest);
-			this->tabPage1->Controls->Add(this->button6);
+			this->tabPage1->Controls->Add(this->groupBox5);
+			this->tabPage1->Controls->Add(this->groupBox4);
+			this->tabPage1->Controls->Add(this->groupBox3);
 			this->tabPage1->Controls->Add(this->input_box);
 			this->tabPage1->Controls->Add(this->codetestbutton);
 			this->tabPage1->Controls->Add(this->button14);
 			this->tabPage1->Controls->Add(this->button12);
-			this->tabPage1->Controls->Add(this->label50);
-			this->tabPage1->Controls->Add(this->panel10);
-			this->tabPage1->Controls->Add(this->label49);
-			this->tabPage1->Controls->Add(this->panel9);
 			this->tabPage1->Controls->Add(this->button4);
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
@@ -1474,47 +1554,167 @@ private:
 			this->tabPage1->Text = L"Debugging Tests";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
-			// eastmotortest
+			// groupBox5
 			// 
-			this->eastmotortest->Location = System::Drawing::Point(90, 179);
-			this->eastmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
-			this->eastmotortest->Name = L"eastmotortest";
-			this->eastmotortest->Size = System::Drawing::Size(44, 20);
-			this->eastmotortest->TabIndex = 17;
-			// 
-			// southmotortest
-			// 
-			this->southmotortest->Location = System::Drawing::Point(61, 205);
-			this->southmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
-			this->southmotortest->Name = L"southmotortest";
-			this->southmotortest->Size = System::Drawing::Size(44, 20);
-			this->southmotortest->TabIndex = 16;
-			// 
-			// westmotortest
-			// 
-			this->westmotortest->Location = System::Drawing::Point(22, 179);
-			this->westmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
-			this->westmotortest->Name = L"westmotortest";
-			this->westmotortest->Size = System::Drawing::Size(44, 20);
-			this->westmotortest->TabIndex = 15;
+			this->groupBox5->Controls->Add(this->northmotortest);
+			this->groupBox5->Controls->Add(this->eastmotortest);
+			this->groupBox5->Controls->Add(this->westmotortest);
+			this->groupBox5->Controls->Add(this->button6);
+			this->groupBox5->Controls->Add(this->southmotortest);
+			this->groupBox5->Location = System::Drawing::Point(6, 157);
+			this->groupBox5->Name = L"groupBox5";
+			this->groupBox5->Size = System::Drawing::Size(152, 126);
+			this->groupBox5->TabIndex = 20;
+			this->groupBox5->TabStop = false;
+			this->groupBox5->Text = L"PWM Write Test";
 			// 
 			// northmotortest
 			// 
-			this->northmotortest->Location = System::Drawing::Point(61, 153);
+			this->northmotortest->Location = System::Drawing::Point(54, 19);
 			this->northmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
 			this->northmotortest->Name = L"northmotortest";
 			this->northmotortest->Size = System::Drawing::Size(44, 20);
 			this->northmotortest->TabIndex = 14;
 			// 
+			// eastmotortest
+			// 
+			this->eastmotortest->Location = System::Drawing::Point(96, 45);
+			this->eastmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
+			this->eastmotortest->Name = L"eastmotortest";
+			this->eastmotortest->Size = System::Drawing::Size(44, 20);
+			this->eastmotortest->TabIndex = 17;
+			// 
+			// westmotortest
+			// 
+			this->westmotortest->Location = System::Drawing::Point(6, 45);
+			this->westmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
+			this->westmotortest->Name = L"westmotortest";
+			this->westmotortest->Size = System::Drawing::Size(44, 20);
+			this->westmotortest->TabIndex = 15;
+			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(44, 231);
+			this->button6->Location = System::Drawing::Point(6, 97);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(75, 23);
 			this->button6->TabIndex = 5;
 			this->button6->Text = L"PWM Write";
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &Form1::button6_Click);
+			// 
+			// southmotortest
+			// 
+			this->southmotortest->Location = System::Drawing::Point(54, 71);
+			this->southmotortest->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {255, 0, 0, 0});
+			this->southmotortest->Name = L"southmotortest";
+			this->southmotortest->Size = System::Drawing::Size(44, 20);
+			this->southmotortest->TabIndex = 16;
+			// 
+			// groupBox4
+			// 
+			this->groupBox4->Controls->Add(this->MagnoTestButton);
+			this->groupBox4->Controls->Add(this->button5);
+			this->groupBox4->Controls->Add(this->button11);
+			this->groupBox4->Controls->Add(this->Gyro_Test);
+			this->groupBox4->Controls->Add(this->button8);
+			this->groupBox4->Controls->Add(this->button7);
+			this->groupBox4->Location = System::Drawing::Point(6, 14);
+			this->groupBox4->Name = L"groupBox4";
+			this->groupBox4->Size = System::Drawing::Size(175, 137);
+			this->groupBox4->TabIndex = 19;
+			this->groupBox4->TabStop = false;
+			this->groupBox4->Text = L"Run Tests";
+			// 
+			// MagnoTestButton
+			// 
+			this->MagnoTestButton->Location = System::Drawing::Point(6, 106);
+			this->MagnoTestButton->Name = L"MagnoTestButton";
+			this->MagnoTestButton->Size = System::Drawing::Size(75, 23);
+			this->MagnoTestButton->TabIndex = 18;
+			this->MagnoTestButton->Text = L"Magno";
+			this->MagnoTestButton->UseVisualStyleBackColor = true;
+			this->MagnoTestButton->Click += gcnew System::EventHandler(this, &Form1::MagnoTestButton_Click);
+			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(6, 19);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(75, 23);
+			this->button5->TabIndex = 4;
+			this->button5->Text = L"PWM Time";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
+			// 
+			// button11
+			// 
+			this->button11->Location = System::Drawing::Point(6, 77);
+			this->button11->Name = L"button11";
+			this->button11->Size = System::Drawing::Size(156, 23);
+			this->button11->TabIndex = 8;
+			this->button11->Text = L"ESC Program";
+			this->button11->UseVisualStyleBackColor = true;
+			this->button11->Click += gcnew System::EventHandler(this, &Form1::button11_Click);
+			// 
+			// Gyro_Test
+			// 
+			this->Gyro_Test->Location = System::Drawing::Point(87, 19);
+			this->Gyro_Test->Name = L"Gyro_Test";
+			this->Gyro_Test->Size = System::Drawing::Size(75, 23);
+			this->Gyro_Test->TabIndex = 9;
+			this->Gyro_Test->Text = L"Gyro";
+			this->Gyro_Test->UseVisualStyleBackColor = true;
+			this->Gyro_Test->Click += gcnew System::EventHandler(this, &Form1::Gyro_Test_Click);
+			// 
+			// button8
+			// 
+			this->button8->Location = System::Drawing::Point(87, 48);
+			this->button8->Name = L"button8";
+			this->button8->Size = System::Drawing::Size(75, 23);
+			this->button8->TabIndex = 7;
+			this->button8->Text = L"Joystick";
+			this->button8->UseVisualStyleBackColor = true;
+			this->button8->Click += gcnew System::EventHandler(this, &Form1::button8_Click);
+			// 
+			// button7
+			// 
+			this->button7->Location = System::Drawing::Point(6, 48);
+			this->button7->Name = L"button7";
+			this->button7->Size = System::Drawing::Size(75, 23);
+			this->button7->TabIndex = 6;
+			this->button7->Text = L"Sensor";
+			this->button7->UseVisualStyleBackColor = true;
+			this->button7->Click += gcnew System::EventHandler(this, &Form1::button7_Click);
+			// 
+			// groupBox3
+			// 
+			this->groupBox3->Controls->Add(this->button10);
+			this->groupBox3->Controls->Add(this->button9);
+			this->groupBox3->Location = System::Drawing::Point(273, 14);
+			this->groupBox3->Name = L"groupBox3";
+			this->groupBox3->Size = System::Drawing::Size(207, 51);
+			this->groupBox3->TabIndex = 18;
+			this->groupBox3->TabStop = false;
+			this->groupBox3->Text = L"Setup";
+			// 
+			// button10
+			// 
+			this->button10->Location = System::Drawing::Point(95, 16);
+			this->button10->Name = L"button10";
+			this->button10->Size = System::Drawing::Size(105, 23);
+			this->button10->TabIndex = 1;
+			this->button10->Text = L"Teardown HW";
+			this->button10->UseVisualStyleBackColor = true;
+			this->button10->Click += gcnew System::EventHandler(this, &Form1::button10_Click);
+			// 
+			// button9
+			// 
+			this->button9->Location = System::Drawing::Point(6, 16);
+			this->button9->Name = L"button9";
+			this->button9->Size = System::Drawing::Size(73, 23);
+			this->button9->TabIndex = 0;
+			this->button9->Text = L"Init. HW";
+			this->button9->UseVisualStyleBackColor = true;
+			this->button9->Click += gcnew System::EventHandler(this, &Form1::button9_Click);
 			// 
 			// input_box
 			// 
@@ -1543,6 +1743,7 @@ private:
 			this->button14->TabIndex = 10;
 			this->button14->Text = L"Cancel";
 			this->button14->UseVisualStyleBackColor = false;
+			this->button14->Click += gcnew System::EventHandler(this, &Form1::button14_Click);
 			// 
 			// button12
 			// 
@@ -1553,116 +1754,6 @@ private:
 			this->button12->Text = L"Clear Terminal";
 			this->button12->UseVisualStyleBackColor = true;
 			this->button12->Click += gcnew System::EventHandler(this, &Form1::button12_Click);
-			// 
-			// label50
-			// 
-			this->label50->AutoSize = true;
-			this->label50->Location = System::Drawing::Point(290, 11);
-			this->label50->Name = L"label50";
-			this->label50->Size = System::Drawing::Size(35, 13);
-			this->label50->TabIndex = 8;
-			this->label50->Text = L"Setup";
-			// 
-			// panel10
-			// 
-			this->panel10->Controls->Add(this->button10);
-			this->panel10->Controls->Add(this->button9);
-			this->panel10->Location = System::Drawing::Point(286, 27);
-			this->panel10->Name = L"panel10";
-			this->panel10->Size = System::Drawing::Size(190, 34);
-			this->panel10->TabIndex = 7;
-			// 
-			// button10
-			// 
-			this->button10->Location = System::Drawing::Point(82, 3);
-			this->button10->Name = L"button10";
-			this->button10->Size = System::Drawing::Size(105, 23);
-			this->button10->TabIndex = 1;
-			this->button10->Text = L"Teardown HW";
-			this->button10->UseVisualStyleBackColor = true;
-			this->button10->Click += gcnew System::EventHandler(this, &Form1::button10_Click);
-			// 
-			// button9
-			// 
-			this->button9->Location = System::Drawing::Point(3, 3);
-			this->button9->Name = L"button9";
-			this->button9->Size = System::Drawing::Size(73, 23);
-			this->button9->TabIndex = 0;
-			this->button9->Text = L"Init. HW";
-			this->button9->UseVisualStyleBackColor = true;
-			this->button9->Click += gcnew System::EventHandler(this, &Form1::button9_Click);
-			// 
-			// label49
-			// 
-			this->label49->AutoSize = true;
-			this->label49->Location = System::Drawing::Point(6, 14);
-			this->label49->Name = L"label49";
-			this->label49->Size = System::Drawing::Size(56, 13);
-			this->label49->TabIndex = 6;
-			this->label49->Text = L"Run Tests";
-			// 
-			// panel9
-			// 
-			this->panel9->Controls->Add(this->MagnoTestButton);
-			this->panel9->Controls->Add(this->Gyro_Test);
-			this->panel9->Controls->Add(this->button11);
-			this->panel9->Controls->Add(this->button8);
-			this->panel9->Controls->Add(this->button7);
-			this->panel9->Controls->Add(this->button5);
-			this->panel9->Location = System::Drawing::Point(6, 30);
-			this->panel9->Name = L"panel9";
-			this->panel9->Size = System::Drawing::Size(158, 117);
-			this->panel9->TabIndex = 5;
-			// 
-			// Gyro_Test
-			// 
-			this->Gyro_Test->Location = System::Drawing::Point(80, 3);
-			this->Gyro_Test->Name = L"Gyro_Test";
-			this->Gyro_Test->Size = System::Drawing::Size(75, 23);
-			this->Gyro_Test->TabIndex = 9;
-			this->Gyro_Test->Text = L"Gyro";
-			this->Gyro_Test->UseVisualStyleBackColor = true;
-			this->Gyro_Test->Click += gcnew System::EventHandler(this, &Form1::Gyro_Test_Click);
-			// 
-			// button11
-			// 
-			this->button11->Location = System::Drawing::Point(4, 61);
-			this->button11->Name = L"button11";
-			this->button11->Size = System::Drawing::Size(151, 23);
-			this->button11->TabIndex = 8;
-			this->button11->Text = L"ESC Program";
-			this->button11->UseVisualStyleBackColor = true;
-			this->button11->Click += gcnew System::EventHandler(this, &Form1::button11_Click);
-			// 
-			// button8
-			// 
-			this->button8->Location = System::Drawing::Point(80, 31);
-			this->button8->Name = L"button8";
-			this->button8->Size = System::Drawing::Size(75, 23);
-			this->button8->TabIndex = 7;
-			this->button8->Text = L"Joystick";
-			this->button8->UseVisualStyleBackColor = true;
-			this->button8->Click += gcnew System::EventHandler(this, &Form1::button8_Click);
-			// 
-			// button7
-			// 
-			this->button7->Location = System::Drawing::Point(1, 31);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(75, 23);
-			this->button7->TabIndex = 6;
-			this->button7->Text = L"Sensor";
-			this->button7->UseVisualStyleBackColor = true;
-			this->button7->Click += gcnew System::EventHandler(this, &Form1::button7_Click);
-			// 
-			// button5
-			// 
-			this->button5->Location = System::Drawing::Point(0, 3);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(75, 23);
-			this->button5->TabIndex = 4;
-			this->button5->Text = L"PWM Time";
-			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
 			// 
 			// button4
 			// 
@@ -1691,15 +1782,15 @@ private:
 			this->checkBox1->UseVisualStyleBackColor = true;
 			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
-			// statusStrip1
+			// StatusStrip
 			// 
-			this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->toolStripProgressBar1, 
-				this->toolStripStatusLabel1});
-			this->statusStrip1->Location = System::Drawing::Point(0, 475);
-			this->statusStrip1->Name = L"statusStrip1";
-			this->statusStrip1->Size = System::Drawing::Size(518, 22);
-			this->statusStrip1->TabIndex = 1;
-			this->statusStrip1->Text = L"statusStrip1";
+			this->StatusStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->toolStripProgressBar1, 
+				this->Status});
+			this->StatusStrip->Location = System::Drawing::Point(0, 475);
+			this->StatusStrip->Name = L"StatusStrip";
+			this->StatusStrip->Size = System::Drawing::Size(518, 22);
+			this->StatusStrip->TabIndex = 1;
+			this->StatusStrip->Text = L"StatusStrip";
 			// 
 			// toolStripProgressBar1
 			// 
@@ -1707,12 +1798,13 @@ private:
 			this->toolStripProgressBar1->Name = L"toolStripProgressBar1";
 			this->toolStripProgressBar1->Size = System::Drawing::Size(100, 16);
 			this->toolStripProgressBar1->Step = 1;
+			this->toolStripProgressBar1->Click += gcnew System::EventHandler(this, &Form1::toolStripProgressBar1_Click);
 			// 
-			// toolStripStatusLabel1
+			// Status
 			// 
-			this->toolStripStatusLabel1->Name = L"toolStripStatusLabel1";
-			this->toolStripStatusLabel1->Size = System::Drawing::Size(39, 17);
-			this->toolStripStatusLabel1->Text = L"Ready";
+			this->Status->Name = L"Status";
+			this->Status->Size = System::Drawing::Size(39, 17);
+			this->Status->Text = L"Ready";
 			// 
 			// menuStrip1
 			// 
@@ -1726,9 +1818,8 @@ private:
 			// 
 			// fileToolStripMenuItem
 			// 
-			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {this->newPIDToolStripMenuItem, 
-				this->loadPIDToolStripMenuItem, this->savePIDToolStripMenuItem, this->setupComportsToolStripMenuItem, this->selectInterfaceToolStripMenuItem, 
-				this->quitToolStripMenuItem});
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->newPIDToolStripMenuItem, 
+				this->loadPIDToolStripMenuItem, this->savePIDToolStripMenuItem, this->quitToolStripMenuItem});
 			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
 			this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
 			this->fileToolStripMenuItem->Text = L"File";
@@ -1736,39 +1827,25 @@ private:
 			// newPIDToolStripMenuItem
 			// 
 			this->newPIDToolStripMenuItem->Name = L"newPIDToolStripMenuItem";
-			this->newPIDToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			this->newPIDToolStripMenuItem->Size = System::Drawing::Size(121, 22);
 			this->newPIDToolStripMenuItem->Text = L"New PID";
 			// 
 			// loadPIDToolStripMenuItem
 			// 
 			this->loadPIDToolStripMenuItem->Name = L"loadPIDToolStripMenuItem";
-			this->loadPIDToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			this->loadPIDToolStripMenuItem->Size = System::Drawing::Size(121, 22);
 			this->loadPIDToolStripMenuItem->Text = L"Load PID";
 			// 
 			// savePIDToolStripMenuItem
 			// 
 			this->savePIDToolStripMenuItem->Name = L"savePIDToolStripMenuItem";
-			this->savePIDToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			this->savePIDToolStripMenuItem->Size = System::Drawing::Size(121, 22);
 			this->savePIDToolStripMenuItem->Text = L"Save PID";
-			// 
-			// setupComportsToolStripMenuItem
-			// 
-			this->setupComportsToolStripMenuItem->Name = L"setupComportsToolStripMenuItem";
-			this->setupComportsToolStripMenuItem->Size = System::Drawing::Size(160, 22);
-			this->setupComportsToolStripMenuItem->Text = L"Setup Comports";
-			this->setupComportsToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::setupComportsToolStripMenuItem_Click);
-			// 
-			// selectInterfaceToolStripMenuItem
-			// 
-			this->selectInterfaceToolStripMenuItem->Name = L"selectInterfaceToolStripMenuItem";
-			this->selectInterfaceToolStripMenuItem->Size = System::Drawing::Size(160, 22);
-			this->selectInterfaceToolStripMenuItem->Text = L"Select Interface";
-			this->selectInterfaceToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::selectInterfaceToolStripMenuItem_Click);
 			// 
 			// quitToolStripMenuItem
 			// 
 			this->quitToolStripMenuItem->Name = L"quitToolStripMenuItem";
-			this->quitToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			this->quitToolStripMenuItem->Size = System::Drawing::Size(121, 22);
 			this->quitToolStripMenuItem->Text = L"Quit";
 			this->quitToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::quitToolStripMenuItem_Click);
 			// 
@@ -1815,7 +1892,8 @@ private:
 			// 
 			// helpToolStripMenuItem
 			// 
-			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->aboutToolStripMenuItem});
+			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->aboutToolStripMenuItem, 
+				this->versionToolStripMenuItem});
 			this->helpToolStripMenuItem->Name = L"helpToolStripMenuItem";
 			this->helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
 			this->helpToolStripMenuItem->Text = L"Help";
@@ -1823,23 +1901,20 @@ private:
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
-			this->aboutToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(113, 22);
 			this->aboutToolStripMenuItem->Text = L"About";
 			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::aboutToolStripMenuItem_Click);
+			// 
+			// versionToolStripMenuItem
+			// 
+			this->versionToolStripMenuItem->Name = L"versionToolStripMenuItem";
+			this->versionToolStripMenuItem->Size = System::Drawing::Size(113, 22);
+			this->versionToolStripMenuItem->Text = L"Version";
+			this->versionToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::versionToolStripMenuItem_Click);
 			// 
 			// backgroundWorker1
 			// 
 			this->backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &Form1::backgroundWorker1_DoWork);
-			// 
-			// MagnoTestButton
-			// 
-			this->MagnoTestButton->Location = System::Drawing::Point(3, 87);
-			this->MagnoTestButton->Name = L"MagnoTestButton";
-			this->MagnoTestButton->Size = System::Drawing::Size(75, 23);
-			this->MagnoTestButton->TabIndex = 18;
-			this->MagnoTestButton->Text = L"Magno";
-			this->MagnoTestButton->UseVisualStyleBackColor = true;
-			this->MagnoTestButton->Click += gcnew System::EventHandler(this, &Form1::MagnoTestButton_Click);
 			// 
 			// Form1
 			// 
@@ -1849,7 +1924,7 @@ private:
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(518, 497);
 			this->Controls->Add(this->checkBox1);
-			this->Controls->Add(this->statusStrip1);
+			this->Controls->Add(this->StatusStrip);
 			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->TabControl);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
@@ -1862,6 +1937,11 @@ private:
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->TabControl->ResumeLayout(false);
 			this->Settings->ResumeLayout(false);
+			this->groupBox2->ResumeLayout(false);
+			this->groupBox1->ResumeLayout(false);
+			this->groupBox1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->CopterComportSelect))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->JoystickComportSelect))->EndInit();
 			this->TiltPID->ResumeLayout(false);
 			this->TiltPID->PerformLayout();
 			this->panel4->ResumeLayout(false);
@@ -1887,16 +1967,16 @@ private:
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			this->tabPage1->ResumeLayout(false);
-			this->tabPage1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->eastmotortest))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->southmotortest))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->westmotortest))->EndInit();
+			this->groupBox5->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->northmotortest))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->eastmotortest))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->westmotortest))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->southmotortest))->EndInit();
+			this->groupBox4->ResumeLayout(false);
+			this->groupBox3->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->input_box))->EndInit();
-			this->panel10->ResumeLayout(false);
-			this->panel9->ResumeLayout(false);
-			this->statusStrip1->ResumeLayout(false);
-			this->statusStrip1->PerformLayout();
+			this->StatusStrip->ResumeLayout(false);
+			this->StatusStrip->PerformLayout();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
@@ -1915,26 +1995,29 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 
 			 int m;
 			 m = Initalize_Hardware(); //manual flight execution
-			 datalog log;
 			 datalog * logptr;
-			 if(logdata)
+			 if(GlobalDataLog.enabledatalogging)
 			 {
-				 StartDataLogging(&log);
-				 logptr = &log;
+				 StartDataLogging(&GlobalDataLog);
+				 logptr = &GlobalDataLog;
 			 }
 			 else
-				 logptr = NULL;
+				 logptr = &GlobalDataLog;
 			 m = PIDFlight(logptr);
-			 if(logdata)
-				 EndDataLogging(logptr);
-			 m = Teardown_Hardware();
+
 		 }
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+			 GlobalDataLog.KillAllThreads = 1;
 			 int m = Kill(); //code for red kill button
+			 wait(1);
+			 GlobalDataLog.KillAllThreads = 0;
 		 }
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 			 	AllocConsole(); //opens a terminal window when the form is executed
 				freopen("CONOUT$", "wb", stdout); //redirects all printf statements to that window
+				JoystickComportSelect->Value = joystickcomport;
+				CopterComportSelect->Value = coptercomport;
+				memset(&GlobalDataLog, '\0', sizeof(datalog)); //clear flags for multithreading
 		 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 
@@ -1953,14 +2036,18 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 
 			printf("begining new thread for manual flight");
 			 _beginthread( &ManFlight, 0, (void*)logptr);
+			 Status->Text = "Manual Flight Mode started";
 
 		 }
 /*code for Debug page buttons*/
 private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
+			 
 			 int m = Initalize_Hardware(); //initalize hardware button
+			 Status->Text = "Hardware Initalized";
 		 }
 private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e) {
 			 int m = Teardown_Hardware(); //teardown hardware button
+			 Status->Text = "Hardware Torn Down";
 		 }
 private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
 			 datalog log;//pwm time test button 
@@ -1992,22 +2079,21 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 			else
 				printf("Values written - N: %d  S: %d  E: %d  W: %d\n", copter.north_motor, copter.south_motor, copter.east_motor, copter.west_motor);
 			
-
+			Status->Text = "PWM values written";
 
 		 }
 private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
-			 datalog log; //Sensor Read Test button
+				 //Sensor Read Test button
 			 datalog * logptr;
-			 if(logdata)
+			 if(GlobalDataLog.enabledatalogging)
 			 {
-				 StartDataLogging(&log);
-				 logptr = &log;
+				 StartDataLogging(&GlobalDataLog);
+				 logptr = &GlobalDataLog;
 			 }
 			 else
-				 logptr = NULL;
+				 logptr = &GlobalDataLog;
 			 int m = Sensor_Read_Test(logptr);
-			 if(logdata)
-				 EndDataLogging(logptr);
+			 
 		 }
 private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
 			 datalog log; //Joystick Read test button
@@ -2025,11 +2111,12 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 		 }
 private: System::Void Form1_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e) {
 			 //code to be executed as program is closed
+			 GlobalDataLog.KillAllThreads = 1;
 			 printf("NO NO!!!! DON'T KILL ME!!!! NOOOOO!!!!\n\n\n ....I'm dying.... gaaak... :(\n\n");
 		 }
 private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //"about" selection under help menu
-			 MessageBox::Show("iRobotics Quadcopter Computer Interface V.1.00\nInterface Design and Programming by Chris Gerth and Michael Vilim\nThank you to all our sponsors who will eventually be mentioned here.");
+			 MessageBox::Show("iRobotics Quadcopter Computer Interface V.1.00\nInterface Design and Programming by Chris Gerth and Michael Vilim\nThank you to our sponsors, Qualcomm, IEEE, and private donors.\n\nSoftware developed Summer and Fall of 2011.");
 		 }
 private: System::Void tellAJokeToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //"Tell a Joke" selection under control menu
@@ -2059,7 +2146,14 @@ private: System::Void runManualToolStripMenuItem_Click(System::Object^  sender, 
 		 }
 private: System::Void kILLToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //"kill" under control menu
+			 GlobalDataLog.KillAllThreads = 1;
 			 int m = Kill();
+			 if(m == 0)
+				Status->Text = "Kill Successful";
+			 else
+				 Status->Text = "KILL UNSUCCESSFUL!";
+			 wait(1);
+			 GlobalDataLog.KillAllThreads = 0;
 		 }
 private: System::Void button12_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //"clear console" button
@@ -2067,12 +2161,24 @@ private: System::Void button12_Click(System::Object^  sender, System::EventArgs^
 		 }
 private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 			 //log data checkbox checked action
-			 logdata = !logdata;
-			 //printf("logdata = %d\n", logdata);
+			 logdata = (int)checkBox1->Checked;
+			 GlobalDataLog.enabledatalogging = logdata;
+			 if(logdata)
+				 Status->Text = "Datalogging enabled";
+			 else
+				 Status->Text = "Datalogging disabled";
 		 }
 private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //Kill button on debug page
+			 GlobalDataLog.KillAllThreads = 1;
 			 int m = Kill();
+			 if(m == 0)
+				Status->Text = "Kill Successful";
+			 else
+				 Status->Text = "KILL UNSUCCESSFUL!";
+			 wait(1);
+			 GlobalDataLog.KillAllThreads = 0;
+			 
 		 }
 
 private: System::Void backgroundWorker1_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e) {
@@ -2090,71 +2196,7 @@ private: System::Void codetestbutton_Click(System::Object^  sender, System::Even
 
 			 
 		 }
-private: System::Void setupComportsToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-			 /*local vars*/
-			 int input;
-			 
-			 /*code to execute when "setup comports" is selected under the file menu*/
-			 printf("\n-----------------------------\n");
-			 printf("Current Comports:\n");
-			 printf("	to joystick interface - %d\n", joystickcomport);
-			 printf("	to Xbee wireless      - %d\n", wirelesscomport);
-			 printf("	to FTDI interface     - %d\n", wiredcomport);
-			 /*get new values for comports*/
-			 printf("\nEnter new comport for Joystick interface: ");
-			 scanf("%d", &input);
-			 if(input < 0) //perform error check
-			 {
-				 printf("\ninvalid entry\n");
-				 return;
-			 }
-			 joystickcomport = input;
-			 printf("\nEnter new comport for Xbee wireless interface: ");
-			 scanf("%d", &input);
-			 if(input < 0) //perform error check
-			 {
-				 printf("\ninvalid entry\n");
-				 return;
-			 }
-			 wirelesscomport = input;
-			 printf("\nEnter new comport for FTDI wired interface: ");
-			 scanf("%d", &input);
-			 if(input < 0) //perform error check
-			 {
-				 printf("\ninvalid entry\n");
-				 return;
-			 }
-			 wiredcomport = input;
-			 printf("\nNew comports:\n");
-			 printf("	joystick - %d\n", joystickcomport);
-			 printf("	Xbee     - %d\n", wirelesscomport);
-			 printf("	FTDI     - %d\n", wiredcomport);
-			 printf("\n-----------------------------\n");
-			 return;
-		 }
-private: System::Void selectInterfaceToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-			 //this function selects whether the communication with the quadcopter will be carried out via the wireless link
-			 //or the wired FTDI interface
-			 
-			 int input;
 
-			 printf("Wired comport - %d\nWireless comport - %d\ncopter comport - %d\n", wiredcomport, wirelesscomport, coptercomport); //alert user to current comports
-			 
-			 do
-			 {
-				printf("Enter 1 to use Wireless comport, 0 to use Wired comport\nfor copter communication:");
-				scanf("%d", &input);
-			 }while(input !=0 && input != 1); //read in user's selection with error checking
-			 if(input == 1)
-				 coptercomport = wirelesscomport;
-			 else
-				 coptercomport = wiredcomport;
-			 
-			 printf("new copter comport - %d\n", coptercomport);
-
-
-
-		 }
 private: System::Void Gyro_Test_Click(System::Object^  sender, System::EventArgs^  e) {
 			 datalog log; //Joystick Read test button
 			 datalog * logptr;
@@ -2183,6 +2225,28 @@ private: System::Void MagnoTestButton_Click(System::Object^  sender, System::Eve
 			 int m = Magno_Read_Test(logptr);
 			 if(logdata)
 				 EndDataLogging(logptr);
+		 }
+private: System::Void toolStripProgressBar1_Click(System::Object^  sender, System::EventArgs^  e) {
+			 printf("hehe! That tickles!\n");
+		 }
+private: System::Void versionToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 MessageBox::Show("Version 1.2.1 \nSVN Rev. 30 \nBuild (far too many to count) \nLast update to Source: 11/23/2011");
+		 }
+
+
+private: System::Void button13_Click(System::Object^  sender, System::EventArgs^  e) {
+			 GlobalDataLog.KillTestThread = 1;
+			 GlobalDataLog.KillPIDThread = 1;
+		 }
+private: System::Void CopterComportSelect_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
+			 coptercomport = (int)CopterComportSelect->Value;
+		 }
+private: System::Void JoystickComportSelect_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
+			 joystickcomport = (int)JoystickComportSelect->Value;
+		 }
+private: System::Void button14_Click(System::Object^  sender, System::EventArgs^  e) {
+			 GlobalDataLog.KillTestThread = 1;
+			 GlobalDataLog.KillPIDThread = 1;
 		 }
 };
 }
