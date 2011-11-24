@@ -103,16 +103,33 @@ void _cdecl Sensor_Test_Thread(void * input)
         while(Read_Sensors(&copter) != 0 ) //loop while waiting for good results
 		{
 			printf("bad sensor read on loop %d, retrying....\n", i);
+			if( (int)log->KillTestThread == 1 || (int)log->KillAllThreads == 1)//check to see if exit flag is high
+			{
+				printf("Thread exiting due to exterior exit signal\n");
+				log->KillTestThread = 0;
+				log->TestThreadRunning = 0;
+				_endthread();
+			}
 		}
         printf("\n\n======================\n"); //print out results
 		printf("loop %d\n", i);
         printf("values read in:\n\n");
         printf("gyrox = %d\ngyroy = %d\ngyroz = %d\naccelx = %d\naccely = %d\naccelz = %d\naltitude = %d\nheading = %d\ntemperature = %d\n", copter.ang_vel_x, copter.ang_vel_y, copter.ang_vel_z, copter.accel_x, copter.accel_y, copter.accel_z, copter.height, copter.heading, copter.temperature);
         printf("\n======================\n\n");
-		if(log != NULL) //log data if requested
+		if(log->enabledatalogging != 0) //log data if requested
 			LogData(log, &copter, &joystickin);
+		if(log->KillTestThread == 1 || (int)log->KillAllThreads == 1)// check to see if exit flag is high.
+		{
+			printf("Thread exiting due to exterior exit signal\n");
+			log->KillTestThread = 0;
+			log->TestThreadRunning = 0;
+			_endthread();
+		}
 
     }
+	
+	if(log->enabledatalogging)
+		EndDataLogging(log);
 	_endthread();
 }
 

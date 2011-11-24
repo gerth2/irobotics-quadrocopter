@@ -52,11 +52,19 @@ extern "C"
 
 	/*Structure definitions*/
 
-	typedef struct datalogging_t
+	typedef struct datalogging_t //datalog structure - contains sufficent info to enable both datalogging and multi-threaded flag control
 	{
 		time_t clock_init;
 		FILE * outputfile;
 		int firstwrite;
+		int enabledatalogging;
+		int KillPIDThread;
+		int PIDThreadRunning;
+		int KillManualThread;
+		int ManualThreadRunning;
+		int KillTestThread;
+		int TestThreadRunning;
+		int KillAllThreads;
 
 	}datalog;
 
@@ -113,12 +121,24 @@ extern "C"
 
 	} joystick;
 
+		typedef struct multithreadingflags_t
+	{
+		int KillPIDThread;
+		int PIDThreadRunning;
+		int KillManualThread;
+		int ManualThreadRunning;
+		int KillTestThread;
+		int TestThreadRunning;
+		int KillAllThreads;
+
+	}ThreadFlagsStruct;
+
 	/*global variables (kinda - i'm really not sure where you declare global variables. here seemed a good as place as any)*/
 	static int logdata = 0; //flag to tell whether datalogging is requested or not
 	static int joystickcomport = 5; //comport to which joystick arduino is attached
-	static int wirelesscomport = 6; //comport to which computer-side Xbee radio is attached
-	static int wiredcomport = 7; //comport to which FDTI chip for wired testing is attached.
 	static int coptercomport = 6; //comport used to communicate between copter and computer (either the wireless or wired comport)
+	static ThreadFlagsStruct Threadflags;
+	static datalog GlobalDataLog;
 
 
 
@@ -178,6 +198,8 @@ extern "C"
 	int PIDFlight(datalog * log);
 	/* allows pilot to have indirect control of the motor outputs*/
 	/* returns 0 on exit success, -1 on exit from Kill*/
+	
+	void _cdecl PIDFlight_thread(void * log);
 
 	int CorrectJoystick(joystick * joystickin);
 	/*adjusts all joystick ouputs to approprate range (0-255)*/

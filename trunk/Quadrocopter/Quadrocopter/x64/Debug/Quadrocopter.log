@@ -1,4 +1,4 @@
-﻿Build started 10/6/2011 7:47:35 PM.
+﻿Build started 11/24/2011 9:21:34 AM.
      1>Project "C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "x64\Debug\Quadrocopter.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -6,15 +6,40 @@
        Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
        ClCompile:
          All outputs are up-to-date.
-         All outputs are up-to-date.
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /MP /Od /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /Zp16 /GS /fp:fast /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Debug\Quadrocopter.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt PIDFlight.cpp /clr:nostdlib 
+         PIDFlight.cpp
+     1>PIDFlight.cpp(236): warning C4244: 'argument' : conversion from 'double' to 'time_t', possible loss of data
+     1>PIDFlight.cpp(236): warning C4244: 'argument' : conversion from 'double' to 'time_t', possible loss of data
+     1>PIDFlight.cpp(417): warning C4129: '-' : unrecognized character escape sequence
+     1>PIDFlight.cpp(417): warning C4129: '+' : unrecognized character escape sequence
+     1>PIDFlight.cpp(417): warning C4129: '-' : unrecognized character escape sequence
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(280): warning C4700: uninitialized local variable 'XZTiltI' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(284): warning C4700: uninitialized local variable 'YZTiltI' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(295): warning C4700: uninitialized local variable 'YawI' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(313): warning C4700: uninitialized local variable 'currentAltitudeVelocity' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(314): warning C4700: uninitialized local variable 'currentAltitude' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(342): warning C4700: uninitialized local variable 'AltI' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(431): warning C4700: uninitialized local variable 'exitflag' used
          All outputs are up-to-date.
        CoreResGen:
          All outputs are up-to-date.
        ResourceCompile:
          All outputs are up-to-date.
        Link:
-         All outputs are up-to-date.
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Debug\Quadrocopter.exe" /INCREMENTAL /NOLOGO /ASSEMBLYRESOURCE:x64\Debug\Quadrocopter.Form1.resources /MANIFEST /ManifestFile:"x64\Debug\Quadrocopter.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Debug\Quadrocopter.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X64 x64\Debug\app.res
+         x64\Debug\AssemblyInfo.obj
+         x64\Debug\Functions.obj
+         x64\Debug\mainFunc.obj
+         x64\Debug\ManFlight.obj
+         x64\Debug\PIDFlight.obj
+         x64\Debug\Quadrocopter.obj
+         x64\Debug\rs232.obj
+         x64\Debug\stdafx.obj
+         x64\Debug\TestFunctions.obj
+         "x64\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
          Quadrocopter.vcxproj -> C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Debug\Quadrocopter.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\x64\Debug\Quadrocopter.exe;#1" /manifest x64\Debug\Quadrocopter.exe.intermediate.manifest
        FinalizeBuildStatus:
          Deleting file "x64\Debug\Quadrocopter.unsuccessfulbuild".
          Touching "x64\Debug\Quadrocopter.lastbuildstate".
@@ -22,4 +47,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.63
+Time Elapsed 00:00:16.01
