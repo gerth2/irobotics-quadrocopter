@@ -223,10 +223,10 @@ void _cdecl PIDFlight_thread(void * input) //main pid thread function
 		//take three sensor readings to smooth the operation
 		Read_Sensors(&copter1);
 		Read_Magno(&copter1);
-		Read_Sensors(&copter2);
-		Read_Magno(&copter2);
-		Read_Sensors(&copter3);
-		Read_Magno(&copter3);
+		//Read_Sensors(&copter2);
+		//Read_Magno(&copter2);
+		//Read_Sensors(&copter3);
+		//Read_Magno(&copter3);
 
         #ifdef DEBUGPRINTSFLIGHT
         printf("corrected joystick values:\nx %d\ny %d\nz %d\nh %d\n", joystickin.x, joystickin.y, joystickin.rotation, joystickin.altitude);
@@ -249,9 +249,12 @@ void _cdecl PIDFlight_thread(void * input) //main pid thread function
 		//-----------TILT PID CALCULATIONS------//
 		//--------------------------------------//
 
-		double avg_ang_vel_y=(copter1.ang_vel_y+copter2.ang_vel_y+copter3.ang_vel_y)/3.0+171;
-		double avg_ang_vel_x=(copter1.ang_vel_x+copter2.ang_vel_x+copter3.ang_vel_x)/3.0+36;
-		double avg_ang_vel_z=(copter1.ang_vel_z+copter2.ang_vel_z+copter3.ang_vel_z)/3.0-36;
+		//double avg_ang_vel_y=(copter1.ang_vel_y+copter2.ang_vel_y+copter3.ang_vel_y)/3.0+171;
+		//double avg_ang_vel_x=(copter1.ang_vel_x+copter2.ang_vel_x+copter3.ang_vel_x)/3.0+36;
+		//double avg_ang_vel_z=(copter1.ang_vel_z+copter2.ang_vel_z+copter3.ang_vel_z)/3.0-36;
+		double avg_ang_vel_y=(copter1.ang_vel_y+171);
+		double avg_ang_vel_x=(copter1.ang_vel_x+36);
+		double avg_ang_vel_z=(copter1.ang_vel_z-36);
 		//gyroscope integration of tilt
 
 		/*
@@ -278,9 +281,14 @@ void _cdecl PIDFlight_thread(void * input) //main pid thread function
 		*/
 
 		//calculate tilt based on magnetometer
-		double avgCurrentMagnoX=(copter1.magno_x+copter2.magno_x+copter3.magno_x)/3;
-		double avgCurrentMagnoY=(copter1.magno_y+copter2.magno_y+copter3.magno_y)/3;
-		double avgCurrentMagnoZ=(copter1.magno_z+copter2.magno_z+copter3.magno_z)/3;
+		//double avgCurrentMagnoX=(copter1.magno_x+copter2.magno_x+copter3.magno_x)/3;
+		//double avgCurrentMagnoY=(copter1.magno_y+copter2.magno_y+copter3.magno_y)/3;
+		//double avgCurrentMagnoZ=(copter1.magno_z+copter2.magno_z+copter3.magno_z)/3;
+
+		double avgCurrentMagnoX=(copter1.magno_x);
+		double avgCurrentMagnoY=(copter1.magno_y);
+		double avgCurrentMagnoZ=(copter1.magno_z);
+
 
 		double currentXZTilt=atan(avgCurrentMagnoZ/avgCurrentMagnoX)-baseXZTilt;
 		double currentYZTilt=atan(avgCurrentMagnoZ/avgCurrentMagnoY)-baseYZTilt;
@@ -300,7 +308,8 @@ void _cdecl PIDFlight_thread(void * input) //main pid thread function
 		//--------------------------------------//
 		//------------YAW PID CALCULATIONS------//
 		//--------------------------------------//
-		currentHeading=(copter1.heading/compassConversion+copter2.heading/compassConversion+copter3.heading/compassConversion)/3.0-180.0; //adjust so it has a -180 to +180 degree range
+		//currentHeading=(copter1.heading/compassConversion+copter2.heading/compassConversion+copter3.heading/compassConversion)/3.0-180.0; //adjust so it has a -180 to +180 degree range
+		currentHeading=(copter1.heading/compassConversion-180.0); //adjust so it has a -180 to +180 degree range
 		YawP=currentHeading+(yawdelta/128.0)*180.0;
 		YawI=YawI+YawP;
 		YawD=avg_ang_vel_z*gyroscopeConversion;
@@ -311,9 +320,12 @@ void _cdecl PIDFlight_thread(void * input) //main pid thread function
 		//--------------------------------------//
 		//-------HEIGHT PID CALCULATIONS--------//
 		//--------------------------------------//
-		double avg_accel_x=(copter1.accel_x+copter2.accel_x+copter3.accel_x)/3.0;
-		double avg_accel_y=(copter1.accel_y+copter2.accel_y+copter3.accel_y)/3.0;
-		double avg_accel_z=(copter1.accel_z+copter2.accel_z+copter3.accel_z)/3.0;
+		//double avg_accel_x=(copter1.accel_x+copter2.accel_x+copter3.accel_x)/3.0;
+		//double avg_accel_y=(copter1.accel_y+copter2.accel_y+copter3.accel_y)/3.0;
+		//double avg_accel_z=(copter1.accel_z+copter2.accel_z+copter3.accel_z)/3.0;
+		double avg_accel_x=(copter1.accel_x);
+		double avg_accel_y=(copter1.accel_y);
+		double avg_accel_z=(copter1.accel_z);
 		double avg_accel_total=pow(pow(avg_accel_x,2)+pow(avg_accel_y,2)+pow(avg_accel_z,2),.5);
 
 		//double currentAltitudeAcceleration=
@@ -322,7 +334,8 @@ void _cdecl PIDFlight_thread(void * input) //main pid thread function
 		double totalAltitudeAccel=(cos(currentYZtilt*toRadianConversion)*firstAccelComponent)-4000;
 		currentAltitudeVelocity=currentAltitudeVelocity+(totalAltitudeAccel*time_diff*accelerometerConversion);
 		currentAltitude=currentAltitude+currentAltitudeVelocity*time_diff;
-		double currentSensorAltitude=((copter1.height+copter2.height+copter3.height)/3.0)/100.0; //average and convert from cm to m
+		//double currentSensorAltitude=((copter1.height+copter2.height+copter3.height)/3.0)/100.0; //average and convert from cm to m
+		double currentSensorAltitude=(copter1.height)/100.0; //average and convert from cm to m
 
 		//used to correct velocity drift due to integration
 		double lastSensorAltitude;
