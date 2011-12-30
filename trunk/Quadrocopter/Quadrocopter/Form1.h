@@ -189,7 +189,9 @@ private: System::Windows::Forms::ToolStripMenuItem^  clearTerminalToolStripMenuI
 private: System::Windows::Forms::CheckBox^  checkBox1;
 private: System::Windows::Forms::Button^  button13;
 private: System::Windows::Forms::Button^  button14;
-private: System::ComponentModel::BackgroundWorker^  backgroundWorker1;
+public: System::ComponentModel::BackgroundWorker^  backgroundWorker1;
+private: 
+
 private: System::Windows::Forms::Button^  codetestbutton;
 
 
@@ -215,6 +217,7 @@ private: System::Windows::Forms::Label^  label51;
 private: System::Windows::Forms::GroupBox^  groupBox3;
 private: System::Windows::Forms::GroupBox^  groupBox5;
 private: System::Windows::Forms::GroupBox^  groupBox4;
+private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
 
 
 
@@ -397,6 +400,7 @@ private:
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->versionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->TabControl->SuspendLayout();
 			this->Settings->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -1827,25 +1831,26 @@ private:
 			// newPIDToolStripMenuItem
 			// 
 			this->newPIDToolStripMenuItem->Name = L"newPIDToolStripMenuItem";
-			this->newPIDToolStripMenuItem->Size = System::Drawing::Size(121, 22);
+			this->newPIDToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->newPIDToolStripMenuItem->Text = L"New PID";
 			// 
 			// loadPIDToolStripMenuItem
 			// 
 			this->loadPIDToolStripMenuItem->Name = L"loadPIDToolStripMenuItem";
-			this->loadPIDToolStripMenuItem->Size = System::Drawing::Size(121, 22);
+			this->loadPIDToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->loadPIDToolStripMenuItem->Text = L"Load PID";
+			this->loadPIDToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::loadPIDToolStripMenuItem_Click);
 			// 
 			// savePIDToolStripMenuItem
 			// 
 			this->savePIDToolStripMenuItem->Name = L"savePIDToolStripMenuItem";
-			this->savePIDToolStripMenuItem->Size = System::Drawing::Size(121, 22);
+			this->savePIDToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->savePIDToolStripMenuItem->Text = L"Save PID";
 			// 
 			// quitToolStripMenuItem
 			// 
 			this->quitToolStripMenuItem->Name = L"quitToolStripMenuItem";
-			this->quitToolStripMenuItem->Size = System::Drawing::Size(121, 22);
+			this->quitToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->quitToolStripMenuItem->Text = L"Quit";
 			this->quitToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::quitToolStripMenuItem_Click);
 			// 
@@ -1915,6 +1920,11 @@ private:
 			// backgroundWorker1
 			// 
 			this->backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &Form1::backgroundWorker1_DoWork);
+			// 
+			// openFileDialog1
+			// 
+			this->openFileDialog1->FileName = L"openFileDialog1";
+			this->openFileDialog1->Title = L"openPID";
 			// 
 			// Form1
 			// 
@@ -1996,14 +2006,14 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 			 int m;
 			 m = Initalize_Hardware(); //manual flight execution
 			 datalog * logptr;
-			 if(GlobalDataLog.enabledatalogging)
+			 if(GlobalDataLog.enabledatalogging) //see if datalogging is requested
 			 {
-				 StartDataLogging(&GlobalDataLog);
-				 logptr = &GlobalDataLog;
+				 StartDataLogging(&GlobalDataLog); //open a log if requested
+				 logptr = &GlobalDataLog; //evaluate the pointer to the global data structure containing all the thread flags and datalogging info
 			 }
 			 else
 				 logptr = &GlobalDataLog;
-			 m = PIDFlight(logptr);
+			 m = PIDFlight(logptr); //call pid function
 
 		 }
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -2015,30 +2025,32 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 			 	AllocConsole(); //opens a terminal window when the form is executed
 				freopen("CONOUT$", "wb", stdout); //redirects all printf statements to that window
-				JoystickComportSelect->Value = joystickcomport;
+				JoystickComportSelect->Value = joystickcomport; //set up desired comport values
 				CopterComportSelect->Value = coptercomport;
 				memset(&GlobalDataLog, '\0', sizeof(datalog)); //clear flags for multithreading
 		 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 
-			 int m = Teardown_Hardware();
+
+			 int m;
 			 m = Initalize_Hardware(); //manual flight execution
-			 datalog log;
 			 datalog * logptr;
-			 if(logdata)
+			 if(GlobalDataLog.enabledatalogging) //see if datalogging is requested
 			 {
-				 StartDataLogging(&log);
-				 logptr = &log;
+				 StartDataLogging(&GlobalDataLog); //open a log if requested
+				 logptr = &GlobalDataLog; //evaluate the pointer to the global data structure containing all the thread flags and datalogging info
 			 }
 			 else
-				 logptr = NULL;
-			 
+				 logptr = &GlobalDataLog;
+			 GlobalDataLog.ManualThreadRunning = 1; //set the new thread running flat to high
 
 			printf("begining new thread for manual flight");
-			 _beginthread( &ManFlight, 0, (void*)logptr);
+			 _beginthread( &ManFlight, 0, (void*)logptr); //start new thread for Manual Flight
 			 Status->Text = "Manual Flight Mode started";
 
 		 }
+
+
 /*code for Debug page buttons*/
 private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
 			 
@@ -2067,7 +2079,7 @@ private: System::Void button11_Click(System::Object^  sender, System::EventArgs^
 			 int m = ESC_Program(); //esc program button
 		 }
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
-			quadcopter copter;
+			quadcopter copter; //code for PWM write test button
 
 			copter.north_motor = (int)northmotortest->Value;
 			copter.east_motor = (int)eastmotortest->Value;
@@ -2111,12 +2123,13 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 		 }
 private: System::Void Form1_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e) {
 			 //code to be executed as program is closed
+			 Teardown_Hardware();
 			 GlobalDataLog.KillAllThreads = 1;
 			 printf("NO NO!!!! DON'T KILL ME!!!! NOOOOO!!!!\n\n\n ....I'm dying.... gaaak... :(\n\n");
 		 }
 private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //"about" selection under help menu
-			 MessageBox::Show("iRobotics Quadcopter Computer Interface V.1.00\nInterface Design and Programming by Chris Gerth and Michael Vilim\nThank you to our sponsors, Qualcomm, IEEE, and private donors.\n\nSoftware developed Summer and Fall of 2011.");
+			 MessageBox::Show("iRobotics Quadcopter Computer Interface V.1.00\nInterface Design and Programming by Chris Gerth and Michael Vilim\nThank you to our sponsors: Illinois Robotics Organization, Caterpillar, IEEE, and private donors.\n\nSoftware developed Summer and Fall of 2011.");
 		 }
 private: System::Void tellAJokeToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //"Tell a Joke" selection under control menu
@@ -2128,20 +2141,21 @@ private: System::Void quitToolStripMenuItem_Click(System::Object^  sender, Syste
 		 }
 private: System::Void runManualToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //"Run Manual" under control menu
-			 int m = Teardown_Hardware();
+			 int m;
 			 m = Initalize_Hardware(); //manual flight execution
-			 datalog log;
 			 datalog * logptr;
-			 if(logdata)
+			 if(GlobalDataLog.enabledatalogging) //see if datalogging is requested
 			 {
-				 StartDataLogging(&log);
-				 logptr = &log;
+				 StartDataLogging(&GlobalDataLog); //open a log if requested
+				 logptr = &GlobalDataLog; //evaluate the pointer to the global data structure containing all the thread flags and datalogging info
 			 }
 			 else
-				 logptr = NULL;
+				 logptr = &GlobalDataLog;
+			 GlobalDataLog.ManualThreadRunning = 1; //set the new thread running flat to high
 
 			printf("begining new thread for manual flight");
-			 _beginthread( &ManFlight, 0, (void*)logptr);
+			 _beginthread( &ManFlight, 0, (void*)logptr); //start new thread for Manual Flight
+			 Status->Text = "Manual Flight Mode started";
 
 		 }
 private: System::Void kILLToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -2186,7 +2200,7 @@ private: System::Void backgroundWorker1_DoWork(System::Object^  sender, System::
 			 printf("executing background code...\n");
 		 }
 private: System::Void codetestbutton_Click(System::Object^  sender, System::EventArgs^  e) {
-			 int value;
+			int value;
 			value = (int)input_box->Value;
 			 
 			 printf("about to start new thread\n");
@@ -2235,18 +2249,22 @@ private: System::Void versionToolStripMenuItem_Click(System::Object^  sender, Sy
 
 
 private: System::Void button13_Click(System::Object^  sender, System::EventArgs^  e) {
-			 GlobalDataLog.KillTestThread = 1;
+			 GlobalDataLog.KillTestThread = 1; //cancel button code
 			 GlobalDataLog.KillPIDThread = 1;
+			 GlobalDataLog.KillManualThread = 1;
 		 }
 private: System::Void CopterComportSelect_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
-			 coptercomport = (int)CopterComportSelect->Value;
+			 coptercomport = (int)CopterComportSelect->Value; //code to update comports when they're changed
 		 }
 private: System::Void JoystickComportSelect_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
-			 joystickcomport = (int)JoystickComportSelect->Value;
+			 joystickcomport = (int)JoystickComportSelect->Value; //code to update comports when they're changed
 		 }
 private: System::Void button14_Click(System::Object^  sender, System::EventArgs^  e) {
-			 GlobalDataLog.KillTestThread = 1;
+			 GlobalDataLog.KillTestThread = 1; //other cancel button code
 			 GlobalDataLog.KillPIDThread = 1;
+			 GlobalDataLog.KillManualThread = 1;
+		 }
+private: System::Void loadPIDToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 		 }
 };
 }

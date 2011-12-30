@@ -3,13 +3,13 @@
 #include "Header.h"
 #include "math.h"
 
-int PIDFlight(datalog * log)
+int PIDFlight(datalog * log) //entry point to multithreading for pid
 {
-	_beginthread( &PIDFlight_thread, 0, (void*)log);
+	_beginthread( &PIDFlight_thread, 0, (void*)log); //start a new thread for the PID, pass the log structure pointer so it has access to both logging and multithreading flags
 	return 0;
 }
 
-void _cdecl PIDFlight_thread(void * input)
+void _cdecl PIDFlight_thread(void * input) //main pid thread function
 {
 
     /*this function allows for indirect user control of the motors*/
@@ -41,13 +41,13 @@ void _cdecl PIDFlight_thread(void * input)
             Read_Joystick(&joystickin);
 			if( (int)log->KillPIDThread == 1 || (int)log->KillAllThreads == 1)//check to see if thread exit flag is high
 			{
-				printf("Thread exiting due to exterior exit signal\n");
-				log->KillPIDThread = 0;
-				log->PIDThreadRunning = 0;
-				if(log->enabledatalogging)
+				printf("Thread exiting due to exterior exit signal\n"); //if a kill is requested, notify user
+				log->KillPIDThread = 0;  //reset kill flag
+				log->PIDThreadRunning = 0; //set indicator flags to show the thread is no longer running
+				if(log->enabledatalogging) //close out the log if it is running
 					EndDataLogging(log);
-				Teardown_Hardware();
-				_endthread();
+				Teardown_Hardware(); //close out hardware ports
+				_endthread();//kill the thread
 			}
             if(joystickin.activate_height == 0)
             {
@@ -68,7 +68,7 @@ void _cdecl PIDFlight_thread(void * input)
 
 	if( (int)log->KillPIDThread == 1 || (int)log->KillAllThreads == 1)//check to see if thread exit flag is high
 	{
-		printf("Thread exiting due to exterior exit signal\n");
+		printf("Thread exiting due to exterior exit signal\n"); //see comments above for explination (code is copied and pasted)
 		log->KillPIDThread = 0;
 		log->PIDThreadRunning = 0;
 		if(log->enabledatalogging)
@@ -206,16 +206,16 @@ void _cdecl PIDFlight_thread(void * input)
     while(1)
     {
 
-	if( (int)log->KillPIDThread == 1 || log->KillAllThreads == 1)//check to see if thread exit flag is high
-	{
-		printf("Thread exiting due to exterior exit signal\n");
-		log->KillPIDThread = 0;
-		log->PIDThreadRunning = 0;
-		if(log->enabledatalogging)
+		if( (int)log->KillPIDThread == 1 || log->KillAllThreads == 1)//check to see if thread exit flag is high
+		{
+			printf("Thread exiting due to exterior exit signal\n");
+			log->KillPIDThread = 0;
+			log->PIDThreadRunning = 0;
+			if(log->enabledatalogging)
 			 EndDataLogging(log);
-		 Teardown_Hardware();
-		_endthread();
-	}
+			 Teardown_Hardware();
+			_endthread();
+		}
 
         Read_Joystick(&joystickin);
         CorrectJoystick(&joystickin);
@@ -472,14 +472,14 @@ void _cdecl PIDFlight_thread(void * input)
     }
 
     printf("Exiting to main menu...\n");
-    copter1.north_motor = 0;
+    copter1.north_motor = 0; //reset motor values to zero
     copter1.south_motor = 0;
     copter1.east_motor = 0;
     copter1.west_motor = 0;
-    Set_Pwm(&copter1);
+    Set_Pwm(&copter1); // write values to copter
     wait(1.5);
-	if(log->enabledatalogging)
+	if(log->enabledatalogging) //close out the datalog if it's running
 		 EndDataLogging(log);
-	Teardown_Hardware();
-    //return 0;
+	Teardown_Hardware(); //close out hardware ports
+    _endthread(); //kill the thread
 }

@@ -138,6 +138,7 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <CompileAsManaged>true</CompileAsManaged>
       <FloatingPointModel>Fast</FloatingPointModel>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

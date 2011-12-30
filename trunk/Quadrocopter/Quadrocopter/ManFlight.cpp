@@ -30,12 +30,24 @@ void _cdecl ManFlight(void * inlog)
         printf("please flip left toggle\n"); //tell the idiot user what to do
         while(1) //loop until he does it
         {
-            Read_Joystick(&joystickin);
+			if( (int)log->KillManualThread == 1 || (int)log->KillAllThreads == 1)//check to see if thread exit flag is high
+			{
+				printf("Thread exiting due to exterior exit signal\n"); //if a kill is requested, notify user
+				log->KillManualThread = 0;  //reset kill flag
+				log->ManualThreadRunning = 0; //set indicator flags to show the thread is no longer running
+				if(log->enabledatalogging) //close out the log if it is running
+					EndDataLogging(log);
+				Teardown_Hardware(); //close out hardware ports
+				_endthread();//kill the thread
+			}
+            
+			Read_Joystick(&joystickin);
             if(joystickin.activate_height == 0)
             {
                 printf("thank you.\n\n"); //and we're good...
                 break;
             }
+
         }
     }
 
@@ -44,9 +56,7 @@ void _cdecl ManFlight(void * inlog)
     printf("Right Toggle executes Kill Code.\n");
     printf("X joystick controls roll, Y joystick controls pitch\n");
     printf("Z joystick controls yaw, H joystick controls altitude\n\n\n");
-    printf("Enter anything to continue.");
-    scanf("%d", &i); //hold until the user is ok to continue, and do nothing with that variable
-    i = 0;//see? i told you we'd do nothing with it.
+	wait(1.5);
 
     /*main control loop*/
     while(1)
@@ -54,6 +64,18 @@ void _cdecl ManFlight(void * inlog)
         Read_Joystick(&joystickin); //get joystick input
         CorrectJoystick(&joystickin); //make it look nice
 		Read_Sensors(&copter);
+
+		if( (int)log->KillManualThread == 1 || (int)log->KillAllThreads == 1)//check to see if thread exit flag is high
+		{
+			printf("Thread exiting due to exterior exit signal\n"); //if a kill is requested, notify user
+			log->KillManualThread = 0;  //reset kill flag
+			log->ManualThreadRunning = 0; //set indicator flags to show the thread is no longer running
+			if(log->enabledatalogging) //close out the log if it is running
+				EndDataLogging(log);
+			Teardown_Hardware(); //close out hardware ports
+			_endthread();//kill the thread
+		}
+
 
         #ifdef DEBUGPRINTSFLIGHT //print out pretty looking debug info if the user wants it
         printf("corrected joystick values:\nx %d\ny %d\nz %d\nh %d\n", joystickin.x, joystickin.y, joystickin.rotation, joystickin.altitude);
@@ -125,13 +147,26 @@ void _cdecl ManFlight(void * inlog)
             {
                 j = Kill();
                 while(j)
-                    j = Kill(); //error checking - continue to attempt to kill until successful
+				{
+					j = Kill(); //error checking - continue to attempt to kill until successful
+					if( (int)log->KillManualThread == 1 || (int)log->KillAllThreads == 1)//check to see if thread exit flag is high
+					{
+						printf("Thread exiting due to exterior exit signal\n"); //if a kill is requested, notify user
+						log->KillManualThread = 0;  //reset kill flag
+						log->ManualThreadRunning = 0; //set indicator flags to show the thread is no longer running
+						if(log->enabledatalogging) //close out the log if it is running
+							EndDataLogging(log);
+						Teardown_Hardware(); //close out hardware ports
+						_endthread();//kill the thread
+					}
+
+				}
             }
             return; //report exit due to kill status
         }
 
 		/*log data, but again only if requested*/
-		if(log != NULL)
+		if(log->enabledatalogging != 0)
 			LogData(log, &copter, &joystickin);
 
     }
@@ -143,7 +178,7 @@ void _cdecl ManFlight(void * inlog)
     copter.west_motor = 0;
     Set_Pwm(&copter); //write zeroed values to copter
 
-	if(log != NULL)
+	if(log->enabledatalogging != 0)
 		EndDataLogging(log);
 
     wait(1.5);//hold for a second and a half before returning control to the caller

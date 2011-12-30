@@ -16,7 +16,7 @@
 // 'o' - read gyro values only
 //       - returns the following values as ascii integers - 
 //         gyrox, gyroy, gyroz
-// 'w' - write pwm values to motors (returns 'd' on success and 'e' on error)
+// 'w' - write pwm values to motors (returns 'd' on success and 'e' on checksum error, 't' on timeout)
 // 'n' - write new maxdeltamotors value (returns the value the variable is set to)
 // 'K' - Killcode - all motors shut down, no more serial transmissions will be listened to. manual reset required.
 // 'm' - Read Magnometer values. Returns them as x, y, z in standard ascii
@@ -41,13 +41,14 @@ int altitude;
 int heading;
 int temperature;
 int north = 50, south = 50, east = 50, west = 50; /*motor pwm values*/
-int checksum, localchecksum;
+long unsigned int checksum, localchecksum;
 int prevpwm[4] = {50,50,50,50}; /*array for previous motor values*/
 int maxdeltamotors = 100;
 unsigned long int zerotime;
 int autokill_flag;
 int accelaxes[3] = {0,0,0};
 int loopcounter = 0, resetloopcount = 0;
+int timeoutcounter = 0;
 
 //internal setup sequence
 void setup()
@@ -62,7 +63,9 @@ void setup()
 //main execution loop
 void loop()
 {
-
+  loopstart: //label for goto's to start loop over again
+  
+  
   /*do nothing while serial line has nothing new on it*/
   do
   {
@@ -150,9 +153,10 @@ void loop()
 
     altitude = ReadHeight();
 
-    heading = ReadHeading();
+   // heading = ReadHeading();
+    heading = 0;
 
-    checksum = (gyrox+gyroy+gyroz+accelx+accely+accelz+altitude+heading) % 10; /*calculate a checksum*/
+    checksum = 3;//hardcode checksum/(abs(gyrox)+abs(accely)+abs(accelz)+altitude+heading)%10; /*calculate a checksum*/
 
 
     /*this code generates ascii output*/
@@ -199,13 +203,15 @@ void loop()
      gyroy = ReadGyroY();
      gyroz = ReadGyroZ();
      
-     checksum = (gyrox + gyroy + gyroz) % 10; /*calculate the checksum*/
+     checksum = 3;/*(gyrox % 10 + gyroy % 10 + gyroz % 10); *//*calculate the checksum*/ //hardcoded checksum
      
      Serial.print(gyrox, DEC); /*print out the colin-dilimeted values*/
      Serial.write(':');
      Serial.print(gyroy, DEC);
      Serial.write(':');
      Serial.print(gyroz, DEC);
+     Serial.write(':');
+     Serial.print(checksum, DEC);
      Serial.write(':');
      
      digitalWrite(13, LOW); /*turn off activity light*/
@@ -218,36 +224,25 @@ void loop()
     digitalWrite(13, HIGH);
     /*input sequence - north, south, east, west, checksum*/
     /*assumes 1-byte char's*/
-
-    do //do nothing while nothing is on the serial line
+    timeoutcounter = 0; //set up a timeout variable
+    while(Serial.available() < 5)
     {
-      north = Serial.read();
+      timeoutcounter++;
+      if(timeoutcounter > 50000)
+      {
+        Serial.write('t');
+        goto loopstart;
+      }
     }
-    while (north == -1);
-    do //do nothing while nothing is on the serial line
-    {
-      south = Serial.read();
-    }
-    while (south == -1);
-    do //do nothing while nothing is on the serial line
-    {
-      east = Serial.read();
-    }
-    while (east == -1);
-    do //do nothing while nothing is on the serial line
-    {
-      west = Serial.read();
-    }
-    while (west == -1);
-    do //do nothing while nothing is on the serial line
-    {
-      checksum = Serial.read();
-    }
-    while (checksum == -1);
+    north = Serial.read();
+    south = Serial.read();
+    east = Serial.read();
+    west = Serial.read();
+    checksum = Serial.read();
     
     /* perform error checking with checksum*/
     
-    localchecksum = (north + south + east + west) % 10;
+    localchecksum = (north%10 + south%10 + east%10 + west%10);
     
     if(localchecksum != checksum)
     {

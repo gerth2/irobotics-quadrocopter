@@ -100,6 +100,7 @@ void _cdecl Sensor_Test_Thread(void * input)
     wait(3); /*printf info and pause*/
     for(i = 0; i<1000; i++) /*loop through sensor reads*/
     {
+		log->progress = ((float)i / 10);
         while(Read_Sensors(&copter) != 0 ) //loop while waiting for good results
 		{
 			printf("bad sensor read on loop %d, retrying....\n", i);
@@ -131,6 +132,7 @@ void _cdecl Sensor_Test_Thread(void * input)
 	if(log->enabledatalogging)
 		EndDataLogging(log);
 	_endthread();
+	log->progress = 0;
 }
 
 int Joystick_Read_Test(datalog * log)
