@@ -22,7 +22,7 @@ int Initalize_Hardware(void)
 
     /*print out some official-looking stuff for coolness factor*/
     printf("\n\n==================================================================\n");
-    printf(    "===            IEEE MIDTERMINATORS QUADCOPTER - v1.1           ===\n");
+    printf(    "===            IEEE MIDTERMINATORS QUADCOPTER - v2.3           ===\n");
     printf(    "===                                                            ===\n");
     printf(    "===    Hardware Design and Interface Software - Chris Gerth    ===\n");
     printf(    "===        Software and PID Algorithm - Michael Vilim          ===\n");
@@ -31,7 +31,8 @@ int Initalize_Hardware(void)
     printf(    "===                    ---Sponsors---                          ===\n");
     printf(    "===                    --------------                          ===\n");
     printf(    "===                       UIUC IEEE                            ===\n");
-	printf(    "===                       Qualcomm                             ===\n");
+	printf(    "===                      Caterpillar                           ===\n");
+	printf(    "===             Illinois Robotics Organization                 ===\n");
     printf(    "==================================================================\n\n\n");
 
     printf("\ninitalizing hardware....\n");
@@ -76,7 +77,7 @@ int Initalize_Hardware(void)
 int Set_Pwm(quadcopter * copter)
 {
     int north, south, east, west; //local variable definitons
-    int i, checksum;
+    unsigned long int i, checksum;
     unsigned char errorbuf[10];
     unsigned char outbuff[4];
     memset(errorbuf, '\0', sizeof(unsigned char)*10); //clear out buffers
@@ -108,7 +109,7 @@ int Set_Pwm(quadcopter * copter)
     west = (float)west * (float)((float)(UPPERLIMIT-LOWERLIMIT)/(float)255);
     west = (int)west + LOWERLIMIT;
 
-	checksum = (north + south + east + west) % 10;
+	checksum = (north %10 + south%10 + east%10 + west%10);
 
     #ifdef DEBUGPRINTS /*print out additional debugging information, if requested*/
     printf("values written:\n");
@@ -135,7 +136,7 @@ int Set_Pwm(quadcopter * copter)
 	if(SendByte(coptercomport, (char)checksum))
 		printf("error in transmisison of checksum\n");
 
-    for(i = 0; i <100000000; i++) /*wait some arbitrairly large time for success signal before continuing*/
+    for(i = 0; i <1000000; i++) /*wait some arbitrairly large time for success signal before continuing*/
     {
         memset(errorbuf, '\0', sizeof(unsigned char)*10);
         PollComport(coptercomport, errorbuf, sizeof(unsigned char)*10); /*verify confirmation of sucessful write*/
@@ -150,6 +151,11 @@ int Set_Pwm(quadcopter * copter)
 		{
 			printf("Checksum Error detected, motor values not written.\n");
 			return -3; //return approprate message
+		}
+		if(errorbuf[0] == 't')
+		{
+			printf("Copter-side Timeout on PWM write, motor vals not written.\n");
+			return -4;
 		}
     }
 
@@ -168,8 +174,8 @@ int Read_Sensors(quadcopter *copter)
     unsigned char inbuffer[100]; /*recieves serial from arduino*/
     const char *valueinastring;
 	char * context; // helps strtok_s keep track of where it is in the string it is parsing
-	int checksum=0;
-	int localchecksum = 1;
+	long unsigned int checksum=0;
+	long unsigned int localchecksum = 1;
 
 	SendByte(coptercomport, 'r'); /*request sensor values*/
 	memset(inbuffer, '\0', sizeof(unsigned char)*100); //clear input buffer
@@ -268,12 +274,17 @@ int Read_Sensors(quadcopter *copter)
 	checksum = atoi(valueinastring);
 
 	//calculate the value that the checksum ought to be
-	localchecksum = (copter->ang_vel_x + copter->ang_vel_y + copter->ang_vel_z + copter->accel_x + copter->accel_y + copter->accel_z + copter->height + copter->heading) % 10;
+	localchecksum = (abs(copter->ang_vel_x) + abs(copter->accel_y) + abs(copter->accel_z) + (copter->height) + (copter->heading)) %10;
 
-	if(checksum != localchecksum)
+
+	if(checksum !=3 || copter->heading != 0 /*localchecksum*/) /*hardcoded checksum*/
+	{
 		return -2; /*return error code on checksum disagreement*/
+	}
 	else
+	{
 		return 0; //return success
+	}
 }
 
 int Read_Gyro(quadcopter *copter)
@@ -333,9 +344,9 @@ int Read_Gyro(quadcopter *copter)
 	}
 	checksum = atoi(valueinastring);
 
-	localchecksum = (copter->ang_vel_z + copter->ang_vel_y + copter->ang_vel_x) % 10;
+	//localchecksum = (copter->ang_vel_z%10 + copter->ang_vel_y%10 + copter->ang_vel_x%10);
 
-	if(checksum != localchecksum)
+	if(checksum != 3)
 	{
 		printf("Error - checksums disagree\n");
 		return -2;
@@ -594,6 +605,9 @@ int LogData(datalog * log, quadcopter *copter, joystick * joystickin)
     fprintf(file,"%d,", copter->accel_z);
     fprintf(file,"%d,", copter->height);
     fprintf(file,"%d,", copter->heading);
+	fprintf(file,"%d,", copter->magno_x);
+	fprintf(file,"%d,", copter->magno_y);
+	fprintf(file,"%d,", copter->magno_z);
     fprintf(file,"%d,", copter->temperature);
     fprintf(file,"%d,", copter->north_motor);
     fprintf(file,"%d,", copter->south_motor);

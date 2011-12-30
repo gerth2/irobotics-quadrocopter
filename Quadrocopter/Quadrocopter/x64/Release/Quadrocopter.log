@@ -1,4 +1,4 @@
-﻿Build started 11/24/2011 9:48:10 AM.
+﻿Build started 12/29/2011 7:30:57 PM.
      1>Project "C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "x64\Release\Quadrocopter.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -6,25 +6,22 @@
        Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
        ClCompile:
          All outputs are up-to-date.
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /MP /O2 /Ot /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:fast /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Release\Quadrocopter.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt Functions.cpp Quadrocopter.cpp /clr:nostdlib 
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /MP /Od /Ot /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:fast /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Release\Quadrocopter.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt Functions.cpp /clr:nostdlib 
          Functions.cpp
-         Quadrocopter.cpp
      1>Functions.cpp(11): warning C4244: '=' : conversion from 'float' to 'clock_t', possible loss of data
-     1>Functions.cpp(102): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Functions.cpp(104): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Functions.cpp(106): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Functions.cpp(108): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Functions.cpp(483): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>Functions.cpp(103): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(105): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(107): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(109): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Functions.cpp(494): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
-     1>Functions.cpp(549): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>Functions.cpp(560): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\time.inl(86) : see declaration of 'ctime'
-     1>Functions.cpp(553): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>Functions.cpp(564): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\time.inl(112) : see declaration of 'localtime'
-     1>Functions.cpp(559): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>Functions.cpp(570): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : see declaration of 'fopen'
-     1>Functions.cpp(692): warning C4552: '<' : operator has no effect; expected operator with side-effect
-     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\Form1.h(2017): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(249) : see declaration of 'freopen'
+     1>Functions.cpp(706): warning C4552: '<' : operator has no effect; expected operator with side-effect
          All outputs are up-to-date.
        CoreResGen:
          All outputs are up-to-date.
@@ -52,4 +49,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.08
+Time Elapsed 00:00:07.62

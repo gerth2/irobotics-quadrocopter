@@ -10,6 +10,7 @@ extern "C"
 	#include <string.h>
 	#include <dos.h>
 	#include <process.h>
+	#include <math.h>
 
 
 
@@ -19,10 +20,10 @@ extern "C"
 	#define JCOMPORT 5
 
 	/*delay definitions (in seconds)*/
-	#define SENSOR_READ_DELAY .089
-	#define GYRO_READ_DELAY .087
+	#define SENSOR_READ_DELAY .090
+	#define GYRO_READ_DELAY .0714
 	#define JOYSTICK_READ_DELAY .010
-	#define PWM_WRITE_DELAY .0020
+	#define PWM_WRITE_DELAY .0110
 	#define MAGNO_READ_DELAY .045
 
 	/*Test debugging definitions*/
@@ -52,6 +53,116 @@ extern "C"
 
 	/*Structure definitions*/
 
+
+	typedef struct pidweights_t 
+	{
+		//this structure contains all the PID weights and acts as the central holding mechanism for them.
+		//each time the PID thread executes, it reads in these values to start.
+		//PID profiles are saved and loaded from this structure
+		//The GUI reads from and edits this structure to get user input into the PID thread
+
+		//---------------------------//
+		//-----DECLARE PID ERRORS----//
+		//---------------------------//
+		double XZTiltP; //roll
+		double XZTiltI;
+		double XZTiltD;
+		double XZTiltError;
+
+		double YZTiltP; //pitch
+		double YZTiltI;
+		double YZTiltD;
+		double YZTiltError;
+
+		double YawP;
+		double YawI;
+		double YawD;
+		double YawError;
+
+		double AltP;
+		double AltI;
+		double AltD;
+		double AltError;
+		//--------------------------------------//
+		//-------------END REGION---------------//
+		//--------------------------------------//
+
+		//----------------------------------//
+		//-----DEFINE  PID ERROR WEIGHTS----//
+		//----------------------------------//
+		double XZTiltPWeight;
+		double XZTiltIWeight;
+		double XZTiltDWeight;
+
+		double YZTiltPWeight;
+		double YZTiltIWeight;
+		double YZTiltDWeight;
+
+		double YawPWeight;
+		double YawIWeight;
+		double YawDWeight;
+
+		double AltPWeight;
+		double AltIWeight;
+		double AltDWeight;
+		//--------------------------------------//
+		//-------------END REGION---------------//
+		//--------------------------------------//
+
+	
+		//----------------------------------//
+		//-----DECLARE CONSTANTS------------//
+		//----------------------------------//
+		static double const gyroscopeConversion; //gyroscope measurement has .00875 degrees per unit
+		static double const accelerometerConversion; //9.81 m/sec^2
+		static double const compassConversion;
+		static double const motorScale;
+		static double const toRadianConversion;
+		//--------------------------------------//
+		//-------------END REGION---------------//
+		//--------------------------------------//
+
+		//--------------------------------------//
+		//-----------DEFINE MAXES---------------//
+		//--------------------------------------//
+		double maxXZAngle; //degrees
+		double maxYZAngle; //degrees
+		double maxAltitude; //meters
+		//--------------------------------------//
+		//-------------END REGION---------------//
+		//--------------------------------------//
+
+		//--------------------------------------//
+		//----DEFINE REACTIVITY COEFFICIENTS----//
+		//--------------------------------------//
+		double rollReactivityCubicCoefficient;
+		double rollReactivityQuadraticCoefficient;
+		double rollReactivityProportionalCoefficient;
+		double rollReactivityConstantCoefficient;
+
+		double pitchReactivityCubicCoefficient;
+		double pitchReactivityQuadraticCoefficient;
+		double pitchReactivityProportionalCoefficient;
+		double pitchReactivityConstantCoefficient;
+
+		double yawReactivityCubicCoefficient;
+		double yawReactivityQuadraticCoefficient;
+		double yawReactivityProportionalCoefficient;
+		double yawReactivityConstantCoefficient;
+
+		double altReactivityCubicCoefficient;
+		double altReactivityQuadraticCoefficient;
+		double altReactivityProportionalCoefficient;
+		double altReactivityConstantCoefficient;
+		//--------------------------------------//
+		//-------------END REGION---------------//
+		//--------------------------------------//
+
+
+	}PIDweightsstruct;
+
+
+
 	typedef struct datalogging_t //datalog structure - contains sufficent info to enable both datalogging and multi-threaded flag control
 	{
 		time_t clock_init;
@@ -65,8 +176,12 @@ extern "C"
 		int KillTestThread;
 		int TestThreadRunning;
 		int KillAllThreads;
+		float progress;
+		PIDweightsstruct * PIDweights;
 
 	}datalog;
+
+
 
 	typedef struct quadcopter_t
 	{
@@ -182,7 +297,7 @@ extern "C"
 	/*returns 0 on success - no error checking possible*/
 
 	void wait(float s);
-	/*creates a pause in the program execution*/
+	/*creates a pause in the program execution, blocks until time has elapsed.*/
 
 	int ESC_Program(void);
 	/*puts program in a mode to configure the ESC's as outlined in the manual*/
@@ -196,10 +311,12 @@ extern "C"
 	/* returns 0 on exit success, -1 on exit from Kill*/
 
 	int PIDFlight(datalog * log);
-	/* allows pilot to have indirect control of the motor outputs*/
-	/* returns 0 on exit success, -1 on exit from Kill*/
+	/*call to this function intializes thread to start PID control of copter*/
 	
 	void _cdecl PIDFlight_thread(void * log);
+	/* allows pilot to have indirect control of the motor outputs*/
+	/* contains the main flight control algorithms*/
+
 
 	int CorrectJoystick(joystick * joystickin);
 	/*adjusts all joystick ouputs to approprate range (0-255)*/
@@ -236,7 +353,7 @@ extern "C"
 	void _cdecl Sensor_Test_Thread(void * input);
 
 	/*the following are test procedure function prototypes*/
-	/*pass NULL if no data is to be logged, datalog pointer to log data*/
+	/*pass pointer to datalog/thread flags structure*/
 	int PWM_Time_Test(datalog * log);
 	int PWM_Write_Test(datalog * log);
 	int Sensor_Read_Test(datalog * log);
