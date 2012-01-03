@@ -4,6 +4,7 @@ int HardwareSetup(void);
 int ReadGyroX(void);
 int ReadGyroY(void);
 int ReadGyroZ(void);
+int ReadGyroAll(int * gyrovals);
 int ReadGyroTemp(void);
 int ReadHeight(void);
 int ReadMagno(void);

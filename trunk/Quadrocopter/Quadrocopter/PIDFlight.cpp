@@ -222,7 +222,7 @@ void _cdecl PIDFlight_thread(void * input) //main pid thread function
 
 		//take three sensor readings to smooth the operation
 		Read_Sensors(&copter1);
-		Read_Magno(&copter1);
+		//Read_Magno(&copter1);
 		//Read_Sensors(&copter2);
 		//Read_Magno(&copter2);
 		//Read_Sensors(&copter3);
