@@ -254,6 +254,33 @@ int Read_Sensors(quadcopter *copter)
 		return -1;
 	}
 	copter->height = atoi(valueinastring);
+
+	/*read magno x data*/
+	valueinastring = strtok_s(NULL, ":", &context);
+	if(valueinastring == NULL)
+	{
+		printf("error - input string is abnormally small\n");
+		return -1;
+	}
+	copter->magno_x = atoi(valueinastring);
+    
+	/*read magno y data*/
+	valueinastring = strtok_s(NULL, ":", &context);
+	if(valueinastring == NULL)
+	{
+		printf("error - input string is abnormally small\n");
+		return -1;
+	}
+	copter->magno_y = atoi(valueinastring);
+
+	/*read magno z data*/
+	valueinastring = strtok_s(NULL, ":", &context);
+	if(valueinastring == NULL)
+	{
+		printf("error - input string is abnormally small\n");
+		return -1;
+	}
+	copter->magno_z = atoi(valueinastring);
     
 	/*read heading data*/
 	valueinastring = strtok_s(NULL, ":", &context);

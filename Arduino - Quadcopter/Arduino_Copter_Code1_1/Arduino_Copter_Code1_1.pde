@@ -12,7 +12,7 @@
 // 's' - execute setup routine
 // 'r' - read sensor values
 //       - returns the following values in ascii integer format - 
-//         gyrox gyroy, gyroz, accelx, accely, accelz, altitude, heading, checksum,
+//         gyrox gyroy, gyroz, accelx, accely, accelz, altitude, magnox, magnoy, magnoz, heading, checksum,
 // 'o' - read gyro values only
 //       - returns the following values as ascii integers - 
 //         gyrox, gyroy, gyroz
@@ -26,6 +26,7 @@
 /***********************************************/
 
 #define AUTOKILL
+#define CPU_FREQ 8000000L
 /*note on autokill - after three seconds without sensor transmission, */
 /* the copter will automatically, slowly decrease the speed of the motors to zero*/
 /* and hold them at zero until a new motor write transmission is recieved. */
@@ -46,7 +47,10 @@ int prevpwm[4] = {50,50,50,50}; /*array for previous motor values*/
 int maxdeltamotors = 100;
 unsigned long int zerotime;
 int autokill_flag;
-int accelaxes[3] = {0,0,0};
+int accelaxes[3] = {0, 0, 0};
+int gyrovals[3] = {0, 0, 0};
+int magnovals[3] = {0, 0, 0};
+
 int loopcounter = 0, resetloopcount = 0;
 int timeoutcounter = 0;
 
@@ -55,6 +59,7 @@ void setup()
 {
   Serial.begin(115200);
   Wire.begin();
+  TWBR = ((CPU_FREQ / 400000L) - 16) / 2;
   zerotime = millis();
   autokill_flag = 0;
   pinMode(13, OUTPUT);
@@ -139,10 +144,19 @@ void loop()
   if(in == 'r')
   {
     digitalWrite(13, HIGH);
+    
+
     //Serial.println("reading sensors...");
-    gyrox = ReadGyroX();
-    gyroy = ReadGyroY();
-    gyroz = ReadGyroZ();
+    //gyrox = ReadGyroX();
+    //gyroy = ReadGyroY();
+    //gyroz = ReadGyroZ();
+    
+    //Read gyroscope
+    ReadGyroAll(gyrovals);
+    //replace values
+    gyrox = gyrovals[0];
+    gyroy = gyrovals[1];
+    gyroz = gyrovals[2];
 
     /*read accelerometer*/
     ReadAccel(accelaxes);
@@ -150,6 +164,10 @@ void loop()
     accelx = accelaxes[0];
     accely = accelaxes[1];
     accelz = accelaxes[2];
+    
+    /*read in magnometer values*/
+    ReadMagno(magnovals);
+    
 
     altitude = ReadHeight();
 
@@ -175,6 +193,12 @@ void loop()
     Serial.print(accelz, DEC);
     Serial.write(':');
     Serial.print(altitude, DEC);
+    Serial.write(':');
+    Serial.print(magnovals[0], DEC);
+    Serial.write(':');
+    Serial.print(magnovals[1], DEC);
+    Serial.write(':');
+    Serial.print(magnovals[2], DEC);
     Serial.write(':');
     Serial.print(heading, DEC);
     Serial.write(':');
@@ -314,7 +338,21 @@ void loop()
     
     /*execute test code*/
     digitalWrite(13, HIGH);
-    ReadMagno();
+    ReadMagno(magnovals);
+      
+    //Print out values of each axis
+    Serial.print(magnovals[0], DEC);
+    Serial.print(":");
+    Serial.print(magnovals[1], DEC);
+    Serial.print(":");
+    Serial.print(magnovals[2], DEC);
+    Serial.print(":");
+    
+    //calculate checksum and transmit
+    checksum = (magnovals[0] + magnovals[1] + magnovals[2]) % 10;
+    Serial.print(checksum, DEC);
+    Serial.print(":");
+  
     digitalWrite(13, LOW);
   }
 

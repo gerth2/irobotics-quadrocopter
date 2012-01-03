@@ -1,4 +1,4 @@
-int ReadMagno(void)
+int ReadMagno(int * magnovalues)
 {
     
   int x,y,z; //triple axis data
@@ -21,20 +21,10 @@ int ReadMagno(void)
     y |= Wire.receive(); //Y lsb
   }
   
-  //Print out values of each axis
-  Serial.print(x);
-  Serial.print(":");
-  Serial.print(y);
-  Serial.print(":");
-  Serial.print(z);
-  Serial.print(":");
+  magnovalues[0] = x;
+  magnovalues[1] = y;
+  magnovalues[2] = z;
   
-  //calculate checksum and transmit
-  checksum = (x + y + z) % 10;
-  Serial.print(checksum, DEC);
-  Serial.print(":");
-  
-  return 0;
-  
+  return 0;  
   
 }

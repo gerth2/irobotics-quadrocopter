@@ -115,7 +115,7 @@ void _cdecl Sensor_Test_Thread(void * input)
         printf("\n\n======================\n"); //print out results
 		printf("loop %d\n", i);
         printf("values read in:\n\n");
-        printf("gyrox = %d\ngyroy = %d\ngyroz = %d\naccelx = %d\naccely = %d\naccelz = %d\naltitude = %d\nheading = %d\ntemperature = %d\n", copter.ang_vel_x, copter.ang_vel_y, copter.ang_vel_z, copter.accel_x, copter.accel_y, copter.accel_z, copter.height, copter.heading, copter.temperature);
+        printf("gyrox = %d\ngyroy = %d\ngyroz = %d\naccelx = %d\naccely = %d\naccelz = %d\naltitude = %d\nheading = %d\nmagno x = %d\nmagno y = %d\nmagno z = %d\ntemperature = %d\n", copter.ang_vel_x, copter.ang_vel_y, copter.ang_vel_z, copter.accel_x, copter.accel_y, copter.accel_z, copter.height, copter.heading, copter.magno_x, copter.magno_y, copter.magno_z, copter.temperature);
         printf("\n======================\n\n");
 		if(log->enabledatalogging != 0) //log data if requested
 			LogData(log, &copter, &joystickin);
