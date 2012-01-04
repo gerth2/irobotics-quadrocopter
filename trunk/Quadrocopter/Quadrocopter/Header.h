@@ -21,10 +21,10 @@ extern "C"
 
 	/*delay definitions (in seconds)*/
 	#define SENSOR_READ_DELAY .050
-	#define GYRO_READ_DELAY .0670
+	#define GYRO_READ_DELAY .0350
 	#define JOYSTICK_READ_DELAY .010
 	#define PWM_WRITE_DELAY .0110
-	#define MAGNO_READ_DELAY .045
+	#define MAGNO_READ_DELAY .040
 
 	/*Test debugging definitions*/
 	#define DEBUGPRINTS

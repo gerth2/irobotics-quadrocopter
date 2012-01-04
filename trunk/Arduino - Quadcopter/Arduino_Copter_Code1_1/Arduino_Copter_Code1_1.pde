@@ -26,7 +26,7 @@
 /***********************************************/
 
 #define AUTOKILL
-#define CPU_FREQ 9000000L
+#define CPU_FREQ 8000000L
 /*note on autokill - after three seconds without sensor transmission, */
 /* the copter will automatically, slowly decrease the speed of the motors to zero*/
 /* and hold them at zero until a new motor write transmission is recieved. */
@@ -59,7 +59,7 @@ void setup()
 {
   Serial.begin(115200);
   Wire.begin();
- // TWBR = ((CPU_FREQ / 400000L) - 16) / 2;
+  TWBR = ((CPU_FREQ / 400000L) - 16) / 2;
   zerotime = millis();
   autokill_flag = 0;
   pinMode(13, OUTPUT);
@@ -350,7 +350,7 @@ void loop()
     Serial.print(":");
     
     //calculate checksum and transmit
-    checksum = (magnovals[0] + magnovals[1] + magnovals[2]) % 10;
+    checksum = 3;/*(magnovals[0] + magnovals[1] + magnovals[2]) % 10;*/  //hardcoded checksum
     Serial.print(checksum, DEC);
     Serial.print(":");
   

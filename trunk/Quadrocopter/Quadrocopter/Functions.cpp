@@ -794,7 +794,7 @@ int Read_Magno(quadcopter *copter)
 	}
 	checksum = atoi(valueinastring);
 
-	localchecksum = (copter->magno_z + copter->magno_y + copter->magno_x) % 10;
+	localchecksum = 3;/*(copter->magno_z + copter->magno_y + copter->magno_x) % 10;*/ //hardcoded checksum
 
 	if(checksum != localchecksum)
 	{

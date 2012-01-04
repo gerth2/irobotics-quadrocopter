@@ -16,11 +16,11 @@ int HardwareSetup(void)
   Wire.endTransmission();
   delay(5);
   
-//  Wire.beginTransmission(gyroAddress);
-//  Wire.send(0x24); /*select control reg. 5*/
-//  Wire.send(B00000010); /*enable LPF2 in output path*/
-//  Wire.endTransmission();
-//  delay(5);
+  Wire.beginTransmission(gyroAddress);
+  Wire.send(0x24); /*select control reg. 5*/
+  Wire.send(B00000010); /*enable LPF2 in output path*/
+  Wire.endTransmission();
+  delay(5);
   
   ///////////////////////////////////////////////////
   /*Magno Setup*/
