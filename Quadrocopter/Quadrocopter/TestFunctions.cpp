@@ -93,16 +93,20 @@ void _cdecl Sensor_Test_Thread(void * input)
     joystick joystickin;
 	int i;
 	datalog * log;
+	double startclock = 0, endclock = 0;
+	unsigned int badpackets = 0;
 	 /*sensor read test*/
 
 	log = (datalog *) input;
     printf("\nSensor Read test - will read 1000 times\n");
     wait(3); /*printf info and pause*/
+	startclock = clock();
     for(i = 0; i<1000; i++) /*loop through sensor reads*/
     {
 		log->progress = ((float)i / 10);
         while(Read_Sensors(&copter) != 0 ) //loop while waiting for good results
 		{
+			badpackets++;
 			printf("bad sensor read on loop %d, retrying....\n", i);
 			if( (int)log->KillTestThread == 1 || (int)log->KillAllThreads == 1)//check to see if exit flag is high
 			{
@@ -128,8 +132,20 @@ void _cdecl Sensor_Test_Thread(void * input)
 		}
 
     }
+	endclock = clock();
 	
-	if(log->enabledatalogging)
+	//print out test results
+	printf("\n\n\n\n\n================================\n");
+	printf("================================\n");
+	printf("==========Test Results==========\n");
+	printf("================================\n\n");
+	printf("Time elapsed = %lf ms\n", (double)(endclock-startclock));
+	printf("Reads/Second = %lf\n\n", (double)((double)1000/(endclock-startclock)*(double)1000));
+	printf("Bad packets = %d\n", badpackets);
+	printf("error probablility = %lf percent \n", (double)((double)badpackets/(double)1000)*100);
+	printf("================================\n\n");
+	
+		if(log->enabledatalogging)
 		EndDataLogging(log);
 	_endthread();
 	log->progress = 0;

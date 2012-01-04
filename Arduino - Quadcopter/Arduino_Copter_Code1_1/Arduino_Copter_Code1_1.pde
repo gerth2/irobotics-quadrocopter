@@ -26,7 +26,7 @@
 /***********************************************/
 
 #define AUTOKILL
-#define CPU_FREQ 8000000L
+#define CPU_FREQ 9000000L
 /*note on autokill - after three seconds without sensor transmission, */
 /* the copter will automatically, slowly decrease the speed of the motors to zero*/
 /* and hold them at zero until a new motor write transmission is recieved. */
@@ -59,7 +59,7 @@ void setup()
 {
   Serial.begin(115200);
   Wire.begin();
-  TWBR = ((CPU_FREQ / 400000L) - 16) / 2;
+ // TWBR = ((CPU_FREQ / 400000L) - 16) / 2;
   zerotime = millis();
   autokill_flag = 0;
   pinMode(13, OUTPUT);
@@ -222,10 +222,11 @@ void loop()
    if(in == 'o')
    {
      digitalWrite(13, HIGH); /*turn on activity light*/
+     ReadGyroAll(gyrovals);
      
-     gyrox = ReadGyroX(); /*read in gyro values*/
-     gyroy = ReadGyroY();
-     gyroz = ReadGyroZ();
+     gyrox = gyrovals[0]; /*read in gyro values*/
+     gyroy = gyrovals[1];
+     gyroz = gyrovals[2];
      
      checksum = 3;/*(gyrox % 10 + gyroy % 10 + gyroz % 10); *//*calculate the checksum*/ //hardcoded checksum
      

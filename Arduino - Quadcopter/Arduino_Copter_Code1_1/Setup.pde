@@ -11,9 +11,16 @@ int HardwareSetup(void)
   /*gyro setup*/
   /*setup control registers to turn the device on*/
   Wire.beginTransmission(gyroAddress);
-  Wire.send(0x20); /*set the device enable regester to start readings*/
-  Wire.send(0x4F); /*set bandwith and sample rate here*/
+  Wire.send(0x20); /*set the device enable regester to start readings*/ //control reg 1 set to ODR of 800Hz, LPF at 30Hz
+  Wire.send(0xCF); /*set bandwith and sample rate here*/
   Wire.endTransmission();
+  delay(5);
+  
+//  Wire.beginTransmission(gyroAddress);
+//  Wire.send(0x24); /*select control reg. 5*/
+//  Wire.send(B00000010); /*enable LPF2 in output path*/
+//  Wire.endTransmission();
+//  delay(5);
   
   ///////////////////////////////////////////////////
   /*Magno Setup*/
@@ -22,6 +29,13 @@ int HardwareSetup(void)
   Wire.send(0x02); //select mode register
   Wire.send(0x00); //continuous measurement mode
   Wire.endTransmission();
+  delay(5);
+  
+  Wire.beginTransmission(magnoaddress);
+  Wire.send(0x00); //select control register
+  Wire.send(B00111000); //set up ODR of 75Hz and take average two samples per data write
+  Wire.endTransmission();
+  delay(5);
   
   
   ///////////////////////////////////////////////////

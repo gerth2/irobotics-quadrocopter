@@ -20,7 +20,7 @@ extern "C"
 	#define JCOMPORT 5
 
 	/*delay definitions (in seconds)*/
-	#define SENSOR_READ_DELAY .078
+	#define SENSOR_READ_DELAY .050
 	#define GYRO_READ_DELAY .0670
 	#define JOYSTICK_READ_DELAY .010
 	#define PWM_WRITE_DELAY .0110
