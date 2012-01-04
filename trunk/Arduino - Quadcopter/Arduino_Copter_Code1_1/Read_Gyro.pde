@@ -155,13 +155,13 @@ int ReadGyroAll(int * gyrovals)
   gyrovals[2] = Wire.receive(); //from register 0x2D
   
   //assemble output vals
-  gyrovals[0] << 8;
-  gyrovals[1] << 8;
-  gyrovals[2] << 8;
+  gyrovals[0] = gyrovals[0] << 8;
+  gyrovals[1] = gyrovals[1] << 8;
+  gyrovals[2] = gyrovals[2] << 8;
   
-  gyrovals[0] += xlowbyte;
-  gyrovals[1] += ylowbyte;
-  gyrovals[2] += zlowbyte;
+  gyrovals[0] = gyrovals[0] + xlowbyte;
+  gyrovals[1] = gyrovals[1] + ylowbyte;
+  gyrovals[2] = gyrovals[2] + zlowbyte;
   
   return 0;
     
