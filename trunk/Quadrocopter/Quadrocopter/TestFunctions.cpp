@@ -7,6 +7,8 @@ int PWM_Time_Test(datalog * log)
 {
 	quadcopter copter; //local variable definitions
     joystick joystickin;
+	unsigned long int starttime, endtime;
+	unsigned int errorcount = 0;
 	int i;
 	
 	printf("will perform 500 writes to pwm values (0, 255 ,0 , 255, ...)\n");
@@ -16,7 +18,10 @@ int PWM_Time_Test(datalog * log)
     copter.west_motor = 0;
     copter.south_motor = 0;
 
+	
     printf("writing...\n");
+	errorcount = 0;
+	starttime = clock();
     for(i = 0; i < 250; i++)//loop for 500 total writes
     {
         copter.north_motor = 0;
@@ -25,6 +30,7 @@ int PWM_Time_Test(datalog * log)
 		copter.west_motor = 0;
         while(Set_Pwm(&copter) < 0) //write low with error checking
 		{
+			errorcount++;
 			printf("bad PWM write on low write %d, retrying...\n", i);
 		}
         copter.north_motor = 255;
@@ -34,6 +40,7 @@ int PWM_Time_Test(datalog * log)
 
         while(Set_Pwm(&copter) < 0) //write high with error checking
 		{
+			errorcount++;
 			printf("bad PWM write on high write %d, retrying...\n", i);
 		}
         printf("write cycle # %d\n",i);
@@ -41,6 +48,18 @@ int PWM_Time_Test(datalog * log)
 			LogData(log, &copter, &joystickin);
 //		Form1.toolStripProgressBar1->Value = i*100/250;
     }
+
+	endtime = clock();
+
+	printf("\n\n\n");
+	printf("===============================\n");
+	printf("==========Test Results=========\n");
+	printf("===============================\n");
+	printf("Time elapsed = %d ms\n", (int)(endtime - starttime));
+	printf("Writes per second = %lf\n", (double)((double)1000 * (double)500.0 / (double)(endtime-starttime)));
+	printf("Errors = %d\n", errorcount);
+	printf("Error Probability = %lf percent\n", (double)((double)errorcount/(double)500 * (double)100));
+	printf("===============================\n");
 
     printf("done!\n");
 	return 0;
@@ -56,6 +75,8 @@ int PWM_Write_Test(datalog * log)
 
 
     printf("analog write test - ten writes will be performed\n");
+
+
     for(i = 0; i < 10; i++) //loop for ten times
     {
         printf("enter pwm values north, south, east, west"); //request values from user
@@ -76,6 +97,7 @@ int PWM_Write_Test(datalog * log)
 		if(log != NULL) //log data if requested
 			LogData(log, &copter, &joystickin);
 	}
+
 	
 	return 0;
 }

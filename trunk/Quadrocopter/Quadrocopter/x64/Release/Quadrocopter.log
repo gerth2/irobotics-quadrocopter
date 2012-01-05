@@ -1,4 +1,4 @@
-﻿Build started 1/4/2012 5:52:40 PM.
+﻿Build started 1/5/2012 3:19:20 PM.
      1>Project "C:\Users\Chris Gerth\Documents\iRobotics Quadcopter SVN\Quadrocopter\Quadrocopter\Quadrocopter.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "x64\Release\Quadrocopter.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -6,8 +6,11 @@
        Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
        ClCompile:
          All outputs are up-to-date.
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /MP /Od /Ot /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:fast /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Release\Quadrocopter.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt Functions.cpp /clr:nostdlib 
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /MP /Od /Ot /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:fast /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Release\Quadrocopter.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /errorReport:prompt Functions.cpp ManFlight.cpp PIDFlight.cpp Quadrocopter.cpp TestFunctions.cpp mainFunc.cpp /clr:nostdlib 
          Functions.cpp
+         ManFlight.cpp
+         PIDFlight.cpp
+         Quadrocopter.cpp
      1>Functions.cpp(11): warning C4244: '=' : conversion from 'float' to 'clock_t', possible loss of data
      1>Functions.cpp(103): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
      1>Functions.cpp(105): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
@@ -22,6 +25,29 @@
      1>Functions.cpp(597): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(234) : see declaration of 'fopen'
      1>Functions.cpp(733): warning C4552: '<' : operator has no effect; expected operator with side-effect
+     1>PIDFlight.cpp(246): warning C4244: 'argument' : conversion from 'double' to 'time_t', possible loss of data
+     1>PIDFlight.cpp(246): warning C4244: 'argument' : conversion from 'double' to 'time_t', possible loss of data
+     1>PIDFlight.cpp(440): warning C4129: '-' : unrecognized character escape sequence
+     1>PIDFlight.cpp(440): warning C4129: '+' : unrecognized character escape sequence
+     1>PIDFlight.cpp(440): warning C4129: '-' : unrecognized character escape sequence
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\Form1.h(2027): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(249) : see declaration of 'freopen'
+     1>ManFlight.cpp(18): warning C4101: 'i' : unreferenced local variable
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(298): warning C4700: uninitialized local variable 'XZTiltI' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(302): warning C4700: uninitialized local variable 'YZTiltI' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(314): warning C4700: uninitialized local variable 'YawI' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(335): warning C4700: uninitialized local variable 'currentAltitudeVelocity' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(336): warning C4700: uninitialized local variable 'currentAltitude' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(365): warning C4700: uninitialized local variable 'AltI' used
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\pidflight.cpp(454): warning C4700: uninitialized local variable 'exitflag' used
+         TestFunctions.cpp
+         mainFunc.cpp
+     1>c:\users\chris gerth\documents\irobotics quadcopter svn\quadrocopter\quadrocopter\manflight.cpp(132): warning C4700: uninitialized local variable 'exitflag' used
+     1>TestFunctions.cpp(83): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(304) : see declaration of 'scanf'
+     1>mainFunc.cpp(14): warning C4101: 'i' : unreferenced local variable
+     1>mainFunc.cpp(13): warning C4101: 'joystickin' : unreferenced local variable
+     1>mainFunc.cpp(12): warning C4101: 'copter' : unreferenced local variable
          All outputs are up-to-date.
        CoreResGen:
          All outputs are up-to-date.
@@ -49,4 +75,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:12.09
+Time Elapsed 00:00:14.29
