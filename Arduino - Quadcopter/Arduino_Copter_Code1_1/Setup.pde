@@ -17,6 +17,12 @@ int HardwareSetup(void)
   delay(5);
   
   Wire.beginTransmission(gyroAddress);
+  Wire.send(0x23); /*select control reg. 4*/
+  Wire.send(0x10); /*Set data range to 500 degrees/sec/lsb*/
+  Wire.endTransmission();
+  delay(5);
+  
+  Wire.beginTransmission(gyroAddress);
   Wire.send(0x24); /*select control reg. 5*/
   Wire.send(B00000010); /*enable LPF2 in output path*/
   Wire.endTransmission();
