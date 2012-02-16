@@ -26,7 +26,7 @@ int Initalize_Hardware(void)
     printf(    "===                                                            ===\n");
     printf(    "===    Hardware Design and Interface Software - Chris Gerth    ===\n");
     printf(    "===        Software and PID Algorithm - Michael Vilim          ===\n");
-    printf(    "===    Consulting and Overall Awesomeness - Robbie Regalbuto   ===\n");
+    printf(    "===    Consulting and Overall Awesomeness - Robby Regalbuto    ===\n");
     printf(    "==================================================================\n");
     printf(    "===                    ---Sponsors---                          ===\n");
     printf(    "===                    --------------                          ===\n");
